@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 12:14:11 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/01 17:12:50 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/03 17:02:51 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,19 @@ void	ft_redirect_output_append(t_cmd *cmd)
 	free(str);
 }
 
-
+void	ft_redirections(t_cmd *cmd)
+{
+	int	i;
+	
+	i = -1;
+	while (cmd->token[++i])
+	{
+		if (ft_strncmp(cmd->token[i], ">>", 2) == 0)
+		{
+			ft_redirect_output_append(cmd);
+			dup2(cmd->outfile, STDOUT_FILENO);
+		}
+		else if (ft_strncmp(cmd->token[i], ">", 1) == 0)
+			dup2(cmd->outfile, STDOUT_FILENO);
+	}
+}

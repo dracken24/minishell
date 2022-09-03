@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/03 14:54:09 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/03 15:53:58 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	free_redirect(char **options);
 void	ft_print_table(t_data *data);
 void	ft_make_token(t_data *data);
 void	ft_free_pars(t_data *data);
+void	ft_redirections(t_cmd *cmd);
 void	ft_open_fds(t_data *data);
 void 	ft_parse(t_data *data);
 
@@ -88,7 +89,6 @@ bool	ft_unset(t_data *data, t_cmd *cmd, char *buffer);
 bool	ft_cd(t_data *data, t_cmd *cmd, char *buffer);
 bool	ft_pwd(t_data *data, t_cmd *cmd);
 
-void	ft_cat_redirect(t_cmd *cmd);
 bool	ft_cat(t_cmd *cmd);
 
 void	ft_echo(t_data *data, t_cmd *cmd, char *buffer);

@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/03 14:57:15 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/03 17:02:48 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_execute_table(t_data *data)
 void	ft_redirect_before(t_cmd *cmd)
 {
 	if (cmd->outfile)
-		ft_cat_redirect(cmd);
+		ft_redirections(cmd);
 }
 
 void	ft_redirect_after(t_cmd *cmd)
