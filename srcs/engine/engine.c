@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/03 13:59:09 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/03 14:57:15 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,14 @@ void	ft_redirect_after(t_cmd *cmd)
 
 void	ft_execute_builtin_suite(t_data *data, t_cmd *cmd)
 {
-	if (ft_strncmp(cmd->buffer, "exit", 4) == 0)
+	if (ft_strncmp(cmd->buffer, "echo", 4) == 0)
+	{
+		if (ft_strncmp(cmd->token[1], "-n", 2) == 0)
+			ft_echo(data, cmd, cmd->token[2]);
+		else
+			ft_echo(data, cmd, cmd->token[1]);
+	}
+	else if (ft_strncmp(cmd->buffer, "exit", 4) == 0)
 		ft_exit(data, "Good bye!\n", 4);
 	else if (cmd->ct == 0)
 	{
@@ -60,14 +67,7 @@ void	ft_execute_builtin_suite(t_data *data, t_cmd *cmd)
 
 void	ft_execute_builtin(t_data *data, t_cmd *cmd)
 {
-	if (ft_strncmp(cmd->buffer, "echo", 4) == 0)
-	{
-		if (ft_strncmp(cmd->token[1], "-n", 2) == 0)
-			ft_echo(data, cmd, cmd->token[2]);
-		else
-			ft_echo(data, cmd, cmd->token[1]);
-	}
-	else if (ft_strncmp(cmd->buffer, "env", 3) == 0)
+	if (ft_strncmp(cmd->buffer, "env", 3) == 0)
 		ft_env(data, cmd);
 	else if (ft_strncmp(cmd->buffer, "pwd", 3) == 0)
 		ft_pwd(data, cmd);
