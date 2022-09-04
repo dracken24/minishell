@@ -6,12 +6,11 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 03:31:08 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/01 15:39:37 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:05:45 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include "./includes/minishell.h"
 
 void	ft_putchar(char c)
 {
@@ -72,12 +71,22 @@ int ft_atoi(const char *str)
 	return (0);
 }
 
-int main(int argc, char **argv)
+void sighandler(int);
+
+int main()
 {
-	(void)argc;
-	(void)argv;
-	printf("ret_atoi : %d\n", ft_atoi("426575"));
-	write(1, "ret_ptnbr: ", 11);
-	ft_ptnbr(-35442);
-	return 0;
+	signal(SIGINT, sighandler);
+
+	while (1)
+	{
+		printf("Going to sleep for a second...\n");
+		sleep(1);
+	}
+	return (0);
+}
+
+void sighandler(int signum)
+{
+	printf("Caught signal %d, coming out...\n", signum);
+	exit(1);
 }
