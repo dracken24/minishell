@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/04 00:44:30 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:06:42 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 # define MINISHELL_H
 
 # include <sys/wait.h>
-# include <stdio.h>
-# include <fcntl.h>
+// # include <stdio.h>
+// # include <fcntl.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../srcs/libft/libft.h"
-# include <stdbool.h>
+// # include <stdbool.h>
 
 #define DBQUOTE 34
 #define SQUOTE 39
