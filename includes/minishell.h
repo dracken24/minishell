@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/03 15:53:58 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:54:34 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_data
 {
 	int		i;
 	int		k;
+	char	*str;
 	char	**env;			//copy of env
 	char	*buffer;		//buffer for readline
 	char	*prompt;		//prompt message for readline
