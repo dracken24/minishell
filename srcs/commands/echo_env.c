@@ -6,25 +6,24 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 12:04:49 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/03 14:10:33 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/03 22:48:24 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_print_dollard(char *buffer, t_data *data, int flag)
+void	ft_print_dollard(char *buffer, t_data *data, int flag)
 {
-	char *str;
-
-	str = ft_calloc(sizeof(char), ft_strlen(buffer));
-	if (!str)
-	{
-		free(str);
-		return (NULL);
-	}
 	data->i = 0;
 	while (buffer[data->i] != '\0')
 	{
+		data->str = ft_calloc(sizeof(char), BUFFER_SIZE);
+		if (!data->str)
+		{
+			free(data->str);
+			return ;
+		}
+		data->str[0] = '\0';
 		data->k = 0;
 		while (buffer[data->i] != '$' && buffer[data->i] != '\0')
 			printf("%c", buffer[data->i++]);
@@ -32,13 +31,12 @@ char	*ft_print_dollard(char *buffer, t_data *data, int flag)
 			break ;
 		data->k = -1;
 		while (buffer[++data->i] != ' ' && buffer[data->i] != '\0')
-			str[++data->k] = buffer[data->i];
-		str = ft_get_variable(data, str);
-		printf("%s", str);
+			data->str[++data->k] = buffer[data->i];
+		data->str = ft_get_variable(data, data->str);
+		printf("%s", data->str);
 	}
 	if (flag == 0)
 		printf("\n");
-	return (NULL);
 }
 
 void	ft_echo(t_data *data, t_cmd *cmd, char *buffer)
@@ -53,12 +51,7 @@ void	ft_echo(t_data *data, t_cmd *cmd, char *buffer)
 		buffer[ft_strlen(buffer) - 1] = '\0';
 		buffer++;
 	}
-	if (ft_strchr_bool(buffer, '$') == true)
-		buffer = ft_print_dollard(buffer, data, flag);
-	else if (buffer && flag == 0)
-		printf("%s\n", buffer);
-	else
-		printf("%s", buffer);
+	ft_print_dollard(buffer, data, flag);
 	cmd->ct = 1;
 }
 
