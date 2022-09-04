@@ -6,12 +6,13 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 12:04:49 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/03 22:48:24 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/04 00:44:37 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/** Manque '' a gerer **/
 void	ft_print_dollard(char *buffer, t_data *data, int flag)
 {
 	data->i = 0;
@@ -34,6 +35,7 @@ void	ft_print_dollard(char *buffer, t_data *data, int flag)
 			data->str[++data->k] = buffer[data->i];
 		data->str = ft_get_variable(data, data->str);
 		printf("%s", data->str);
+		// free(data->str);
 	}
 	if (flag == 0)
 		printf("\n");
