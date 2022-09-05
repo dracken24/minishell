@@ -6,7 +6,7 @@
 #    By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 23:33:38 by root              #+#    #+#              #
-#    Updated: 2022/09/05 12:41:40 by nadesjar         ###   ########.fr        #
+#    Updated: 2022/09/05 14:21:11 by nadesjar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ FILES			= $(P_SRCS)minishell.c \
 				$(P_COMM)ft_cd.c $(P_COMM)ft_unset.c \
 				$(P_COMM)echo_env.c $(P_COMM)ft_export.c \
 				$(P_PARS)parsing_01.c $(P_PARS)parsing_02.c \
-				$(P_ENGINE)engine.c \
+				$(P_ENGINE)engine.c $(P_ENGINE)check_path.c \
 				# $(P_UTILS)readline.c \
 				# $(P_COMM)ft_pwd.c \
 				# $(P_COMM)ft_cat.c \

@@ -6,13 +6,15 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/05 12:40:33 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:20:47 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_execute_builtin(t_data *data, int nb)
+// void	ft_execute(t_data *data, int nb);
+
+bool	ft_execute_builtin(t_data *data, int nb)
 {
 	if (ft_strncmp(data->cmd[nb].token[0], "echo", 4) == 0)
 		ft_echo(data->cmd[nb].token);
@@ -30,23 +32,40 @@ void	ft_execute_builtin(t_data *data, int nb)
 		ft_cd(data, data->cmd[nb].token[1]);
 	else
 	{
-		ft_color(RED);
-		printf("<%s> is not a builtin command\n", data->cmd[nb].buffer);
-		ft_color(WHITE);
+		return (false);
 	}
+	return (true);
 }
 
 void	ft_make_child_process(t_data *data, int nb)
 {
 	//pid
-	//fork
-	//enter child process
-	//ft_find_redirect(data, nb);
-	//if builtin
-	ft_execute_builtin(data, nb);
-	//else
-	//ft_execute(data, nb);
+	// dup
+	//if fork == 1 enfent
+		//enter child process
+		//ft_find_redirect(data, nb);
+		if (ft_execute_builtin(data, nb))
+			return ;
+		else
+		{
+			ft_color(RED);
+			printf("<%s> is not a builtin command\n", data->cmd[nb].buffer);
+			ft_color(RESET);
+			ft_execute(data, nb);
+		}
+	// else
+		// wait pid
 }
+
+// void	ft_execute(t_data *data, int nb)
+// {
+// 	char	**options;
+// 	char	*path;
+	
+// 	// printf("options[0] = %s\n", options[0]);
+// 	// access(path, F_OK);
+// 	// execve(path, options, data->env);
+// }
 
 // void	ft_execute_table(t_data *data)
 // {
