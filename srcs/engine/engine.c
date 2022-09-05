@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/05 15:20:47 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:39:59 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,19 @@ bool	ft_execute_builtin(t_data *data, int nb)
 	else if (ft_strncmp(data->cmd[nb].buffer, "cd", 2) == 0)
 		ft_cd(data, data->cmd[nb].token[1]);
 	else
-	{
 		return (false);
-	}
 	return (true);
+}
+
+void	ft_exec_cmd(t_data *data, char *cmd_path, int nb)
+{
+	if (execve(cmd_path, data->cmd[nb].token, data->env) == -1)
+	{
+		printf("minishell: %s: command not found\n", data->cmd[nb].token[0]);
+		return ;
+		// exit(127);
+	}
+	printf("TEST\n");
 }
 
 void	ft_make_child_process(t_data *data, int nb)
@@ -51,7 +60,9 @@ void	ft_make_child_process(t_data *data, int nb)
 			ft_color(RED);
 			printf("<%s> is not a builtin command\n", data->cmd[nb].buffer);
 			ft_color(RESET);
-			ft_execute(data, nb);
+			// ft_execute(data, nb);
+			ft_exec_cmd(data, ft_execute(data, nb), nb);
+			// printf("PATH: %s\n", ft_execute(data, nb));
 		}
 	// else
 		// wait pid

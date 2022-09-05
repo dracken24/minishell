@@ -6,49 +6,39 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 20:44:21 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/05 15:20:34 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:31:35 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 char	*find_good_path(t_data *data, char **paths, char *env_path, int nb);
-char	*find_path(t_data *data, char *env_path, int nb);
+char	*find_path(char *env_path);
 
 char	*ft_execute(t_data *data, int nb)
 {
 	char	**paths;
-	char	*cmd_path;
 	char	*env_path;
 	int		i;
 
-	cmd_path = NULL;
-	paths = NULL;
 	i = -1;
-	printf("1\n");
 	while (data->env[++i])
 	{
 		env_path = ft_strnstr(data->env[i], "PATH=", 5);
 		if (env_path)
 		{
-			env_path = find_path(data, env_path, nb);
+			env_path = find_path(env_path);
 			break ;
 		}
 	}
-	printf("1.1\n");
-
 	paths = ft_calloc(sizeof(paths), ft_strlen(env_path + 1));
-	printf("1.2\n");
-	cmd_path = find_good_path(data, paths, env_path, nb);
-	printf("1.3\n");
+	env_path = find_good_path(data, paths, env_path, nb);
 	free(paths);
-	return (cmd_path);
+	return (env_path);
 }
 
-char	*find_path(t_data *data, char *env_path, int nb)
+char	*find_path(char *env_path)
 {
-	(void)data;
-	(void)nb;
 	char	*tmp;
 	int		len;
 
@@ -58,7 +48,6 @@ char	*find_path(t_data *data, char *env_path, int nb)
 	{
 		perror("Error, tmp <find_path>");
 		free(tmp);
-		// exit(0);
 		return (NULL);
 	}
 	tmp = ft_substr(env_path, 5, len);
@@ -77,15 +66,11 @@ char	*find_good_path(t_data *data, char **paths, char *env_path, int nb)
 	{
 		perror("Error, path <find_good_path>");
 		return (NULL);
-		// exit(0);
 	}
-	printf("env_path: %s\n", env_path);
 	paths = ft_split(env_path, ':');
-	printf("2\n");
 	i = -1;
 	while (paths[++i])
 		paths[i] = ft_strjoin(paths[i], "/", 0);
-	printf("2.1\n");
 	i = -1;
 	while (paths[++i])
 	{
@@ -97,6 +82,5 @@ char	*find_good_path(t_data *data, char **paths, char *env_path, int nb)
 		}
 		free(cmd_path);
 	}
-	printf("2.2\n");
 	return (NULL);
 }
