@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/05 15:39:59 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/05 16:21:19 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,30 @@ void	ft_exec_cmd(t_data *data, char *cmd_path, int nb)
 	{
 		printf("minishell: %s: command not found\n", data->cmd[nb].token[0]);
 		return ;
-		// exit(127);
 	}
 	printf("TEST\n");
+}
+
+void	ft_find_redirect(t_data *data, int nb)
+{
+	int	i;
+
+	i = -1;
+
+	// printf("NB: %d\n", nb);
+	while (data->cmd[nb].token[++i])
+	{
+		// printf("REDIRET: %s\n", data->cmd[nb].token[i]);
+		if (ft_strncmp(data->cmd[nb].token[i], ">>\0", 3) == 0)
+			data->cmd[nb].outfile = ft_open_fd(data->cmd[nb].token[++i], 4);
+		else if (ft_strncmp(data->cmd[nb].token[i], ">\0", 2) == 0)
+			data->cmd[nb].outfile = ft_open_fd(data->cmd[nb].token[++i], 2);
+		// else if (ft_strncmp(data->cmd[i].token[k], "<<", 2) == 0)
+		// 	data->cmd[i].outfile = ft_open_fd(data->cmd[i].token[++k], 2);
+		// else if (ft_strncmp(data->cmd[i].token[k], "<", 1) == 0)
+		// 	data->cmd[i].outfile = ft_open_fd(data->cmd[i].token[++k], 2);
+	}
+	ft_print_table(data);
 }
 
 void	ft_make_child_process(t_data *data, int nb)
@@ -52,7 +73,7 @@ void	ft_make_child_process(t_data *data, int nb)
 	// dup
 	//if fork == 1 enfent
 		//enter child process
-		//ft_find_redirect(data, nb);
+		ft_find_redirect(data, nb);
 		if (ft_execute_builtin(data, nb))
 			return ;
 		else
@@ -67,6 +88,7 @@ void	ft_make_child_process(t_data *data, int nb)
 	// else
 		// wait pid
 }
+
 
 // void	ft_execute(t_data *data, int nb)
 // {

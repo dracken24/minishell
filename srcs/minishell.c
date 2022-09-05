@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/05 13:20:23 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/05 16:12:06 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int ac, char **argv, char **env)
 		else
 		{
 			ft_parse(&data);//tokenize the buffer
-			ft_print_table(&data);//print the table with all the tokens
+			// ft_print_table(&data);//print the table with all the tokens
 			while (++i < data.cmd_count)
 				ft_make_child_process(&data, i);
 			ft_free_table(&data);// Free the table for next iteration
