@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:00:19 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/01 17:11:48 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:20:09 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@
 # include <ctype.h>
 # include <stdio.h>
 # include <stdbool.h>
+
+
+# define RED 1
+# define GREEN 2
+# define YELLOW 3
+# define BLUE 4
+# define PURPLE 5
+# define CYAN 6
+# define WHITE 7
+# define RESET 8
 
 typedef struct s_ct{
 	int		i;
@@ -62,6 +72,7 @@ int		ft_tolower(int c);
 
 bool	ft_strchr_bool(const char *str, int c);
 bool	ft_tabchr(char **tab, char *find);
+bool	ft_is_only(char *buffer, char c);
 
 char	*ft_strnstr_ret_tofind(const char *str, const char *to_find, size_t len);
 char	*ft_strnstr(const char *str, const char *to_find, size_t len);
@@ -73,6 +84,7 @@ char	*ft_strjoin(char *str1, char const *str2, int f);
 char	**ft_split_cmd(char const *str, char c);
 char	*ft_strrchr(const char *str, int c);
 char	*ft_strchr(const char *str, int c);
+char	*ft_strtok(char *buffer, char sep);
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(char *src);
 char	*ft_itoa(int n);
