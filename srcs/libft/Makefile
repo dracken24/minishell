@@ -46,7 +46,7 @@ FILES 		= $(MATH)ft_ultimate_range.c $(MATH)ft_putnbr.c $(MATH)ft_range.c $(MATH
 			$(ATOI)ft_atoi.c $(ATOI)ft_itoa.c $(ATOI)ft_atoi_base.c \
 			$(GNL)gnl.c $(GNL)gnl_utils.c \
 			$(FD)ft_open_fd.c $(FD)ft_putchar_fd.c $(FD)ft_putstr_fd.c \
-			$(FD)ft_putendl_fd.c $(FD)ft_fd_len.c \
+			$(FD)ft_putendl_fd.c $(FD)ft_fd_len.c $(FD)ft_print_doc.c \
 			$(UTILS)ft_color.c \
 
 OBJS		= $(patsubst %.c, $(P_OBJS)%.o, $(FILES))

@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:00:19 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/05 12:20:09 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/06 11:40:07 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char	*ft_strrchr(const char *str, int c);
 char	*ft_strchr(const char *str, int c);
 char	*ft_strtok(char *buffer, char sep);
 char	**ft_split(char const *s, char c);
+void	ft_print_doc(char *str);
 char	*ft_strdup(char *src);
 char	*ft_itoa(int n);
 

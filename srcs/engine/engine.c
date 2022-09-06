@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/06 00:10:00 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/06 13:28:19 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,26 @@ void	ft_find_redirect(t_data *data, int nb)
 	while (data->cmd[nb].token[++i])
 	{
 		// printf("REDIRET: %s\n", data->cmd[nb].token[i]);
-		if (ft_strncmp(data->cmd[nb].token[i], ">>\0", 3) == 0)
+		if (ft_strncmp(data->cmd[nb].token[i], ">>", 2) == 0)
+		{
 			data->cmd[nb].outfile = ft_open_fd(data->cmd[nb].token[++i], 4);
+			ft_redirect_output_append(data->cmd[nb]);
+			dup2(data->cmd[nb].outfile, STDOUT_FILENO);
+			data->cmd[nb].token[i] = NULL;
+		}
 		else if (ft_strncmp(data->cmd[nb].token[i], ">\0", 2) == 0)
+		{
 			data->cmd[nb].outfile = ft_open_fd(data->cmd[nb].token[++i], 2);
-		else if (ft_strncmp(data->cmd[nb].token[i], "<<\0", 3) == 0)
-			data->cmd[nb].infile = ft_open_fd(data->cmd[nb].token[++i], 2);
+			dup2(data->cmd[nb].outfile, STDOUT_FILENO);
+			data->cmd[nb].token[i] = NULL;
+		}
 		else if (ft_strncmp(data->cmd[nb].token[i], "<\0", 2) == 0)
+		{
 			data->cmd[nb].infile = ft_open_fd(data->cmd[nb].token[++i], 2);
+			dup2(data->cmd[nb].infile, STDIN_FILENO);
+		}
 	}
-	ft_redirections(&data->cmd[nb]);
+	// ft_redirections(&data->cmd[nb]);
 	// ft_print_table(data);
 }
 
@@ -75,13 +85,15 @@ void	ft_make_child_process(t_data *data, int nb)
 		//enter child process
 		ft_find_redirect(data, nb);
 		if (ft_execute_builtin(data, nb) == true)
+		{
 			return ;
+		}
 		else
 		{
 			ft_color(RED);
 			printf("<%s> is not a builtin command\n", data->cmd[nb].buffer);
 			ft_color(RESET);
-			// ft_execute(data, nb);
+			ft_execute(data, nb);
 			ft_exec_cmd(data, ft_execute(data, nb), nb);
 			// printf("PATH: %s\n", ft_execute(data, nb));
 		}

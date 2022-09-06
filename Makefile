@@ -6,7 +6,7 @@
 #    By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 23:33:38 by root              #+#    #+#              #
-#    Updated: 2022/09/05 17:21:20 by nadesjar         ###   ########.fr        #
+#    Updated: 2022/09/06 11:30:05 by nadesjar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ FILES			= $(P_SRCS)minishell.c \
 				$(P_COMM)ft_redirect_out_append.c \
 				$(P_PARS)parsing_01.c $(P_PARS)parsing_02.c \
 				$(P_ENGINE)engine.c $(P_ENGINE)check_path.c \
+				$(P_COMM)heredoc.c \
 				# $(P_UTILS)readline.c \
 				# $(P_COMM)ft_pwd.c \
 				# $(P_COMM)ft_cat.c \
@@ -36,7 +37,6 @@ FILES			= $(P_SRCS)minishell.c \
 				# $(P_COMM)ft_grep.c \
 				# $(P_COMM)ft_redirect_in.c \
 				# $(P_COMM)ft_redirect_out.c \
-				# $(P_COMM)heredoc.c \
 
 OBJS 			= $(patsubst $(P_SRCS)%.c, $(P_OBJS)%.o, $(FILES)) \
 

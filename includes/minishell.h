@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/05 17:21:44 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/06 11:31:08 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ bool	ft_execute_builtin(t_data *data, int nb);
 void	ft_unset(t_data *data, char *buffer);
 void	ft_export(t_data *data, char *arg);
 void	ft_cd(t_data *data, char *buffer);
+void	ft_heredoc(char *limiter);
 void	ft_env(t_data *data);
 void	ft_echo(char **arg);
 
