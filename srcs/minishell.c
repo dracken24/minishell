@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/06 11:03:37 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:45:36 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,3 @@ int	main(int ac, char **argv, char **env)
 		}
 	}
 }
-
-/** PROB**/
-/*
-	cat infile > outfile
-	wc infile > outfile
-*/

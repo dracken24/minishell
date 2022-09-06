@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/06 11:31:08 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:08:34 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct		s_cmd
 	char	**token;		//tokenized buffer
 	int		infile;			//for open input file
 	int		outfile;		//for open output file
-	// pid_t	pid;			//pid of the child process
+	// pid_t	*pid;			//pid of the child process
 }					t_cmd;
 
 typedef struct		s_data

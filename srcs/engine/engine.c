@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/06 13:28:19 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:32:46 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,44 +45,105 @@ void	ft_exec_cmd(t_data *data, char *cmd_path, int nb)
 	printf("TEST\n");
 }
 
+void	ft_redirect_output_append(t_cmd *cmd)
+/* >> */
+{
+    char	*str;
+
+	str = get_next_line(cmd->outfile);
+	while (str)
+	{
+		if (str)
+			printf("%s", str);
+		free(str);
+		str = get_next_line(cmd->outfile);
+	}
+	free(str);
+}
+
 void	ft_find_redirect(t_data *data, int nb)
 {
 	int	i;
 
+	// check si infile, outfile ou outappend != -1
+	// si oui,
+	// si infile > 2;  dup2(infile, 0);
+	// si outfile > 2; dup2(outfile, 1);
+	// si outappend > 2; dup2(outappend, 1);
 	i = -1;
-
 	while (data->cmd[nb].token[++i])
 	{
-		// printf("REDIRET: %s\n", data->cmd[nb].token[i]);
 		if (ft_strncmp(data->cmd[nb].token[i], ">>", 2) == 0)
 		{
 			data->cmd[nb].outfile = ft_open_fd(data->cmd[nb].token[++i], 4);
-			ft_redirect_output_append(data->cmd[nb]);
+			ft_redirect_output_append(&data->cmd[nb]);
 			dup2(data->cmd[nb].outfile, STDOUT_FILENO);
-			data->cmd[nb].token[i] = NULL;
+			data->cmd[nb].token[--i] = NULL;
 		}
-		else if (ft_strncmp(data->cmd[nb].token[i], ">\0", 2) == 0)
+		else if (ft_strncmp(data->cmd[nb].token[i], ">", 1) == 0)
 		{
 			data->cmd[nb].outfile = ft_open_fd(data->cmd[nb].token[++i], 2);
 			dup2(data->cmd[nb].outfile, STDOUT_FILENO);
-			data->cmd[nb].token[i] = NULL;
+			data->cmd[nb].token[--i] = NULL;
 		}
-		else if (ft_strncmp(data->cmd[nb].token[i], "<\0", 2) == 0)
+		else if (ft_strncmp(data->cmd[nb].token[i], "<", 1) == 0
+				&& data->cmd[nb].token[i][1] != '<')
 		{
 			data->cmd[nb].infile = ft_open_fd(data->cmd[nb].token[++i], 2);
 			dup2(data->cmd[nb].infile, STDIN_FILENO);
 		}
 	}
-	// ft_redirections(&data->cmd[nb]);
-	// ft_print_table(data);
 }
 
+void	do_pipe(t_all *all, char *cmd, char **envp)
+{
+	char	**split_cmd;
+
+	split_cmd = ft_split(cmd, ' ');
+	all->cmd_path = check_path(all, split_cmd[0], envp);
+	if (!all->cmd_path)
+	{
+		free_ptr(split_cmd);
+		ft_printf("%s: command not found\n", split_cmd[0]);
+		exit (-1);
+	}
+	if (execve(all->cmd_path, split_cmd, envp) == -1)
+	{
+		free_ptr(split_cmd);
+		exit(-1);
+	}
+	free_ptr(split_cmd);
+}
+
+// cat infile | wc outfile
 void	ft_make_child_process(t_data *data, int nb)
 {
-	//pid
-	// dup
-	//if fork == 1 enfent
-		//enter child process
+	pid_t	pid;
+	int		fd[2];
+
+	if (pipe(fd) == -1)
+	{
+		printf("Pipe failed\n");
+		return ;
+	}
+	pid = fork;
+	if (pid == -1)
+	{
+		printf("Fork failed\n");
+		return ;
+	}
+	if (pid == 0)
+	{
+		close(fd[0]);
+		dup2(fd[1], STDOUT_FILENO);
+		// do_pipe(all, argv, envp);
+	}
+	else
+	{
+		close(fd[1]);
+		dup2(fd[0], STDIN_FILENO);
+		waitpid(pid, NULL, 0);
+	}
 		ft_find_redirect(data, nb);
 		if (ft_execute_builtin(data, nb) == true)
 		{
@@ -100,3 +161,27 @@ void	ft_make_child_process(t_data *data, int nb)
 	// else
 		// wait pid
 }
+
+// void	ft_make_child_process(t_data *data, int nb)
+// {
+// 	//pid
+// 	// dup
+// 	//if fork == 1 enfent
+// 		//enter child process
+// 		ft_find_redirect(data, nb);
+// 		if (ft_execute_builtin(data, nb) == true)
+// 		{
+// 			return ;
+// 		}
+// 		else
+// 		{
+// 			ft_color(RED);
+// 			printf("<%s> is not a builtin command\n", data->cmd[nb].buffer);
+// 			ft_color(RESET);
+// 			ft_execute(data, nb);
+// 			ft_exec_cmd(data, ft_execute(data, nb), nb);
+// 			// printf("PATH: %s\n", ft_execute(data, nb));
+// 		}
+// 	// else
+// 		// wait pid
+// }
