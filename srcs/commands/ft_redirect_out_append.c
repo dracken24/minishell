@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 12:14:11 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/05 20:37:54 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/06 00:09:55 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_redirections(t_cmd *cmd)
 		// 	dup2(cmd->infile, STDIN_FILENO);
 		
 	}
-	i = -1;
-	while (cmd->token[++i])
-		printf("TOKEN: %s\n", cmd->token[i]);
+	// i = -1;
+	// while (cmd->token[++i])
+	// 	printf("TOKEN: %s\n", cmd->token[i]);
 }
