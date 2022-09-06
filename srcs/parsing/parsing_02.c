@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/05 15:49:47 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/05 17:44:59 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,44 +76,3 @@ void 	ft_parse(t_data *data)
 		data->cmd[i].buffer = ft_trim_token(ft_strtok(NULL, '|'), ' ');
 	ft_make_token(data);
 }
-
-// void	ft_open_fds_suite(t_data *data, int i, int k);
-
-// void	ft_print_table(t_data *data)
-// {
-// 	int i;
-// 	int j;
-	
-// 	printf("\n-- Print Table Start --\n\n");
-// 	ft_color(3);
-// 	printf("NBR DE CMDS: %d\n", data->cmd_count);
-// 	i = 0;
-// 	while (i < data->cmd_count)
-// 	{
-// 		printf("\nCMD #: %d\n", data->cmd[i].no_cmd + 1);
-// 		printf("INFILE: %d\n", data->cmd[i].infile);
-// 		printf("OUTFILE: %d\n", data->cmd[i].outfile);
-// 		printf("BUFF: %s\n", data->cmd[i].buffer);
-// 		j = 0;
-// 		ft_color(2);
-// 		while (data->cmd[i].token[j])
-// 		{
-// 			printf("TOKEN [%d]%s\n", j, data->cmd[i].token[j]);
-// 			j++;
-// 		}
-// 		ft_color(3);
-// 		printf("PATH: %s\n", data->cmd[i].path);
-// 		i++;
-// 	}
-// 	ft_color(8);
-// 	printf("\n-- Print Table end --\n\n");
-// }
-
-// void 	ft_parse(t_data *data)
-// {
-// 	ft_make_cmd_table(data);
-// 	ft_make_token(data);
-// 	ft_open_fds(data);
-// 	ft_print_table(data);
-// 	ft_execute_table(data);
-// }

@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:02:10 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/05 15:48:20 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/05 17:30:22 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_print_table(t_data *data)
 	{
 		j = 0;
 		ft_color(CYAN);
-		printf("Infile: %d\n", data->cmd[1].infile);
-		printf("Outfile: %d\n", data->cmd[1].outfile);
+		// printf("Infile: %d\n", data->cmd[i].infile);
+		// printf("Outfile: %d\n", data->cmd[i].outfile);
 		printf("[cmd %d]", i);
 		while (data->cmd[i].token[j])
 		{

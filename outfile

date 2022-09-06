@@ -1,0 +1,4 @@
+[0m[1;31m<wc> is not a builtin command
+ 4 11 57 infile
+ 2 10 57 'outfile'$'\n'
+ 6 21 114 total
