@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 12:24:39 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 13:35:04 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void	ft_find_redirect(t_data *data, int nb)
 	}
 }
 
-// cat infile | wc outfile
 void	ft_make_child_process(t_data *data, int nb)
 {
 	pid_t	pid;
@@ -132,27 +131,3 @@ void	ft_make_child_process(t_data *data, int nb)
 		waitpid(pid, NULL, 0);
 	}
 }
-
-// void	ft_make_child_process(t_data *data, int nb)
-// {
-// 	//pid
-// 	// dup
-// 	//if fork == 1 enfent
-// 		//enter child process
-// 		ft_find_redirect(data, nb);
-// 		if (ft_execute_builtin(data, nb) == true)
-// 		{
-// 			return ;
-// 		}
-// 		else
-// 		{
-// 			ft_color(RED);
-// 			printf("<%s> is not a builtin command\n", data->cmd[nb].buffer);
-// 			ft_color(RESET);
-// 			ft_execute(data, nb);
-// 			ft_exec_cmd(data, ft_execute(data, nb), nb);
-// 			// printf("PATH: %s\n", ft_execute(data, nb));
-// 		}
-// 	// else
-// 		// wait pid
-// }
