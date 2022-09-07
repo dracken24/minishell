@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/06 15:08:34 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/06 23:07:14 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ int	ft_token_count(char *buffer, char sep);
 
 char	*ft_execute(t_data *data, int nb);
 
+void	ft_exec_cmd(t_data *data, char *cmd_path, int nb);
 void	ft_make_child_process(t_data *data, int nb);
+void	ft_find_redirect(t_data *data, int nb);
 void	ft_redirections(t_cmd *cmd);
 
 bool	ft_execute_builtin(t_data *data, int nb);

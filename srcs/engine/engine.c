@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/06 15:51:37 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/06 23:10:56 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ft_exec_cmd(t_data *data, char *cmd_path, int nb)
 		printf("minishell: %s: command not found\n", data->cmd[nb].token[0]);
 		return ;
 	}
-	printf("TEST\n");
 }
 
 void	ft_redirect_output_append(t_cmd *cmd)
@@ -85,6 +84,7 @@ void	ft_find_redirect(t_data *data, int nb)
 			data->cmd[nb].outfile = ft_open_fd(data->cmd[nb].token[++i], 2);
 			dup2(data->cmd[nb].outfile, STDOUT_FILENO);
 			data->cmd[nb].token[--i] = NULL;
+			// break ;
 		}
 		else if (ft_strncmp(data->cmd[nb].token[i], "<", 1) == 0
 				&& data->cmd[nb].token[i][1] != '<')
@@ -92,28 +92,11 @@ void	ft_find_redirect(t_data *data, int nb)
 			data->cmd[nb].infile = ft_open_fd(data->cmd[nb].token[++i], 2);
 			dup2(data->cmd[nb].infile, STDIN_FILENO);
 		}
+		// i = -1;
+		// while (data->cmd[nb].token[++i])
+		// 	printf("TOK: %s\n", data->cmd[nb].token[i]);
 	}
 }
-
-// void	do_pipe(t_all *all, char *cmd, char **envp)
-// {
-// 	char	**split_cmd;
-
-// 	split_cmd = ft_split(cmd, ' ');
-// 	all->cmd_path = check_path(all, split_cmd[0], envp);
-// 	if (!all->cmd_path)
-// 	{
-// 		free_ptr(split_cmd);
-// 		ft_printf("%s: command not found\n", split_cmd[0]);
-// 		exit (-1);
-// 	}
-// 	if (execve(all->cmd_path, split_cmd, envp) == -1)
-// 	{
-// 		free_ptr(split_cmd);
-// 		exit(-1);
-// 	}
-// 	free_ptr(split_cmd);
-// }
 
 // cat infile | wc outfile
 void	ft_make_child_process(t_data *data, int nb)
@@ -121,7 +104,6 @@ void	ft_make_child_process(t_data *data, int nb)
 	pid_t	pid;
 	int		fd[2];
 	
-	printf("TEST\n");
 	if (pipe(fd) == -1)
 	{
 		printf("Pipe failed\n");
@@ -137,45 +119,17 @@ void	ft_make_child_process(t_data *data, int nb)
 	{
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
-
-		//**************************  **************************//
 		ft_find_redirect(data, nb);
 		if (ft_execute_builtin(data, nb) == true)
-		{
 			return ;
-		}
 		else
-		{
-			ft_color(RED);
-			printf("<%s> is not a builtin command\n", data->cmd[nb].buffer);
-			ft_color(RESET);
-			ft_execute(data, nb);
 			ft_exec_cmd(data, ft_execute(data, nb), nb);
-			// printf("PATH: %s\n", ft_execute(data, nb));
-		}
-		//**************************  **************************//
 	}
 	else
 	{
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
 		waitpid(pid, NULL, 0);
-		//**************************  **************************//
-		ft_find_redirect(data, nb);
-		if (ft_execute_builtin(data, nb) == true)
-		{
-			return;
-		}
-		else
-		{
-			ft_color(RED);
-			printf("<%s> is not a builtin command\n", data->cmd[nb].buffer);
-			ft_color(RESET);
-			ft_execute(data, nb);
-			ft_exec_cmd(data, ft_execute(data, nb), nb);
-			// printf("PATH: %s\n", ft_execute(data, nb));
-		}
-		//**************************  **************************//
 	}
 }
 
