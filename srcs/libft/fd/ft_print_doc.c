@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   ft_print_doc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 12:19:48 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/05 12:33:14 by nadesjar         ###   ########.fr       */
+/*   Created: 2022/09/06 11:36:42 by nadesjar          #+#    #+#             */
+/*   Updated: 2022/09/06 11:44:54 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../libft.h"
 
-void	ft_unset(t_data *data, char *buffer)
+void	ft_print_doc(char *str)
 {
-	int	i;
+	int		fd;
+	char	*line;
 
-	i = -1;
-	while (data->env[++i])
+	fd = ft_open_fd(str, 1);
+	if (fd == -1)
 	{
-		if (ft_strncmp(data->env[i], buffer, ft_strlen(buffer)) == 0
-			&& data->env[i][ft_strlen(buffer)] == '=')
-		{
-			free(data->env[i]);
-			while (data->env[i + 1])
-			{
-				data->env[i] = data->env[i + 1];
-				i++;
-			}
-			data->env[i] = NULL;
-		}
+		printf("Error: heredoc file could not be opened\n");
+		return ;
 	}
+	line = get_next_line(fd);
+	while (line)
+	{
+		ft_putstr_fd(line, 1);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	free(line);
 }

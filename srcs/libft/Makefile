@@ -36,16 +36,17 @@ FILES 		= $(MATH)ft_ultimate_range.c $(MATH)ft_putnbr.c $(MATH)ft_range.c $(MATH
 			$(STR)ft_tolower.c $(STR)ft_strmapi.c $(STR)ft_striteri.c $(STR)ft_strcat.c \
 			$(STR)ft_strchr.c $(STR)ft_strchr_bool.c $(STR)ft_strjoin.c \
 			$(STR)ft_nbr_sign_in_str.c $(STR)ft_strnstr_ret_tofind.c \
+			$(STR)ft_strtoc.c \
 			$(TAB)ft_nbr_sign_in_tab.c $(TAB)ft_strncmp_tab.c $(TAB)ft_split_cmd.c \
 			$(TAB)ft_strchr_tab.c $(TAB)ft_split.c $(TAB)ft_tabchr.c \
 			$(MEM_M)ft_memset.c $(MEM_M)ft_memmove.c $(MEM_M)ft_memcmp.c \
 			$(MEM_M)ft_memcpy.c \
 			$(IS)ft_isalpha.c $(IS)ft_isdigit.c $(IS)ft_isalnum.c $(IS)ft_isascii.c \
-			$(IS)ft_isprint.c \
+			$(IS)ft_isprint.c $(IS)ft_is_only.c \
 			$(ATOI)ft_atoi.c $(ATOI)ft_itoa.c $(ATOI)ft_atoi_base.c \
 			$(GNL)gnl.c $(GNL)gnl_utils.c \
 			$(FD)ft_open_fd.c $(FD)ft_putchar_fd.c $(FD)ft_putstr_fd.c \
-			$(FD)ft_putendl_fd.c $(FD)ft_fd_len.c \
+			$(FD)ft_putendl_fd.c $(FD)ft_fd_len.c $(FD)ft_print_doc.c \
 			$(UTILS)ft_color.c \
 
 OBJS		= $(patsubst %.c, $(P_OBJS)%.o, $(FILES))

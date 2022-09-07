@@ -6,7 +6,7 @@
 #    By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 23:33:38 by root              #+#    #+#              #
-#    Updated: 2022/09/01 16:46:18 by nadesjar         ###   ########.fr        #
+#    Updated: 2022/09/06 13:44:48 by nadesjar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,17 +23,20 @@ P_BUILT  		= ./srcs/built_in/
 FILES			= $(P_SRCS)minishell.c \
 				$(P_KILL)exit.c \
 				$(P_INIT)init.c \
-				$(P_UTILS)readline.c \
-				$(P_UTILS)ft_get_var.c \
+				$(P_UTILS)utils.c \
+				$(P_COMM)ft_cd.c $(P_COMM)ft_unset.c \
+				$(P_COMM)echo_env.c $(P_COMM)ft_export.c \
 				$(P_PARS)parsing_01.c $(P_PARS)parsing_02.c \
-				$(P_ENGINE)engine.c \
-				$(P_COMM)echo_env.c $(P_COMM)ft_pwd.c $(P_COMM)ft_cd.c \
-				$(P_COMM)ft_cat.c $(P_COMM)ft_export.c $(P_COMM)ft_unset.c \
-				$(P_COMM)ft_redirect_out_append.c $(P_COMM)ft_wc.c \
-				$(P_COMM)ft_grep.c \
+				$(P_ENGINE)engine.c $(P_ENGINE)check_path.c \
+				$(P_COMM)heredoc.c \
+				# $(P_COMM)ft_redirect_out_append.c \
+				# $(P_UTILS)readline.c \
+				# $(P_COMM)ft_pwd.c \
+				# $(P_COMM)ft_cat.c \
+				$(P_COMM)ft_wc.c \
+				# $(P_COMM)ft_grep.c \
 				# $(P_COMM)ft_redirect_in.c \
 				# $(P_COMM)ft_redirect_out.c \
-				# $(P_COMM)heredoc.c \
 
 OBJS 			= $(patsubst $(P_SRCS)%.c, $(P_OBJS)%.o, $(FILES)) \
 

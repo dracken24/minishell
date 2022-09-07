@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 10:17:53 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/03 16:18:35 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/05 14:06:46 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	ft_color(int color)
 	else if (color == 7)
 		printf("\033[1;37m");
 	else if (color == 8)
-		printf("\033[0;00m");
+		printf("\033[0m");
 }
