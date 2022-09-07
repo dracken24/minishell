@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 20:44:21 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/05 15:31:35 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:00:28 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ char	*find_path(char *env_path)
 
 char	*find_good_path(t_data *data, char **paths, char *env_path, int nb)
 {
-	int i;
-	char *cmd_path;
-	
+	int		i;
+	char	*cmd_path;
+
 	if (!paths)
 	{
 		perror("Error, path <find_good_path>");

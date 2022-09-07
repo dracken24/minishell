@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/06 23:10:56 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:24:39 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	ft_execute_builtin(t_data *data, int nb)
 	else if (ft_strncmp(data->cmd[nb].token[0], "export", 6) == 0)
 		ft_export(data, data->cmd[nb].token[1]);
 	else if (ft_strncmp(data->cmd[nb].token[0], "unset", 5) == 0)
-		ft_unset(data, data->cmd[nb].token[1]); 
+		ft_unset(data, data->cmd[nb].token[1]);
 	else if (ft_strncmp(data->cmd[nb].token[0], "pwd", 3) == 0)
 		printf("%s\n", ft_get_variable(data, "PWD"));
 	else if (ft_strncmp(data->cmd[nb].token[0], "exit", 5) == 0)

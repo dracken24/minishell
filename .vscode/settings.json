@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "locale_t.h": "c",
-        "locale": "c"
+        "locale": "c",
+        "math.h": "c"
     }
 }
