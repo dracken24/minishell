@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:40:45 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 21:06:55 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:40:56 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_cd(t_data *data, char *buffer)
 	int	ret;
 
 	ret = chdir(buffer);
-	printf("ret = %d\n", ret);
 	old = -1;
 	while (data->env[++old])
 	{
@@ -37,6 +36,5 @@ void	ft_cd(t_data *data, char *buffer)
 		free (data->env[old]);
 		data->env[old] = data->env[new];
 		data->env[new] = ft_strjoin("PWD=", getcwd(NULL, 0), 0);
-		printf("PWD = %s\n", data->env[new]);
 	}
 }
