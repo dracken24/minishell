@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/07 11:29:21 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:57:07 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	ft_find_redirect(t_data *data, int nb);
 void	ft_redirections(t_cmd *cmd);
 
 bool	ft_execute_builtin(t_data *data, int nb);
+bool	ft_check_builtin(t_data *data, int nb);
 
 /** CMDS **/
 

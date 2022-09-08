@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/07 13:35:18 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 19:47:16 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,16 @@ int	main(int ac, char **argv, char **env)
 		data.buffer = readline(data.prompt);	// Fill the buffer with user input
 		free(data.prompt);						// Free the prompt for next iteration
 		add_history(data.buffer);
-		if (strncmp(data.buffer, "exit\0", 5) == 0)
-			ft_exit(&data, "Asta la vista Baby !!!", 2);
 		if (ft_is_only(data.buffer, ' '))		// Newline on empty buffer
 			free(data.buffer);
-		else
+		ft_parse(&data); // tokenize the buffer
+		if (ft_check_builtin(&data, 0) == 1 && data.cmd_count == 1)
 		{
-			ft_fork_main(&data, i);
+			ft_find_redirect(&data, 0);
+			ft_execute_builtin(&data, 0);
 		}
+		else
+			ft_fork_main(&data, i);
 		ft_free_table(&data);				// Free the table for next iteration
 	}
 }
@@ -50,14 +52,12 @@ void	ft_fork_main(t_data *data, int nb)
 		ft_exit(data, "Fork failed", 3);
 	if (pid == 0)
 	{
-		dprintf(2, "1\n");
-		ft_parse(data); // tokenize the buffer
 		// ft_print_table(&data);			//print the table with all the tokens
 		while (++nb < data->cmd_count - 1)
 			ft_make_child_process(data, nb);
 		ft_find_redirect(data, nb);
 		if (ft_execute_builtin(data, nb) == true)
-			;
+			ft_exit(data, "exit fork", 3);
 		else
 			ft_exec_cmd(data, ft_execute(data, nb), nb);
 	}
