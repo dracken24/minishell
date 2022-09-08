@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:02:10 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/05 17:30:22 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 20:00:43 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	ft_print_table(t_data *data)
 	{
 		j = 0;
 		ft_color(CYAN);
-		// printf("Infile: %d\n", data->cmd[i].infile);
-		// printf("Outfile: %d\n", data->cmd[i].outfile);
 		printf("[cmd %d]", i);
 		while (data->cmd[i].token[j])
 		{
@@ -44,6 +42,7 @@ void	ft_print_table(t_data *data)
 char	*ft_get_variable(t_data *data, char *buffer)
 {
 	int		i;
+	
 	i = -1;
 	while (data->env[++i])
 	{
@@ -72,24 +71,32 @@ char	*ft_get_prompt(t_data *data)
 	return (prompt);
 }
 
-// char	*ft_get_variable(t_data *data, char *buffer)
-// {
-// 	char	*str;
-// 	int		i;
+bool	ft_check_builtin(t_data *data, int nb)
+{
+	if (ft_strncmp(data->cmd[nb].token[0], "echo", 4) == 0)
+		return (true);
+	else if (ft_strncmp(data->cmd[nb].token[0], "env", 3) == 0)
+		return (true);
+	else if (ft_strncmp(data->cmd[nb].token[0], "export", 6) == 0)
+		return (true);
+	else if (ft_strncmp(data->cmd[nb].token[0], "unset", 5) == 0)
+		return (true);
+	else if (ft_strncmp(data->cmd[nb].token[0], "pwd", 3) == 0)
+		return (true);
+	else if (ft_strncmp(data->cmd[nb].buffer, "cd", 2) == 0)
+		return (true);
+	else if (ft_strncmp(data->cmd[nb].token[0], "exit", 4) == 0)
+		return (true);
+	else
+		return (false);
+	return (true);
+}
 
-// 	str = ft_strjoin(buffer, "=", 0);
-// 	i = -1;
-// 	while (data->env[++i])
-// 	{
-// 		if (data->env[i] && !ft_strncmp(data->env[i], str, ft_strlen(str)))
-// 		{
-// 			free(str);
-// 			return (data->env[i] + ft_strlen(buffer) + 1);
-// 		}
-// 	}
-// 	free(str);
-// 	ft_color(1);
-// 	printf("<%s> variable not exist\n", buffer);
-// 	ft_color(6);
-// 	return (NULL);
-// }
+void	ft_exec_cmd(t_data *data, char *cmd_path, int nb)
+{
+	if (execve(cmd_path, data->cmd[nb].token, data->env) == -1)
+	{
+		printf("minishell: %s: command not found\n", data->cmd[nb].token[0]);
+		return ;
+	}
+}

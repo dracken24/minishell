@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 12:24:39 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 20:00:35 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,13 @@ bool	ft_execute_builtin(t_data *data, int nb)
 		ft_unset(data, data->cmd[nb].token[1]);
 	else if (ft_strncmp(data->cmd[nb].token[0], "pwd", 3) == 0)
 		printf("%s\n", ft_get_variable(data, "PWD"));
-	else if (ft_strncmp(data->cmd[nb].token[0], "exit", 5) == 0)
-		ft_exit(data, "Goodbye\n", 3);
 	else if (ft_strncmp(data->cmd[nb].buffer, "cd", 2) == 0)
 		ft_cd(data, data->cmd[nb].token[1]);
+	else if (ft_strncmp(data->cmd[nb].token[0], "exit", 4) == 0)
+		ft_exit(data, "Goodbye\n", 3);
 	else
 		return (false);
 	return (true);
-}
-
-void	ft_exec_cmd(t_data *data, char *cmd_path, int nb)
-{
-	if (execve(cmd_path, data->cmd[nb].token, data->env) == -1)
-	{
-		printf("minishell: %s: command not found\n", data->cmd[nb].token[0]);
-		return ;
-	}
 }
 
 void	ft_redirect_output_append(t_cmd *cmd)
@@ -84,7 +75,6 @@ void	ft_find_redirect(t_data *data, int nb)
 			data->cmd[nb].outfile = ft_open_fd(data->cmd[nb].token[++i], 2);
 			dup2(data->cmd[nb].outfile, STDOUT_FILENO);
 			data->cmd[nb].token[--i] = NULL;
-			// break ;
 		}
 		else if (ft_strncmp(data->cmd[nb].token[i], "<", 1) == 0
 				&& data->cmd[nb].token[i][1] != '<')
@@ -98,7 +88,17 @@ void	ft_find_redirect(t_data *data, int nb)
 	}
 }
 
-// cat infile | wc outfile
+void	ft_child_suite(t_data *data, int *fd, int nb)
+{
+	close(fd[0]);
+	dup2(fd[1], STDOUT_FILENO);
+	ft_find_redirect(data, nb);
+	if (ft_execute_builtin(data, nb) == true)
+		;
+	else
+		ft_exec_cmd(data, ft_execute(data, nb), nb);
+}
+
 void	ft_make_child_process(t_data *data, int nb)
 {
 	pid_t	pid;
@@ -116,15 +116,7 @@ void	ft_make_child_process(t_data *data, int nb)
 		return ;
 	}
 	if (pid == 0)
-	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		ft_find_redirect(data, nb);
-		if (ft_execute_builtin(data, nb) == true)
-			return ;
-		else
-			ft_exec_cmd(data, ft_execute(data, nb), nb);
-	}
+		ft_child_suite(data, fd, nb);
 	else
 	{
 		close(fd[1]);
@@ -132,27 +124,3 @@ void	ft_make_child_process(t_data *data, int nb)
 		waitpid(pid, NULL, 0);
 	}
 }
-
-// void	ft_make_child_process(t_data *data, int nb)
-// {
-// 	//pid
-// 	// dup
-// 	//if fork == 1 enfent
-// 		//enter child process
-// 		ft_find_redirect(data, nb);
-// 		if (ft_execute_builtin(data, nb) == true)
-// 		{
-// 			return ;
-// 		}
-// 		else
-// 		{
-// 			ft_color(RED);
-// 			printf("<%s> is not a builtin command\n", data->cmd[nb].buffer);
-// 			ft_color(RESET);
-// 			ft_execute(data, nb);
-// 			ft_exec_cmd(data, ft_execute(data, nb), nb);
-// 			// printf("PATH: %s\n", ft_execute(data, nb));
-// 		}
-// 	// else
-// 		// wait pid
-// }
