@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:02:10 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 20:00:43 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 20:13:45 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,4 @@ bool	ft_check_builtin(t_data *data, int nb)
 	else
 		return (false);
 	return (true);
-}
-
-void	ft_exec_cmd(t_data *data, char *cmd_path, int nb)
-{
-	if (execve(cmd_path, data->cmd[nb].token, data->env) == -1)
-	{
-		printf("minishell: %s: command not found\n", data->cmd[nb].token[0]);
-		return ;
-	}
 }
