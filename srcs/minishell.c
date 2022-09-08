@@ -6,13 +6,11 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/07 21:11:12 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/08 13:40:35 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	ft_fork_main(t_data *data, int nb);
 
 int	main(int ac, char **argv, char **env)
 {
@@ -31,15 +29,18 @@ int	main(int ac, char **argv, char **env)
 		add_history(data.buffer);
 		if (ft_is_only(data.buffer, ' '))		// Newline on empty buffer
 			free(data.buffer);
-		ft_parse(&data); 						// tokenize the buffer
-		if (ft_check_builtin(&data, 0) == 1 && data.cmd_count == 1)
-		{
-			ft_find_redirect(&data, 0);
-			ft_execute_builtin(&data, 0);
-		}
 		else
-			ft_fork_main(&data, i);
-		ft_free_table(&data);					// Free the table for next iteration
+		{
+			ft_parse(&data); // tokenize the buffer
+			if (ft_check_builtin(&data, 0) == 1 && data.cmd_count == 1)
+			{
+				ft_find_redirect(&data, 0);
+				ft_execute_builtin(&data, 0);
+			}
+			else
+				ft_fork_main(&data, i);
+			ft_free_table(&data);
+		}
 	}
 }
 
