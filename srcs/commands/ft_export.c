@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:20:35 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 20:11:10 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 20:57:58 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,4 @@ void	ft_export(t_data *data, char *arg)
 	}
 	else if (arg == NULL)
 		ft_env(data);
-
 }
