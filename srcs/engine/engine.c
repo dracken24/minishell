@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 21:09:24 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/08 11:38:48 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ bool	ft_execute_builtin(t_data *data, int nb)
 
 void	ft_exec_cmd(t_data *data, char *cmd_path, int nb)
 {
+	
 	if (execve(cmd_path, data->cmd[nb].token, data->env) == -1)
 	{
 		printf("minishell: %s: command not found\n", data->cmd[nb].token[0]);
