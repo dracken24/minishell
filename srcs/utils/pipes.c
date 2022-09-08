@@ -6,12 +6,11 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:05:04 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 20:14:09 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 21:08:04 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 void	ft_child_suite(t_data *data, int *fd, int nb)
 {
@@ -28,7 +27,7 @@ void	ft_make_child_process(t_data *data, int nb)
 {
 	pid_t	pid;
 	int		fd[2];
-	
+
 	if (pipe(fd) == -1)
 	{
 		printf("Pipe failed\n");

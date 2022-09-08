@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/07 19:47:16 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 21:11:12 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char **argv, char **env)
 		add_history(data.buffer);
 		if (ft_is_only(data.buffer, ' '))		// Newline on empty buffer
 			free(data.buffer);
-		ft_parse(&data); // tokenize the buffer
+		ft_parse(&data); 						// tokenize the buffer
 		if (ft_check_builtin(&data, 0) == 1 && data.cmd_count == 1)
 		{
 			ft_find_redirect(&data, 0);
@@ -39,20 +39,20 @@ int	main(int ac, char **argv, char **env)
 		}
 		else
 			ft_fork_main(&data, i);
-		ft_free_table(&data);				// Free the table for next iteration
+		ft_free_table(&data);					// Free the table for next iteration
 	}
 }
 
 void	ft_fork_main(t_data *data, int nb)
 {
 	pid_t	pid;
-	
+
 	pid = fork();
 	if (pid == -1)
 		ft_exit(data, "Fork failed", 3);
 	if (pid == 0)
 	{
-		// ft_print_table(&data);			//print the table with all the tokens
+		// ft_print_table(&data);				//print the table with all the tokens
 		while (++nb < data->cmd_count - 1)
 			ft_make_child_process(data, nb);
 		ft_find_redirect(data, nb);

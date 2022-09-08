@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:02:10 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 20:13:45 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 21:10:46 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_print_table(t_data *data)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 0;
 	ft_color(RED);
 	printf("---------- COMAND TABLE ----------\n");
@@ -42,7 +42,7 @@ void	ft_print_table(t_data *data)
 char	*ft_get_variable(t_data *data, char *buffer)
 {
 	int		i;
-	
+
 	i = -1;
 	while (data->env[++i])
 	{
@@ -60,7 +60,7 @@ char	*ft_get_prompt(t_data *data)
 {
 	char	*prompt;
 
-	prompt = ft_strjoin("\033[0;32m", ft_get_variable(data, "USER") , 0);
+	prompt = ft_strjoin("\033[0;32m", ft_get_variable(data, "USER"), 0);
 	prompt = ft_strjoin(prompt, "@", 1);
 	prompt = ft_strjoin(prompt, "Minishell", 1);
 	prompt = ft_strjoin(prompt, ": ", 1);

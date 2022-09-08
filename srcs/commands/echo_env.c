@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 12:04:49 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 20:10:35 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 21:07:58 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_echo(char **arg)
 {
-	int i;
-	int flag;
+	int	i;
+	int	flag;
 
 	flag = 0;
 	i = 1;
@@ -30,9 +30,9 @@ void	ft_echo(char **arg)
 			i++;
 		else
 		{
-		printf("%s", arg[i++]);
-		if (arg[i])
-			printf(" ");
+			printf("%s", arg[i++]);
+			if (arg[i])
+				printf(" ");
 		}
 	}
 	if (flag == 0)
@@ -41,9 +41,9 @@ void	ft_echo(char **arg)
 
 void	ft_env(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
-	while(data->env[++i])
+	while (data->env[++i])
 		printf("%s\n", data->env[i]);
 }
