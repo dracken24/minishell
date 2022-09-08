@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 20:13:59 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 21:09:24 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_exec_cmd(t_data *data, char *cmd_path, int nb)
 void	ft_redirect_output_append(t_cmd *cmd)
 /* >> */
 {
-    char	*str;
+	char	*str;
 
 	str = get_next_line(cmd->outfile);
 	while (str)
@@ -86,7 +86,7 @@ void	ft_find_redirect(t_data *data, int nb)
 			data->cmd[nb].token[--i] = NULL;
 		}
 		else if (ft_strncmp(data->cmd[nb].token[i], "<", 1) == 0
-				&& data->cmd[nb].token[i][1] != '<')
+			&& data->cmd[nb].token[i][1] != '<')
 		{
 			data->cmd[nb].infile = ft_open_fd(data->cmd[nb].token[++i], 2);
 			dup2(data->cmd[nb].infile, STDIN_FILENO);

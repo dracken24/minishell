@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/05 17:44:59 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 21:10:08 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 void	ft_clean_token(t_data *data, char **token)
 {
-	int t;
+	int	t;
 
 	t = 0;
 	while (token[t])
 	{
 		if (token[t][0] == '\'' && token[t][ft_strlen(token[t]) - 1] == '\'')
 			ft_remove_char(token[t], '\'');
-		else if (token[t][0] == '\"' && token[t][ft_strlen(token[t]) - 1] == '\"')
+		else if (token[t][0] == '\"'
+			&& token[t][ft_strlen(token[t]) - 1] == '\"')
 		{
 			if (ft_strchr(token[t], '$'))
 				token[t] = ft_expand_variable(data, token[t]);
@@ -40,9 +41,9 @@ void	ft_clean_token(t_data *data, char **token)
 
 void	ft_make_token(t_data *data)
 {
-	int c;
-	int t;
-	int count;
+	int	c;
+	int	t;
+	int	count;
 
 	c = -1;
 	while (++c < data->cmd_count)
@@ -62,9 +63,9 @@ void	ft_make_token(t_data *data)
 		ft_clean_token(data, data->cmd[c].token);
 }
 
-void 	ft_parse(t_data *data)
+void	ft_parse(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	data->cmd_count = ft_token_count(data->buffer, '|');

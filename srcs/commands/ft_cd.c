@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:40:45 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 20:10:54 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 21:06:55 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_cd(t_data *data, char *buffer)
 {
-	int new;
-	int old;
-	int ret;
+	int	new;
+	int	old;
+	int	ret;
 
 	ret = chdir(buffer);
 	printf("ret = %d\n", ret);

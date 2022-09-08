@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/05 17:44:53 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/07 21:06:49 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_trim_token(char *buffer, char sep)
 {
 	int		i;
-	
+
 	if (!buffer)
 		return (buffer);
 	i = ft_strlen(buffer) - 1;
@@ -31,14 +31,14 @@ char	*ft_trim_token(char *buffer, char sep)
 
 int	ft_token_count(char *buffer, char sep)
 {
-	char *tmp;
-	char *token;
-	int i;
-	
+	char	*tmp;
+	char	*token;
+	int		i;
+
 	i = 0;
 	tmp = ft_strdup(buffer);
 	token = ft_trim_token(ft_strtok(tmp, sep), ' ');
-	while(token)
+	while (token)
 	{
 		i++;
 		token = ft_trim_token(ft_strtok(NULL, sep), ' ');
@@ -49,9 +49,9 @@ int	ft_token_count(char *buffer, char sep)
 
 void	ft_remove_char(char *token, char sep)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 0;
 	j = 0;
 	while (token[i])
