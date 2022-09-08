@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/08 14:28:19 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:34:25 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,17 @@ char	*ft_get_prompt(t_data *data);
 
 /** PARSING **/
 
+char	*ft_expand_heredoc(t_data *data, char *heredoc);
+char	*ft_expand(t_data *data, char *token, int flag);
 char	*ft_expand_variable(t_data *data, char *token);
+char	*ft_remove_char(char *token, char sep);
 char	*ft_trim_token(char *buffer, char sep);
 
 void	ft_clean_token(t_data *data, char **token);
-void	ft_remove_char(char *token, char sep);
 void	ft_make_token(t_data *data);
 void 	ft_parse(t_data *data);
 
-int	ft_token_count(char *buffer, char sep);
+int		ft_token_count(char *buffer, char sep);
 
 /** ENGINE **/
 

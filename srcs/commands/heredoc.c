@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:46:46 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 21:08:50 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:34:36 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	ft_heredoc(char *limiter)
 		str = readline("<heredoc> ");
 		i = 0;
 	}
-	// ft_print_doc("heredoc");
 	close(fd);
 	free(str);
 }

@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/08 14:37:53 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:53:27 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,6 @@ void	ft_find_redirect(t_data *data, int nb)
 {
 	int	i;
 
-	// check si infile, outfile ou outappend != -1
-	// si oui,
-	// si infile > 2;  dup2(infile, 0);
-	// si outfile > 2; dup2(outfile, 1);
-	// si outappend > 2; dup2(outappend, 1);
 	i = -1;
 	while (data->cmd[nb].token[++i])
 	{
