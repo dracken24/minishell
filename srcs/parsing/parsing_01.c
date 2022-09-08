@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/08 16:52:36 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/08 17:21:12 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	ft_check_redirect(t_data *data, char **token)
 	{
 		if (ft_strncmp(token[i], "<<\0", 3) == 0)
 		{
+			printf("DEL: %s", token[i + 1]);
 			ft_heredoc(token[i + 1]);
 			token[i][1] = 0;
 			token[i + 1] = ft_expand_heredoc(data, ft_strjoin(&data->heredoc[0], "heredoc", 0));
