@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:05:04 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/08 13:27:04 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:55:50 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_child_suite(t_data *data, int *fd, int nb)
 	if (ft_execute_builtin(data, nb) == true)
 		;
 	else
-		ft_exec_cmd(data, ft_execute(data, nb), nb);
+		ft_exec_cmd(data, ft_get_path(data, nb), nb);
 }
 
 void	ft_make_child_process(t_data *data, int nb)

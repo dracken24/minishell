@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/08 17:21:12 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:44:36 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,6 @@ char	*ft_expand_variable(t_data *data, char *token)
 	return (token);
 }
 
-char	*ft_expand_heredoc(t_data *data, char *heredoc)
-{
-	char	*temps;
-	char	*expand;
-
-	expand = ft_strjoin(data->heredoc, "heredoc=", 0);
-	temps = ft_strjoin(expand, heredoc, 0);
-	free(heredoc);
-	ft_export(data, temps);
-	free(temps);
-	expand[ft_strlen(expand) - 1] = '\0';
-	heredoc = ft_get_variable(data, expand);
-	free(expand);
-	data->heredoc[0] = data->heredoc[0] + 1; 
-
-	return (heredoc);
-}
-
 void	ft_clean_token(t_data *data, char **token)
 {
 	int t;
@@ -82,20 +64,39 @@ void	ft_clean_token(t_data *data, char **token)
 	}
 }
 
+char	*ft_expand_heredoc(t_data *data, char *heredoc)
+{
+	char	*temps;
+	char	*expand;
+
+	expand = ft_strjoin(data->heredoc, "heredoc=", 0);
+	temps = ft_strjoin(expand, heredoc, 0);
+	free(heredoc);
+	ft_export(data, temps);
+	free(temps);
+	expand[ft_strlen(expand) - 1] = '\0';
+	heredoc = ft_get_variable(data, expand);
+	free(expand);
+	data->heredoc[0] = data->heredoc[0] + 1; 
+
+	return (heredoc);
+}
+
 void	ft_check_redirect(t_data *data, char **token)
 {
 	int i;
+	char	*str;
 
 	i = -1;
 	while (token[++i])
 	{
 		if (ft_strncmp(token[i], "<<\0", 3) == 0)
 		{
-			printf("DEL: %s", token[i + 1]);
-			ft_heredoc(token[i + 1]);
-			token[i][1] = 0;
-			token[i + 1] = ft_expand_heredoc(data, ft_strjoin(&data->heredoc[0], "heredoc", 0));
-			return ;
+			str = ft_expand_heredoc(data, ft_strjoin(&data->heredoc[0], "heredoc", 0));
+			ft_heredoc(token[i + 1], str);
+			token[i][1] = '\0';
+			token[i + 1] = str;
+			// return ;
 		}
 		else if (ft_strncmp(token[i], "<<", 2) == 0)
 		{

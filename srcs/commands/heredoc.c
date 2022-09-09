@@ -6,19 +6,19 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:46:46 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/08 16:34:36 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/08 20:29:07 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_heredoc(char *limiter)
+void	ft_heredoc(char *limiter, char *heredoc)
 {
 	char	*str;
 	int		fd;
 	int		i;
 
-	fd = ft_open_fd("heredoc", 2);
+	fd = ft_open_fd(heredoc, 2);
 	if (fd == -1)
 	{
 		printf("Error: heredoc file could not be opened\n");
