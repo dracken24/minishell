@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 20:44:21 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/08 13:26:09 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:56:39 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 char	*find_good_path(t_data *data, char **paths, char *env_path, int nb);
 char	*find_path(char *env_path);
 
-char	*ft_execute(t_data *data, int nb)
+char	*ft_get_path(t_data *data, int nb)
 {
 	char	**paths;
 	char	*env_path;

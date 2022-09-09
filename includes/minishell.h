@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/08 14:28:19 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:54:37 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,21 @@ char	*ft_get_prompt(t_data *data);
 
 /** PARSING **/
 
+char	*ft_expand_heredoc(t_data *data, char *heredoc);
+char	*ft_expand(t_data *data, char *token, int flag);
 char	*ft_expand_variable(t_data *data, char *token);
+char	*ft_remove_char(char *token, char sep);
 char	*ft_trim_token(char *buffer, char sep);
 
 void	ft_clean_token(t_data *data, char **token);
-void	ft_remove_char(char *token, char sep);
 void	ft_make_token(t_data *data);
 void 	ft_parse(t_data *data);
 
-int	ft_token_count(char *buffer, char sep);
+int		ft_token_count(char *buffer, char sep);
 
 /** ENGINE **/
 
-char	*ft_execute(t_data *data, int nb);
-// char	*ft_get_path(t_data *data, char *buffer);
+char	*ft_get_path(t_data *data, int nb);
 
 void	ft_exec_cmd(t_data *data, char *cmd_path, int nb);
 void	ft_make_child_process(t_data *data, int nb);
@@ -91,7 +92,7 @@ bool	ft_check_builtin(t_data *data, int nb);
 void	ft_unset(t_data *data, char *buffer);
 void	ft_export(t_data *data, char *arg);
 void	ft_cd(t_data *data, char *buffer);
-void	ft_heredoc(char *limiter);
+void	ft_heredoc(char *limiter, char *heredoc);
 void	ft_env(t_data *data);
 void	ft_echo(char **arg);
 
