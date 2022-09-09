@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/08 21:44:36 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/09 11:46:14 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,19 @@ void	ft_make_token(t_data *data)
 	}
 	c = -1;
 	while (++c < data->cmd_count)
+	{
 		ft_check_redirect(data, data->cmd[c].token);
-	c = -1;
-	while (++c < data->cmd_count)
-		ft_clean_token(data, data->cmd[c].token);
+	}
+	// c = -1;
+	// while (++c < data->cmd_count)
+	// {
+	// 	ft_find_redirect(data, c);
+	// }
+	// c = -1;
+	// while (++c < data->cmd_count)
+	// {
+	// 	ft_clean_token(data, data->cmd[c].token);
+	// }
 }
 
 void 	ft_parse(t_data *data)

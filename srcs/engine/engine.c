@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/08 21:50:35 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/09 11:46:53 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_find_redirect(t_data *data, int nb)
 		else if (ft_strncmp(data->cmd[nb].token[i], "<", 1) == 0
 			&& data->cmd[nb].token[i][1] != '<')
 		{
-			data->cmd[nb].fd_in = ft_open_fd(data->cmd[nb].token[++i], 2);
+			data->cmd[nb].fd_in = ft_open_fd(data->cmd[nb].token[++i], 1);
 			dup2(data->cmd[nb].fd_in, STDIN_FILENO);
 			data->cmd[nb].token[--i] = NULL;
 		}
@@ -92,4 +92,5 @@ void	ft_find_redirect(t_data *data, int nb)
 		// while (data->cmd[nb].token[++i])
 		// 	printf("TOK: %s\n", data->cmd[nb].token[i]);
 	}
+	ft_clean_token(data, data->cmd[nb].token);
 }
