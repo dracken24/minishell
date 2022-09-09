@@ -6,12 +6,13 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:46:46 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/08 20:29:07 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/09 12:13:47 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+// retour de readline avec ft_clean_token pour $
 void	ft_heredoc(char *limiter, char *heredoc)
 {
 	char	*str;

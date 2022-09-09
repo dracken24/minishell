@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/09 11:46:53 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/09 13:08:18 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	ft_execute_builtin(t_data *data, int nb)
 		ft_env(data);
 	else if (ft_strncmp(data->cmd[nb].token[0], "export", 6) == 0)
 		ft_export(data, data->cmd[nb].token[1]);
-	else if (ft_strncmp(data->cmd[nb].token[0], "unset", 5) == 0)
+	else if (ft_strncmp(data->cmd[nb].token[0], "unset\0", 6) == 0)
 		ft_unset(data, data->cmd[nb].token[1]);
 	else if (ft_strncmp(data->cmd[nb].token[0], "pwd", 3) == 0)
 		printf("%s\n", ft_get_variable(data, "PWD"));
@@ -86,7 +86,13 @@ void	ft_find_redirect(t_data *data, int nb)
 		{
 			data->cmd[nb].fd_in = ft_open_fd(data->cmd[nb].token[++i], 1);
 			dup2(data->cmd[nb].fd_in, STDIN_FILENO);
-			data->cmd[nb].token[--i] = NULL;
+			if (data->cmd[nb].token[0][0] != '<')
+				data->cmd[nb].token[--i] = NULL;
+			else
+			{
+				data->cmd[nb].token++;
+				data->cmd[nb].token++;
+			}
 		}
 		// i = -1;
 		// while (data->cmd[nb].token[++i])
