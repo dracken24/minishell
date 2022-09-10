@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/09 19:56:08 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/09 20:30:21 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ typedef struct		s_cmd
 	char	*buffer;		//indivividual buffer
 	char	**token;		//tokenized buffer
 	
-	char	*infile;			//for open input file
-	int		fd_in;		//for open input file
+	char	*infile;		//for open input file
+	int		fd_in;			//for open input file
 	
 	char	*outfile;		//for open output file
 	char	*outappend;		//for open output file in append mode
-	int		fd_out;		//for open output file
+	int		fd_out;			//for open output file
 	
 	int		file;			//for open input file
 	int		file_error;		//for open error file
@@ -46,7 +46,7 @@ typedef struct		s_data
 	int 	cmd_count;		//count of commands
 	char	expand[2];		//flag for expansion
 	char	heredoc[2];		//flag for heredoc
-	pid_t	*pid;
+	pid_t	*pid;			//pids for all process
 	t_cmd	*cmd;			//array of cmd
 }					t_data;
 
