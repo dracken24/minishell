@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/10 12:25:05 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 17:13:54 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct		s_data
 	char	*buffer;		//buffer for readline
 	char	*prompt;		//prompt message for readline
 	int 	cmd_count;		//count of commands
+	int		ct;
 	char	expand[2];		//flag for expansion
 	char	heredoc[2];		//flag for heredoc
 	pid_t	*pid;			//pids for all process

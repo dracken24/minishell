@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/10 12:25:07 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 17:58:27 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int	main(int ac, char **argv, char **env)
 				ft_execute_builtin(0);
 			}
 			else
+			{
 				ft_fork_main(i);
+			}
 			ft_free_table();
 		}
 	}
