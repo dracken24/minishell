@@ -6,11 +6,13 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/09 13:21:05 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:35:16 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern t_data data;
 
 char	*ft_trim_token(char *buffer, char sep)
 {
@@ -70,7 +72,7 @@ char	*ft_remove_char(char *token, char sep)
 	return (token);
 }
 
-char	*ft_expand(t_data *data, char *token, int flag)
+char	*ft_expand(char *token, int flag)
 {
 	char	*temp[4];
 
@@ -81,7 +83,7 @@ char	*ft_expand(t_data *data, char *token, int flag)
 		if (*temp[0] == '\0' || *temp[0] == ' ' || *temp[0] == '$' || *temp[0] == '"' || *temp[0] == '\'')
 			break ;
 	temp[2] = ft_substr(temp[2] , 0, temp[0] - temp[2] );
-	temp[3] = ft_get_variable(data, temp[2] );
+	temp[3] = ft_get_variable(temp[2] );
 	temp[3]  = ft_strjoin(temp[1], temp[3], 1);
 	free (temp[2]);
 	temp[1] = ft_remove_char(ft_substr(temp[0], 0, ft_strlen(temp[0])), '\"');
@@ -90,6 +92,6 @@ char	*ft_expand(t_data *data, char *token, int flag)
 	if (flag == 1)
 		free (token);
 	if (ft_strchr(temp[0], '$'))
-		temp[0] = ft_expand(data, temp[0], 1);
+		temp[0] = ft_expand(temp[0], 1);
 	return (temp[0]);
 }

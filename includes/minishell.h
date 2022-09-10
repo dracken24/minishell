@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/09 20:30:21 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:29:17 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,48 +52,48 @@ typedef struct		s_data
 
 /** FONTIONS **/
 
-void	ft_init_environement(t_data *data, char **env);
-void	ft_exit(t_data *data, char *str, int s);
-void	ft_print_table(t_data *data);
-void	ft_free_table(t_data *data);
+void	ft_init_environement(char **env);
+void	ft_exit(char *str, int s);
+void	ft_print_table(void);
+void	ft_free_table(void);
 
-char	*ft_get_variable(t_data *data, char *buffer);
-char	*ft_get_prompt(t_data *data);
+char	*ft_get_variable(char *buffer);
+char	*ft_get_prompt(void);
 
 /** PARSING **/
 
-char	*ft_expand_heredoc(t_data *data, char *heredoc);
-char	*ft_expand(t_data *data, char *token, int flag);
-char	*ft_expand_variable(t_data *data, char *token);
+char	*ft_expand_heredoc(char *heredoc);
+char	*ft_expand(char *token, int flag);
+char	*ft_expand_variable(char *token);
 char	*ft_remove_char(char *token, char sep);
 char	*ft_trim_token(char *buffer, char sep);
 
-void	ft_clean_token(t_data *data, char **token);
-void	ft_make_token(t_data *data);
-void 	ft_parse(t_data *data);
+void	ft_clean_token(char **token);
+void	ft_make_token(void);
+void 	ft_parse(void);
 
 int		ft_token_count(char *buffer, char sep);
 
 /** ENGINE **/
 
-char	*ft_get_path(t_data *data, int nb);
+char	*ft_get_path(int nb);
 
-void	ft_exec_cmd(t_data *data, char *cmd_path, int nb);
-void	ft_make_child_process(t_data *data, int nb);
-void	ft_find_redirect(t_data *data, int nb);
-void	ft_fork_main(t_data *data, int nb);
+void	ft_exec_cmd(char *cmd_path, int nb);
+void	ft_make_child_process(int nb);
+void	ft_find_redirect(int nb);
+void	ft_fork_main(int nb);
 void	ft_redirections(t_cmd *cmd);
 
-bool	ft_execute_builtin(t_data *data, int nb);
-bool	ft_check_builtin(t_data *data, int nb);
+bool	ft_execute_builtin(int nb);
+bool	ft_check_builtin(int nb);
 
 /** CMDS **/
 
-void	ft_unset(t_data *data, char *buffer);
-void	ft_export(t_data *data, char *arg);
-void	ft_cd(t_data *data, char *buffer);
+void	ft_unset(char *buffer);
+void	ft_export(char *arg);
+void	ft_cd(char *buffer);
 void	ft_heredoc(char *limiter, char *heredoc);
-void	ft_env(t_data *data);
+void	ft_env(void);
 void	ft_echo(char **arg);
 
 #endif
