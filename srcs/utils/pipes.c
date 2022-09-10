@@ -6,24 +6,26 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:05:04 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/09 20:21:28 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:56:02 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_child_suite(t_data *data, int *fd, int nb)
+extern t_data data;
+
+void	ft_child_suite(int *fd, int nb)
 {
 	close(fd[0]);
 	dup2(fd[1], STDOUT_FILENO);
-	ft_find_redirect(data, nb);
-	if (ft_execute_builtin(data, nb) == true)
-		;
+	ft_find_redirect(nb);
+	if (ft_execute_builtin(nb) == true)
+		ft_exit("", 3);
 	else
-		ft_exec_cmd(data, ft_get_path(data, nb), nb);
+		ft_exec_cmd(ft_get_path(nb), nb);
 }
 
-void	ft_make_child_process(t_data *data, int nb)
+void	ft_make_child_process(int nb)
 {
 	int		fd[2];
 
@@ -32,14 +34,14 @@ void	ft_make_child_process(t_data *data, int nb)
 		printf("Pipe failed\n");
 		return ;
 	}
-	data->pid[nb] = fork();
-	if (data->pid[nb] == -1)
+	data.pid[nb] = fork();
+	if (data.pid[nb] == -1)
 	{
 		printf("Fork failed\n");
 		return ;
 	}
-	if (data->pid[nb] == 0)
-		ft_child_suite(data, fd, nb);
+	if (data.pid[nb] == 0)
+		ft_child_suite(fd, nb);
 	else
 	{
 		close(fd[1]);

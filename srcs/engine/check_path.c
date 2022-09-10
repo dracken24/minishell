@@ -6,25 +6,27 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 20:44:21 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/09 19:54:28 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:30:37 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*find_good_path(t_data *data, char **paths, char *env_path, int nb);
+extern t_data data;
+
+char	*find_good_path(char **paths, char *env_path, int nb);
 char	*find_path(char *env_path);
 
-char	*ft_get_path(t_data *data, int nb)
+char	*ft_get_path(int nb)
 {
 	char	**paths;
 	char	*env_path;
 	int		i;
 
 	i = -1;
-	while (data->env[++i])
+	while (data.env[++i])
 	{
-		env_path = ft_strnstr(data->env[i], "PATH=", 5);
+		env_path = ft_strnstr(data.env[i], "PATH=", 5);
 		if (env_path)
 		{
 			env_path = find_path(env_path);
@@ -32,7 +34,7 @@ char	*ft_get_path(t_data *data, int nb)
 		}
 	}
 	paths = ft_calloc(sizeof(paths), ft_strlen(env_path + 1));
-	env_path = find_good_path(data, paths, env_path, nb);
+	env_path = find_good_path(paths, env_path, nb);
 	free(paths);
 	return (env_path);
 }
@@ -57,7 +59,7 @@ char	*find_path(char *env_path)
 	return (env_path);
 }
 
-char	*find_good_path(t_data *data, char **paths, char *env_path, int nb)
+char	*find_good_path(char **paths, char *env_path, int nb)
 {
 	int		i;
 	char	*cmd_path;
@@ -74,7 +76,7 @@ char	*find_good_path(t_data *data, char **paths, char *env_path, int nb)
 	i = -1;
 	while (paths[++i])
 	{
-		cmd_path = ft_strjoin(paths[i], data->cmd[nb].token[0], 0);
+		cmd_path = ft_strjoin(paths[i], data.cmd[nb].token[0], 0);
 		if (access(cmd_path, F_OK | X_OK) == 0)
 		{
 			free(paths);

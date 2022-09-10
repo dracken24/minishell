@@ -6,11 +6,13 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 12:04:49 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 21:07:58 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:20:45 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern t_data data;
 
 void	ft_echo(char **arg)
 {
@@ -39,11 +41,11 @@ void	ft_echo(char **arg)
 		printf("\n");
 }
 
-void	ft_env(t_data *data)
+void	ft_env(void)
 {
 	int	i;
 
 	i = -1;
-	while (data->env[++i])
-		printf("%s\n", data->env[i]);
+	while (data.env[++i])
+		printf("%s\n", data.env[i]);
 }

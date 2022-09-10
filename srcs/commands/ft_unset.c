@@ -6,29 +6,31 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:19:48 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/07 18:57:41 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:29:51 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_unset(t_data *data, char *buffer)
+extern t_data data;
+
+void	ft_unset(char *buffer)
 {
 	int	i;
 
 	i = -1;
-	while (data->env[++i])
+	while (data.env[++i])
 	{
-		if (ft_strncmp(data->env[i], buffer, ft_strlen(buffer)) == 0
-			&& data->env[i][ft_strlen(buffer)] == '=')
+		if (ft_strncmp(data.env[i], buffer, ft_strlen(buffer)) == 0
+			&& data.env[i][ft_strlen(buffer)] == '=')
 		{
-			free(data->env[i]);
-			while (data->env[i + 1])
+			free(data.env[i]);
+			while (data.env[i + 1])
 			{
-				data->env[i] = data->env[i + 1];
+				data.env[i] = data.env[i + 1];
 				i++;
 			}
-			data->env[i] = NULL;
+			data.env[i] = NULL;
 		}
 	}
 }

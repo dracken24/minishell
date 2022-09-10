@@ -6,32 +6,38 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:43:29 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/08 14:06:55 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:49:25 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_free_table(t_data *data)
+extern t_data data;
+
+void	ft_free_table(void)
 {
 	int	i;
 
 	i = -1;
-	while (++i < data->cmd_count)
-		free(data->cmd[i].token);
-	free(data->cmd);
-	free(data->buffer);
+	while (++i < data.cmd_count)
+		free(data.cmd[i].token);
+	free(data.cmd);
+	free(data.pid);
+	free(data.buffer);
 }
 
-void	ft_exit(t_data *data, char *str, int s)
+void	ft_exit(char *str, int s)
 {
 	if (s <= 0)
 		ft_putstr_fd(str, 2);
 	if (s <= 1)
-		free(data->buffer);
+		free(data.buffer);
 	if (s <= 2)
-		ft_free_ptr(data->env);
+	{
+		ft_free_ptr(data.env);
+		free(data.pid);
+	}
 	if (s <= 3)
-		ft_free_table(data);
+		ft_free_table();
 	exit(0);
 }
