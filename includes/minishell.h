@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/10 10:29:17 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 12:25:05 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct		s_cmd
 
 typedef struct		s_data
 {
+	char	**cmds;			//all builtin names
 	char	**env;			//copy of env
 	char	*buffer;		//buffer for readline
 	char	*prompt;		//prompt message for readline
@@ -85,7 +86,7 @@ void	ft_fork_main(int nb);
 void	ft_redirections(t_cmd *cmd);
 
 bool	ft_execute_builtin(int nb);
-bool	ft_check_builtin(int nb);
+bool	ft_check_builtin(int nb, int i);
 
 /** CMDS **/
 

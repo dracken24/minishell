@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/10 11:44:35 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 12:25:07 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int ac, char **argv, char **env)
 		else
 		{
 			ft_parse(); // tokenize the buffer
-			if (ft_check_builtin(0) == 1 && data.cmd_count == 1)
+			if (ft_check_builtin(0, 0) == 1 && data.cmd_count == 1)
 			{
 				ft_find_redirect(0);
 				ft_execute_builtin(0);

@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:02:10 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 11:37:19 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 12:21:42 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,42 @@ char	*ft_get_prompt(void)
 	return (prompt);
 }
 
-bool	ft_check_builtin(int nb)
+// bool	ft_check_builtin(int nb)
+// {
+// 	if (ft_strncmp(data.cmd[nb].token[0], "echo", 4) == 0)
+// 		return (true);
+// 	else if (ft_strncmp(data.cmd[nb].token[0], "env", 3) == 0)
+// 		return (true);
+// 	else if (ft_strncmp(data.cmd[nb].token[0], "export", 6) == 0)
+// 		return (true);
+// 	else if (ft_strncmp(data.cmd[nb].token[0], "unset", 5) == 0)
+// 		return (true);
+// 	else if (ft_strncmp(data.cmd[nb].token[0], "pwd", 3) == 0)
+// 		return (true);
+// 	else if (ft_strncmp(data.cmd[nb].buffer, "cd", 2) == 0)
+// 		return (true);
+// 	else if (ft_strncmp(data.cmd[nb].token[0], "exit", 4) == 0)
+// 		return (true);
+// 	else
+// 		return (false);
+// 	return (true);
+// }
+
+bool	ft_check_builtin(int nb, int i)
 {
-	if (ft_strncmp(data.cmd[nb].token[0], "echo", 4) == 0)
+	if (ft_strncmp(data.cmd[nb].token[i], "echo", 4) == 0)
 		return (true);
-	else if (ft_strncmp(data.cmd[nb].token[0], "env", 3) == 0)
+	else if (ft_strncmp(data.cmd[nb].token[i], "env", 3) == 0)
 		return (true);
-	else if (ft_strncmp(data.cmd[nb].token[0], "export", 6) == 0)
+	else if (ft_strncmp(data.cmd[nb].token[i], "export", 6) == 0)
 		return (true);
-	else if (ft_strncmp(data.cmd[nb].token[0], "unset", 5) == 0)
+	else if (ft_strncmp(data.cmd[nb].token[i], "unset", 5) == 0)
 		return (true);
-	else if (ft_strncmp(data.cmd[nb].token[0], "pwd", 3) == 0)
+	else if (ft_strncmp(data.cmd[nb].token[i], "pwd", 3) == 0)
 		return (true);
 	else if (ft_strncmp(data.cmd[nb].buffer, "cd", 2) == 0)
 		return (true);
-	else if (ft_strncmp(data.cmd[nb].token[0], "exit", 4) == 0)
+	else if (ft_strncmp(data.cmd[nb].token[i], "exit", 4) == 0)
 		return (true);
 	else
 		return (false);
