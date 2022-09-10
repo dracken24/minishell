@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/08 21:54:37 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/09 19:56:08 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ typedef struct		s_data
 	int 	cmd_count;		//count of commands
 	char	expand[2];		//flag for expansion
 	char	heredoc[2];		//flag for heredoc
+	pid_t	*pid;
 	t_cmd	*cmd;			//array of cmd
-
 }					t_data;
 
 /** FONTIONS **/

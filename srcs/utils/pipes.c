@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:05:04 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/08 21:55:50 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/09 20:08:50 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_child_suite(t_data *data, int *fd, int nb)
 
 void	ft_make_child_process(t_data *data, int nb)
 {
-	pid_t	pid;
 	int		fd[2];
 
 	if (pipe(fd) == -1)
@@ -33,18 +32,18 @@ void	ft_make_child_process(t_data *data, int nb)
 		printf("Pipe failed\n");
 		return ;
 	}
-	pid = fork();
-	if (pid == -1)
+	data->pid[nb] = fork();
+	if (data->pid[nb] == -1)
 	{
 		printf("Fork failed\n");
 		return ;
 	}
-	if (pid == 0)
+	if (data->pid[nb] == 0)
 		ft_child_suite(data, fd, nb);
 	else
 	{
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
-		waitpid(pid, NULL, 0);
+		waitpid(data->pid[nb], NULL, 0);
 	}
 }
