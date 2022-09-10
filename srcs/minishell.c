@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/09 22:38:07 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/09 22:39:27 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	ft_fork_main(t_data *data, int nb)
 		ft_find_redirect(data, nb);
 		// ft_print_table(data);
 		if (ft_execute_builtin(data, nb) == true)
-			;
+			ft_exit(data, "exit fork", 3);
 		else
 			ft_exec_cmd(data, ft_get_path(data, nb), nb);
-		ft_exit(data, "exit fork", 3);
+		
 		nb = -1;
 		while (++nb < data->cmd_count - 1)
 			waitpid(data->pid[nb], NULL, 0);
