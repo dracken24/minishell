@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/09 11:46:14 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/09 19:57:07 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void	ft_check_redirect(t_data *data, char **token)
 			ft_heredoc(token[i + 1], str);
 			token[i][1] = '\0';
 			token[i + 1] = str;
-			// return ;
 		}
 		else if (ft_strncmp(token[i], "<<", 2) == 0)
 		{
@@ -104,10 +103,6 @@ void	ft_check_redirect(t_data *data, char **token)
 			return;
 		}
 	}
-
-	//  if : ft_check_heredoc(data);
-	
-	// faire : remplace <<var par <heredoc || << var par < heredoc
 }
 
 void	ft_make_token(t_data *data)
@@ -138,10 +133,6 @@ void	ft_make_token(t_data *data)
 	// while (++c < data->cmd_count)
 	// {
 	// 	ft_find_redirect(data, c);
-	// }
-	// c = -1;
-	// while (++c < data->cmd_count)
-	// {
 	// 	ft_clean_token(data, data->cmd[c].token);
 	// }
 }
@@ -157,76 +148,9 @@ void 	ft_parse(t_data *data)
 		ft_exit(data, "Malloc error\n", 2);
 	data->cmd[0].buffer = ft_trim_token(ft_strtok(data->buffer, '|'), ' ');
 	while (++i < data->cmd_count)
+	{
+		
 		data->cmd[i].buffer = ft_trim_token(ft_strtok(NULL, '|'), ' ');
+	}
 	ft_make_token(data);
 }
-
-
-// char	*ft_trim_token(char *buffer, char sep)
-// {
-// 	int		i;
-
-// 	if (!buffer)
-// 		return (buffer);
-// 	i = ft_strlen(buffer) - 1;
-// 	while (buffer[i] == sep)
-// 	{
-// 		buffer[i] = '\0';
-// 		i--;
-// 	}
-// 	while (*buffer == sep)
-// 		buffer++;
-// 	return (buffer);
-// }
-
-// int	ft_token_count(char *buffer, char sep)
-// {
-// 	char	*tmp;
-// 	char	*token;
-// 	int		i;
-
-// 	i = 0;
-// 	tmp = ft_strdup(buffer);
-// 	token = ft_trim_token(ft_strtok(tmp, sep), ' ');
-// 	while (token)
-// 	{
-// 		i++;
-// 		token = ft_trim_token(ft_strtok(NULL, sep), ' ');
-// 	}
-// 	free(tmp);
-// 	return (i);
-// }
-
-// void	ft_remove_char(char *token, char sep)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	j = 0;
-// 	while (token[i])
-// 	{
-// 		if (token[i] == sep)
-// 		{
-// 			j = i;
-// 			while (token[j])
-// 			{
-// 				token[j] = token[j + 1];
-// 				j++;
-// 			}
-// 		}
-// 		else
-// 			i++;
-// 	}
-// }
-
-// char	*ft_expand_variable(t_data *data, char *token)
-// {
-// 	ft_color(YELLOW);
-// 	if (token[0] == '$' && ft_strchr(&token[1], '$') == NULL)
-// 		token = ft_get_variable(data, &token[1]);
-// 	else
-// 		printf("expander !!!!\n");
-// 	ft_color(WHITE);
-// 	return (token);
-// }

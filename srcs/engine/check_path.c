@@ -6,42 +6,11 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 20:44:21 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/08 21:56:39 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/09 19:54:28 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// char	*ft_get_path(t_data *data, char *buffer)
-// {
-// 	char	*program;
-// 	char	*env_path;
-// 	char	**fcnt_path;
-// 	char 	*test_path;
-// 	int		i;
-// 	i = 0;
-// 	if (access(buffer, F_OK | X_OK) == 0)
-// 		return (buffer);
-// 	program = ft_strjoin("/", buffer, 0);
-// 	env_path = ft_get_variable(data, "PATH");
-// 	if (env_path == NULL || program == NULL)
-// 		return (NULL);
-// 	fcnt_path = ft_split(env_path, ':');
-// 	if (fcnt_path == NULL)
-// 		return (NULL);
-// 	while (fcnt_path[i])
-// 	{
-// 		test_path = ft_strjoin(fcnt_path[i], program, 0);
-// 		if (access(test_path, F_OK | X_OK) == 0)
-// 			break ;
-// 		free (test_path);
-// 		test_path = NULL;
-// 		i++;
-// 	}
-// 	ft_free_ptr(fcnt_path);
-// 	free(program);
-// 	return (test_path);
-// }
 
 char	*find_good_path(t_data *data, char **paths, char *env_path, int nb);
 char	*find_path(char *env_path);
