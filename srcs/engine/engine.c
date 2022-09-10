@@ -6,20 +6,19 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 17:58:07 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 18:58:07 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// void	ft_execute(t_data *data, int nb);
 void	ft_keep_cmd(int nb);
 
 extern t_data data;
 
 bool	ft_execute_builtin(int nb)
 {
-	dprintf(2, "cmd: %s\n", data.cmd[nb].token[0]);
+	// dprintf(2, "cmd: %s\n", data.cmd[nb].token[0]);
 	if (ft_strncmp(data.cmd[nb].token[0], "echo", 4) == 0)
 		ft_echo(data.cmd[nb].token);
 	else if (ft_strncmp(data.cmd[nb].token[0], "env", 3) == 0)
@@ -53,15 +52,10 @@ void	ft_find_redirect(int nb)
 {
 	int	i;
 
-	// if (data.cmd[nb].fd_in)
-	// 	close(data.cmd[nb].fd_in);
-	// if (data.cmd[nb].fd_out)
-	// 	close(data.cmd[nb].fd_out);
 	i = -1;
 	while (data.cmd[nb].token[++i])
 	{
-		dprintf(2, "1\n");
-		// ft_print_table();
+		// dprintf(2, "1\n");
 		if (ft_strncmp(data.cmd[nb].token[i], "<", 1) == 0
 			&& data.cmd[nb].token[i][1] != '<')
 		{
@@ -89,11 +83,31 @@ void	ft_find_redirect(int nb)
 	ft_print_table();
 }
 
+void	ft_keep_cmd_suite(char *path, int nb)
+{
+	int	k;
+	
+	if (data.cmd[nb].token[2] && (ft_strncmp(data.cmd[nb].token[2], "<", 1) == 0
+			|| ft_strncmp(data.cmd[nb].token[2], ">", 1)) == 0)
+		data.cmd[nb].token[2] = NULL;
+	else if (data.cmd[nb].token[1] && (ft_strncmp(data.cmd[nb].token[1], "<", 1) == 0
+			|| ft_strncmp(data.cmd[nb].token[1], ">", 1)) == 0)
+		data.cmd[nb].token[1] = NULL;		
+	if (data.ct == 0)
+		data.cmd[nb].token++;
+	k = 2;
+	while (data.cmd[nb].token[k] && (data.cmd[nb].token[k][0] == '-'
+			|| data.cmd[nb].token[k][0] == '$'))
+		k++;
+	if (data.cmd[nb].token[k])
+		data.cmd[nb].token[k] = NULL;
+	free(path);
+}
+
 void	ft_keep_cmd(int nb)
 {
 	int	i;
 	char	*path;
-	int	k;
 	
 	data.ct = 1;
 	i = -1;
@@ -104,18 +118,7 @@ void	ft_keep_cmd(int nb)
 		path = ft_get_path(nb);
 		if (path || ft_check_builtin(nb, 0) == true)
 		{
-			if (data.cmd[nb].token[1] && (ft_strncmp(data.cmd[nb].token[1], "<", 1) == 0
-					|| ft_strncmp(data.cmd[nb].token[1], ">", 1)) == 0)
-				data.cmd[nb].token[1] = NULL;
-			if (data.ct == 0)
-				data.cmd[nb].token++;
-			k = 2;
-			while (data.cmd[nb].token[k] && (data.cmd[nb].token[k][0] == '-'
-					|| data.cmd[nb].token[k][0] == '$'))
-				k++;
-			if (data.cmd[nb].token[k])
-				data.cmd[nb].token[k] = NULL;
-			free(path);
+			ft_keep_cmd_suite(path, nb);
 			return ;
 		}
 		else
