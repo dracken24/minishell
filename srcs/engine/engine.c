@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/09 13:08:18 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/09 23:21:09 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,21 @@ void	ft_exec_cmd(t_data *data, char *cmd_path, int nb)
 	}
 }
 
-void	ft_redirect_output_append(t_cmd *cmd)
-/* >> */
-{
-	char	*str;
+// void	ft_redirect_output_append(t_cmd *cmd)
+// /* >> */
+// {
+// 	char	*str;
 
-	str = get_next_line(cmd->fd_out);
-	while (str)
-	{
-		if (str)
-			printf("%s", str);
-		free(str);
-		str = get_next_line(cmd->fd_out);
-	}
-	free(str);
-}
+// 	str = get_next_line(cmd->fd_out);
+// 	while (str)
+// 	{
+// 		if (str)
+// 			printf("%s", str);
+// 		free(str);
+// 		str = get_next_line(cmd->fd_out);
+// 	}
+// 	free(str);
+// }
 
 void	ft_find_redirect(t_data *data, int nb)
 {
@@ -70,8 +70,7 @@ void	ft_find_redirect(t_data *data, int nb)
 	{
 		if (ft_strncmp(data->cmd[nb].token[i], ">>", 2) == 0)
 		{
-			data->cmd[nb].fd_out = ft_open_fd(data->cmd[nb].token[++i], 4);
-			ft_redirect_output_append(&data->cmd[nb]);
+			data->cmd[nb].fd_out = ft_open_fd(data->cmd[nb].token[++i], 6);
 			dup2(data->cmd[nb].fd_out, STDOUT_FILENO);
 			data->cmd[nb].token[--i] = NULL;
 		}

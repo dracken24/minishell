@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:35:49 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/09 11:26:21 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/09 23:17:03 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	ft_open_fd(char *str, int i)
 		fd = open(str, O_RDWR | O_CREAT, 0644);
 	else if (i == 5)
 		fd = open(str, O_WRONLY | O_CREAT, 0644);
+	else if (i == 6)
+		fd = open(str, O_RDWR | O_APPEND | O_CREAT, 0644);
 	if (!fd)
 		return (-1);
 	return (fd);
