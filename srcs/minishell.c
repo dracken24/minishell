@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/09 20:05:39 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/09 20:23:00 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,19 @@ void	ft_fork_main(t_data *data, int nb)
 		ft_exit(data, "Fork failed", 3);
 	if (pid == 0)
 	{
-		ft_print_table(data);				//print the table with all the tokens
-		dprintf(2, "A:\n");
+		// ft_print_table(data);				//print the table with all the tokens
 		while (++nb < data->cmd_count - 1)
-		{
 			ft_make_child_process(data, nb);
-		}
-		dprintf(2, "B:\n");
-		// nb = -1;
-		// while (++nb < data->cmd_count - 1)
-		// {
-		// 	waitpid(data->pid[nb], NULL, 0);
-			
-		// }
-		dprintf(2, "C:\n");
 		ft_find_redirect(data, nb);
-		ft_print_table(data);
+		// ft_print_table(data);
 		if (ft_execute_builtin(data, nb) == true)
 			;
 		else
 			ft_exec_cmd(data, ft_get_path(data, nb), nb);
 		ft_exit(data, "exit fork", 3);
+		nb = -1;
+		while (++nb < data->cmd_count - 1)
+			waitpid(data->pid[nb], NULL, 0);
 	}
 	else
 		waitpid(pid, NULL, 0);
