@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:02:10 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 10:38:00 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 11:37:19 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,23 @@ void	ft_print_table(void)
 
 	i = 0;
 	ft_color(RED);
-	printf("---------- COMAND TABLE ----------\n");
+	dprintf(2, "---------- COMAND TABLE ----------\n");
 	while (i < data.cmd_count)
 	{
 		j = 0;
 		ft_color(CYAN);
-		printf("[cmd %d]", i);
+		dprintf(2, "[cmd %d]", i);
 		while (data.cmd[i].token[j])
 		{
 			ft_color(YELLOW);
-			printf("[%s]", data.cmd[i].token[j]);
+			dprintf(2, "[%s]", data.cmd[i].token[j]);
 			j++;
 		}
-		printf("\n");
+		dprintf(2, "\n");
 		i++;
 	}
 	ft_color(RED);
-	printf("---------------END----------------\n");
+	dprintf(2, "---------------END----------------\n");
 	ft_color(RESET);
 }
 

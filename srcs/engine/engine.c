@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 10:31:09 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 11:40:14 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,7 @@ void	ft_find_redirect(int nb)
 	i = -1;
 	while (data.cmd[nb].token[++i])
 	{
-		if (ft_strncmp(data.cmd[nb].token[i], ">>", 2) == 0)
-		{
-			data.cmd[nb].fd_out = ft_open_fd(data.cmd[nb].token[++i], 6);
-			dup2(data.cmd[nb].fd_out, STDOUT_FILENO);
-			data.cmd[nb].token[--i] = NULL;
-		}
-		else if (ft_strncmp(data.cmd[nb].token[i], ">", 1) == 0)
-		{
-			data.cmd[nb].fd_out = ft_open_fd(data.cmd[nb].token[++i], 2);
-			dup2(data.cmd[nb].fd_out, STDOUT_FILENO);
-			data.cmd[nb].token[--i] = NULL;
-		}
-		else if (ft_strncmp(data.cmd[nb].token[i], "<", 1) == 0
+		if (ft_strncmp(data.cmd[nb].token[i], "<", 1) == 0
 			&& data.cmd[nb].token[i][1] != '<')
 		{
 			data.cmd[nb].fd_in = ft_open_fd(data.cmd[nb].token[++i], 1);
@@ -93,6 +81,19 @@ void	ft_find_redirect(int nb)
 				data.cmd[nb].token++;
 				data.cmd[nb].token++;
 			}
+			i += 2;
+		}
+		if (ft_strncmp(data.cmd[nb].token[i], ">>", 2) == 0)
+		{
+			data.cmd[nb].fd_out = ft_open_fd(data.cmd[nb].token[++i], 6);
+			dup2(data.cmd[nb].fd_out, STDOUT_FILENO);
+			data.cmd[nb].token[--i] = NULL;
+		}
+		else if (ft_strncmp(data.cmd[nb].token[i], ">", 1) == 0)
+		{
+			data.cmd[nb].fd_out = ft_open_fd(data.cmd[nb].token[++i], 2);
+			dup2(data.cmd[nb].fd_out, STDOUT_FILENO);
+			data.cmd[nb].token[--i] = NULL;
 		}
 		// i = -1;
 		// while (data.cmd[nb].token[++i])

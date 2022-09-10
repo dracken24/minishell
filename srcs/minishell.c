@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/10 10:49:36 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 11:44:35 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	ft_fork_main(int nb)
 			ft_exit("exit fork", 3);
 		else
 			ft_exec_cmd(ft_get_path(nb), nb);
-		
 		nb = -1;
 		while (++nb < data.cmd_count - 1)
 			waitpid(data.pid[nb], NULL, 0);

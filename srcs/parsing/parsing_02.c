@@ -6,13 +6,39 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 10:35:16 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 11:13:26 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 extern t_data data;
+
+char	*ft_expand_variable(char *token)
+{
+	char	*temps;
+	char	*expand;
+
+	if (token[0] == '$' && ft_strchr(&token[1], '$') == NULL)
+		token = ft_get_variable(&token[1]);
+	else
+	{
+		if (token[0] == '\"')
+			token = ft_expand(token + 1, 0);
+		else
+			token = ft_expand(token, 0);
+		expand = ft_strjoin(data.expand, "-expand=", 0);
+		temps = ft_strjoin(expand, token, 0);
+		free(token);
+		ft_export(temps);
+		free(temps);
+		expand[ft_strlen(expand) - 1] = '\0';
+		token = ft_get_variable(expand);
+		free(expand);
+		data.expand[0] = data.expand[0] + 1; 
+	}
+	return (token);
+}
 
 char	*ft_trim_token(char *buffer, char sep)
 {
@@ -59,12 +85,9 @@ char	*ft_remove_char(char *token, char sep)
 	{
 		if (token[i] == sep)
 		{
-			j = i;
-			while (token[j])
-			{
+			j = i - 1;
+			while (token[++j])
 				token[j] = token[j + 1];
-				j++;
-			}
 		}
 		else
 			i++;
@@ -80,7 +103,8 @@ char	*ft_expand(char *token, int flag)
 	temp[1] = ft_remove_char(ft_substr(token, 0, temp[0] - token), '\"');
 	temp[2] = temp[0] + 1;
 	while (++temp[0])
-		if (*temp[0] == '\0' || *temp[0] == ' ' || *temp[0] == '$' || *temp[0] == '"' || *temp[0] == '\'')
+		if (*temp[0] == '\0' || *temp[0] == ' ' || *temp[0] == '$'
+			|| *temp[0] == '"' || *temp[0] == '\'')
 			break ;
 	temp[2] = ft_substr(temp[2] , 0, temp[0] - temp[2] );
 	temp[3] = ft_get_variable(temp[2] );

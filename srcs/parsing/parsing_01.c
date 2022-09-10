@@ -6,39 +6,13 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 10:54:05 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 11:11:02 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 extern t_data data;
-
-char	*ft_expand_variable(char *token)
-{
-	char	*temps;
-	char	*expand;
-
-	if (token[0] == '$' && ft_strchr(&token[1], '$') == NULL)
-		token = ft_get_variable(&token[1]);
-	else
-	{
-		if (token[0] == '\"')
-			token = ft_expand(token + 1, 0);
-		else
-			token = ft_expand(token, 0);
-		expand = ft_strjoin(data.expand, "-expand=", 0);
-		temps = ft_strjoin(expand, token, 0);
-		free(token);
-		ft_export(temps);
-		free(temps);
-		expand[ft_strlen(expand) - 1] = '\0';
-		token = ft_get_variable(expand);
-		free(expand);
-		data.expand[0] = data.expand[0] + 1; 
-	}
-	return (token);
-}
 
 void	ft_clean_token(char **token)
 {
@@ -145,7 +119,6 @@ void 	ft_parse(void)
 	data.cmd_count = ft_token_count(data.buffer, '|');
 	data.cmd = ft_calloc(sizeof(t_cmd), data.cmd_count + 1);
 	data.pid = ft_calloc(sizeof(pid_t), data.cmd_count - 1);
-	printf("NBR CMD: %d\n", data.cmd_count);
 	if (data.cmd == NULL || data.pid == NULL)
 		ft_exit("Malloc error\n", 2);
 	data.cmd[0].buffer = ft_trim_token(ft_strtok(data.buffer, '|'), ' ');
