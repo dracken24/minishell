@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/10 21:12:09 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 00:32:45 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ char	*ft_remove_char(char *token, char sep);
 char	*ft_trim_token(char *buffer, char sep);
 
 void	ft_clean_token(char **token);
-void	ft_make_token(void);
-void 	ft_parse(void);
 
 int		ft_token_count(char *buffer, char sep);
+int		ft_make_token(void);
+int		ft_parse(void);
 
 /** ENGINE **/
 

@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 20:36:41 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 23:50:16 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,33 +58,51 @@ char	*ft_expand_heredoc(char *heredoc)
 	return (heredoc);
 }
 
-void	ft_check_redirect(char **token)
+int	ft_check_redirect(char **token)
 {
-	int i;
+	int 	i;
+	// int		sig;
+	// int		ret;
 	char	*str;
+	// pid_t	pid;
 
+	// sig = 4;
 	i = -1;
 	while (token[++i])
 	{
 		if (ft_strncmp(token[i], "<<\0", 3) == 0)
 		{
-			str = ft_expand_heredoc(ft_strjoin(&data.heredoc[0], "heredoc", 0));
-			ft_heredoc(token[i + 1], str);
-			token[i][1] = '\0';
-			token[i + 1] = str;
+			// pid = fork();
+			// if (pid == -1)
+			// 	ft_exit("Fork failed", 3);
+			// if (pid == 0)
+			// {
+				dprintf(2, "A\n");
+				str = ft_expand_heredoc(ft_strjoin(&data.heredoc[0], "heredoc", 0));
+				ft_heredoc(token[i + 1], str);
+				token[i][1] = '\0';
+				token[i + 1] = str;
+			// }
+			// else
+			// {
+			// 	dprintf(2, "B\n");
+			// 	waitpid(pid, NULL, 0);
+			// }
 		}
 		else if (ft_strncmp(token[i], "<<", 2) == 0)
 		{
 			
-			return;
+			return 0;
 		}
 	}
+	return (0);
 }
 
-void	ft_make_token(void)
+int	ft_make_token(void)
 {
 	int c;
 	int t;
+	// int	ret;
 	int count;
 
 	c = -1;
@@ -103,15 +121,10 @@ void	ft_make_token(void)
 	c = -1;
 	while (++c < data.cmd_count)
 		ft_check_redirect(data.cmd[c].token);
-	// c = -1;
-	// while (++c < data.cmd_count)
-	// {
-	// 	ft_find_redirect(data, c);
-	// 	ft_clean_token(data, data.cmd[c].token);
-	// }
+	return (0);
 }
 
-void 	ft_parse(void)
+int	ft_parse(void)
 {
 	int i;
 
@@ -125,4 +138,5 @@ void 	ft_parse(void)
 	while (++i < data.cmd_count)
 		data.cmd[i].buffer = ft_trim_token(ft_strtok(NULL, '|'), ' ');
 	ft_make_token();
+	return (0);
 }
