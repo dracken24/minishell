@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 20:36:57 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 19:10:34 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ char	*ft_expand_variable(char *token)
 		expand = ft_strjoin(data.expand, "-expand=", 0);
 		temps = ft_strjoin(expand, token, 0);
 		free(token);
-		ft_export(temps, 1);
+		ft_export(temps, 0);
 		free(temps);
 		expand[ft_strlen(expand) - 1] = '\0';
 		token = ft_get_variable(expand);
 		free(expand);
-		data.expand[0] = data.expand[0] + 1; 
+		data.expand[0] = data.expand[0] + 1;
 	}
 	return (token);
 }
@@ -43,6 +43,7 @@ char	*ft_expand_variable(char *token)
 char	*ft_trim_token(char *buffer, char sep)
 {
 	int		i;
+
 	if (!buffer)
 		return (buffer);
 	i = ft_strlen(buffer) - 1;
@@ -58,14 +59,14 @@ char	*ft_trim_token(char *buffer, char sep)
 
 int	ft_token_count(char *buffer, char sep)
 {
-	char *tmp;
-	char *token;
-	int i;
-	
+	char	*tmp;
+	char	*token;
+	int		i;
+
 	i = 0;
 	tmp = ft_strdup(buffer);
 	token = ft_trim_token(ft_strtok(tmp, sep), ' ');
-	while(token)
+	while (token)
 	{
 		i++;
 		token = ft_trim_token(ft_strtok(NULL, sep), ' ');
@@ -76,9 +77,9 @@ int	ft_token_count(char *buffer, char sep)
 
 char	*ft_remove_char(char *token, char sep)
 {
-	int i;
-	int j;
-	
+	int		i;
+	int		j;
+
 	i = 0;
 	j = 0;
 	while (token[i])
@@ -106,12 +107,12 @@ char	*ft_expand(char *token, int flag)
 		if (*temp[0] == '\0' || *temp[0] == ' ' || *temp[0] == '$'
 			|| *temp[0] == '"' || *temp[0] == '\'')
 			break ;
-	temp[2] = ft_substr(temp[2] , 0, temp[0] - temp[2] );
-	temp[3] = ft_get_variable(temp[2] );
-	temp[3]  = ft_strjoin(temp[1], temp[3], 1);
+	temp[2] = ft_substr(temp[2], 0, temp[0] - temp[2]);
+	temp[3] = ft_get_variable(temp[2]);
+	temp[3] = ft_strjoin(temp[1], temp[3], 1);
 	free (temp[2]);
 	temp[1] = ft_remove_char(ft_substr(temp[0], 0, ft_strlen(temp[0])), '\"');
-	temp[0] = ft_strjoin(temp[3] , temp[1], 1);
+	temp[0] = ft_strjoin(temp[3], temp[1], 1);
 	free(temp[1]);
 	if (flag == 1)
 		free (token);

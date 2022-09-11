@@ -6,7 +6,7 @@
 #    By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 23:33:38 by root              #+#    #+#              #
-#    Updated: 2022/09/09 23:55:52 by nadesjar         ###   ########.fr        #
+#    Updated: 2022/09/11 18:34:36 by nadesjar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ P_BUILT  		= ./srcs/built_in/
 FILES			= $(P_SRCS)minishell.c \
 				$(P_KILL)exit.c \
 				$(P_INIT)init.c \
-				$(P_UTILS)utils.c \
+				$(P_UTILS)utils.c $(P_UTILS)utils_02.c \
 				$(P_UTILS)pipes.c \
 				$(P_COMM)ft_cd.c $(P_COMM)ft_unset.c \
 				$(P_COMM)echo_env.c $(P_COMM)ft_export.c \
@@ -94,3 +94,5 @@ C	= $(shell tput -Txterm setaf 6)
 W	= $(shell tput -Txterm setaf 7)
 	
 .Phony: all make_lib msg_in msg_out clean fclean re signature
+
+# 禡
