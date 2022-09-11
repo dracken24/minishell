@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 10:54:33 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 13:01:52 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	ft_find_redirect(int nb)
 	}
 	ft_print_table();
 	ft_keep_cmd(nb);
+	ft_print_table();
 	ft_clean_token(data.cmd[nb].token);
 	ft_print_table();
 }

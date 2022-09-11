@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 09:58:14 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 17:19:30 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,38 @@ void	ft_clean_token(char **token)
 	}
 }
 
+// char	*ft_expand_heredoc(char *heredoc)
+// {
+// 	char	*temps;
+// 	char	*expand;
+
+// 	expand = ft_strjoin("<", &data.heredoc, 0);
+// 	expand = ft_strjoin(expand, "=", 1);
+// 	temps = ft_strjoin(expand, heredoc, 0);
+// 	free(heredoc);
+// 	ft_export(temps, 1);
+// 	free(temps);
+// 	expand[ft_strlen(expand) - 1] = '\0';
+// 	heredoc = ft_get_variable(expand);
+// 	free(expand);
+// 	data.heredoc = data.heredoc + 1;
+// 	return (heredoc);
+// }
+
 char	*ft_expand_heredoc(char *heredoc)
 {
 	char	*temps;
-	char	*expand;
+	char	*expend;
 
-	expand = ft_strjoin(&data.heredoc[0], "heredoc=", 0);
-	temps = ft_strjoin(expand, heredoc, 0);
+	expend = ft_strjoin(&data.heredoc, "heredoc=", 0);
+	temps = ft_strjoin(expend, heredoc, 0);
 	free(heredoc);
-	ft_export(temps, 1);
+	ft_export(temps, 0);
 	free(temps);
-	expand[ft_strlen(expand) - 1] = '\0';
-	heredoc = ft_get_variable(expand);
-	free(expand);
-	data.heredoc[0] = data.heredoc[0] + 1; 
+	expend[ft_strlen(expend) - 1] = '\0';
+	heredoc = ft_get_variable(expend);
+	free(expend);
+	data.heredoc = data.heredoc + 1; 
 
 	return (heredoc);
 }
@@ -61,32 +79,17 @@ char	*ft_expand_heredoc(char *heredoc)
 int	ft_check_redirect(char **token)
 {
 	int 	i;
-	// int		sig;
-	// int		ret;
 	char	*str;
-	// pid_t	pid;
 
-	// sig = 4;
 	i = -1;
 	while (token[++i])
 	{
 		if (ft_strncmp(token[i], "<<\0", 3) == 0)
 		{
-			// pid = fork();
-			// if (pid == -1)
-			// 	ft_exit("Fork failed", 3);
-			// if (pid == 0)
-			// {
-				str = ft_expand_heredoc(ft_strjoin(&data.heredoc[0], "heredoc", 0));
-				ft_heredoc(token[i + 1], str);
-				token[i][1] = '\0';
-				token[i + 1] = str;
-			// }
-			// else
-			// {
-			// 	dprintf(2, "B\n");
-			// 	waitpid(pid, NULL, 0);
-			// }
+			str = ft_expand_heredoc(ft_strjoin(&data.heredoc, "heredoc", 0));
+			ft_heredoc(token[i + 1], str);
+			token[i][1] = '\0';
+			token[i + 1] = str;
 		}
 		else if (ft_strncmp(token[i], "<<", 2) == 0)
 		{
@@ -119,7 +122,9 @@ int	ft_make_token(void)
 	}
 	c = -1;
 	while (++c < data.cmd_count)
+	{
 		ft_check_redirect(data.cmd[c].token);
+	}
 	return (0);
 }
 

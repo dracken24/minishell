@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:40:49 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 12:51:20 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 16:43:57 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	ft_init_suite(void)
 {
 	data.expand[0] = 'a';
 	data.expand[1] = '\0';
-	data.heredoc[0] = 'a';
-	data.heredoc[1] = '\0';
+	data.heredoc = 'a';
 	data.buffer = NULL;
 	data.prompt = NULL;
 	data.cmd_count = 0;
