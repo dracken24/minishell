@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/11 12:51:44 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 19:18:38 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@ t_data	data;
 
 int	main(int ac, char **argv, char **env)
 {
-	(void)ac;
-	(void)argv;
 	int		i;
 
-	signal(SIGINT, handle_sigint);
-	signal(SIGSEGV, handle_sigint);
+	ft_sig(ac, argv);
 	ft_init_environement(env);					// Copy environement variable in main struct
 	while (1)
 	{
@@ -41,42 +38,4 @@ int	main(int ac, char **argv, char **env)
 			ft_free_table();
 		}
 	}
-}
-
-void	ft_one_cmd(int nb)
-{
-	ft_find_redirect(nb);
-	ft_execute_builtin(nb);
-}
-
-void	ft_fork_main(int nb)
-{
-	pid_t	pid;
-	// int		ret;
-
-	ft_parse();
-	if (data.cmd_count == 1 && (ft_check_builtin(0, 0) == true
-			|| ft_check_builtin(0, 0) == true))
-	{
-		ft_one_cmd(0);
-		return ;
-	}
-	pid = fork();
-	if (pid == -1)
-		ft_exit("Fork failed", 3);
-	if (pid == 0)
-	{
-		while (++nb < data.cmd_count - 1)
-			ft_make_child_process(nb);
-		ft_find_redirect(nb);
-		if (ft_execute_builtin(nb) == true)
-			ft_exit("exit fork", 3);
-		else
-			ft_exec_cmd(ft_get_path(nb), nb);
-		nb = -1;
-		while (++nb < data.cmd_count - 1)
-			waitpid(data.pid[nb], NULL, 0);
-	}
-	else
-		waitpid(pid, NULL, 0);
 }

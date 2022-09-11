@@ -6,24 +6,25 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 17:19:30 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 19:08:35 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_data data;
+extern t_data	data;
 
 void	ft_clean_token(char **token)
 {
-	int t;
+	int		t;
 
 	t = 0;
 	while (token[t])
 	{
 		if (token[t][0] == '\'' && token[t][ft_strlen(token[t]) - 1] == '\'')
 			ft_remove_char(token[t], '\'');
-		else if (token[t][0] == '\"' && token[t][ft_strlen(token[t]) - 1] == '\"')
+		else if (token[t][0] == '\"'
+			&& token[t][ft_strlen(token[t]) - 1] == '\"')
 		{
 			if (ft_strchr(token[t], '$'))
 				token[t] = ft_expand_variable(token[t]);
@@ -40,24 +41,6 @@ void	ft_clean_token(char **token)
 	}
 }
 
-// char	*ft_expand_heredoc(char *heredoc)
-// {
-// 	char	*temps;
-// 	char	*expand;
-
-// 	expand = ft_strjoin("<", &data.heredoc, 0);
-// 	expand = ft_strjoin(expand, "=", 1);
-// 	temps = ft_strjoin(expand, heredoc, 0);
-// 	free(heredoc);
-// 	ft_export(temps, 1);
-// 	free(temps);
-// 	expand[ft_strlen(expand) - 1] = '\0';
-// 	heredoc = ft_get_variable(expand);
-// 	free(expand);
-// 	data.heredoc = data.heredoc + 1;
-// 	return (heredoc);
-// }
-
 char	*ft_expand_heredoc(char *heredoc)
 {
 	char	*temps;
@@ -71,14 +54,13 @@ char	*ft_expand_heredoc(char *heredoc)
 	expend[ft_strlen(expend) - 1] = '\0';
 	heredoc = ft_get_variable(expend);
 	free(expend);
-	data.heredoc = data.heredoc + 1; 
-
+	data.heredoc = data.heredoc + 1;
 	return (heredoc);
 }
 
 int	ft_check_redirect(char **token)
 {
-	int 	i;
+	int		i;
 	char	*str;
 
 	i = -1;
@@ -93,8 +75,10 @@ int	ft_check_redirect(char **token)
 		}
 		else if (ft_strncmp(token[i], "<<", 2) == 0)
 		{
-			
-			return 0;
+			str = ft_expand_heredoc(ft_strjoin(&data.heredoc, "heredoc", 0));
+			ft_heredoc(token[i] + 2, str);
+			token[i][1] = '\0';
+			token[i + 1] = str;
 		}
 	}
 	return (0);
@@ -102,10 +86,9 @@ int	ft_check_redirect(char **token)
 
 int	ft_make_token(void)
 {
-	int c;
-	int t;
-	// int	ret;
-	int count;
+	int		c;
+	int		t;
+	int		count;
 
 	c = -1;
 	while (++c < data.cmd_count)
@@ -130,7 +113,7 @@ int	ft_make_token(void)
 
 int	ft_parse(void)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	data.cmd_count = ft_token_count(data.buffer, '|');

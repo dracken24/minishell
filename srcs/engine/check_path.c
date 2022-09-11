@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 20:44:21 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 10:06:18 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 18:55:10 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	*ft_get_path(int nb)
 	char	*program;
 	char	*env_path;
 	char	**fcnt_path;
-	char 	*test_path;
+	char	*test_path;
 	int		i;
-	
+
 	i = -1;
 	if (access(data.cmd[nb].token[0], F_OK | X_OK) == 0)
 		return (data.cmd[nb].token[0]);

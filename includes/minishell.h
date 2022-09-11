@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/11 16:43:37 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 19:18:17 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,15 @@ typedef struct		s_data
 {
 	char	**cmds;			//all builtin names
 	char	**env;			//copy of env
+	char	*start_path;
 	char	*buffer;		//buffer for readline
 	char	*prompt;		//prompt message for readline
-	char	*start_path;
-	int 	cmd_count;		//count of commands
-	int		ct;
 	char	expand[2];		//flag for expansion
 	char	heredoc;		//flag for heredoc
+	
+	int 	cmd_count;		//count of commands
+	int		ct;
+	
 	pid_t	*pid;			//pids for all process
 	t_cmd	*cmd;			//array of cmd
 }					t_data;
@@ -56,6 +58,7 @@ typedef struct		s_data
 /** FONTIONS **/
 
 void	ft_init_environement(char **env);
+void	ft_sig(int ac, char **argv);
 void	ft_exit(char *str, int s);
 void	handle_sigint(int sig);
 void	ft_print_table(void);
@@ -69,11 +72,11 @@ char	*ft_get_prompt(void);
 
 /** PARSING **/
 
+char	*ft_remove_char(char *token, char sep);
+char	*ft_trim_token(char *buffer, char sep);
 char	*ft_expand_heredoc(char *heredoc);
 char	*ft_expand(char *token, int flag);
 char	*ft_expand_variable(char *token);
-char	*ft_remove_char(char *token, char sep);
-char	*ft_trim_token(char *buffer, char sep);
 
 void	ft_clean_token(char **token);
 
@@ -87,20 +90,21 @@ char	*ft_get_path(int nb);
 
 void	ft_exec_cmd(char *cmd_path, int nb);
 void	ft_make_child_process(int nb);
+void	ft_redirections(t_cmd *cmd);
 void	ft_find_redirect(int nb);
 void	ft_fork_main(int nb);
-void	ft_redirections(t_cmd *cmd);
+void	ft_keep_cmd(int nb);
 
-bool	ft_execute_builtin(int nb);
 bool	ft_check_builtin(int nb, int i);
+bool	ft_execute_builtin(int nb);
 
 /** CMDS **/
 
+void	ft_heredoc(char *limiter, char *heredoc);
 void	ft_unset(char *buffer, int nb);
 void	ft_export(char *arg, int nb);
 void	ft_cd(char *buffer);
-void	ft_heredoc(char *limiter, char *heredoc);
-void	ft_env(void);
 void	ft_echo(char **arg);
+void	ft_env(void);
 
 #endif
