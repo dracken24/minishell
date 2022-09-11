@@ -3,6 +3,7 @@
         "locale_t.h": "c",
         "locale": "c",
         "math.h": "c",
-        "signal.h": "c"
+        "signal.h": "c",
+        "libft.h": "c"
     }
 }

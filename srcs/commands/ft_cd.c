@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:40:45 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 10:22:14 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 11:39:39 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	ft_cd(char *buffer)
 	if (ret == 0)
 	{
 		free (data.env[old]);
-		data.env[old] = data.env[new];
+		data.env[old] = ft_strjoin("OLD", data.env[new], 0);
 		data.env[new] = ft_strjoin("PWD=", getcwd(NULL, 0), 0);
 	}
+	ft_fd_env();
 }

@@ -6,26 +6,13 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/11 00:35:45 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 12:51:44 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 t_data	data;
-
-void handle_sigint(int sig)
-{
-	if (sig == SIGINT)
-	{
-		data.prompt = ft_get_prompt();
-		printf("\n%s", data.prompt);
-	}
-	else if (sig == SIGSEGV)
-	{
-		exit (1);
-	}
-}
 
 int	main(int ac, char **argv, char **env)
 {
@@ -56,12 +43,24 @@ int	main(int ac, char **argv, char **env)
 	}
 }
 
+void	ft_one_cmd(int nb)
+{
+	ft_find_redirect(nb);
+	ft_execute_builtin(nb);
+}
+
 void	ft_fork_main(int nb)
 {
 	pid_t	pid;
 	// int		ret;
 
-	ft_parse(); 								// tokenize the buffer
+	ft_parse();
+	if (data.cmd_count == 1 && (ft_check_builtin(0, 0) == true
+			|| ft_check_builtin(0, 0) == true))
+	{
+		ft_one_cmd(0);
+		return ;
+	}
 	pid = fork();
 	if (pid == -1)
 		ft_exit("Fork failed", 3);
