@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 23:50:16 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 09:58:14 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_expand_heredoc(char *heredoc)
 	char	*temps;
 	char	*expand;
 
-	expand = ft_strjoin(data.heredoc, "heredoc=", 0);
+	expand = ft_strjoin(&data.heredoc[0], "heredoc=", 0);
 	temps = ft_strjoin(expand, heredoc, 0);
 	free(heredoc);
 	ft_export(temps, 1);
@@ -77,7 +77,6 @@ int	ft_check_redirect(char **token)
 			// 	ft_exit("Fork failed", 3);
 			// if (pid == 0)
 			// {
-				dprintf(2, "A\n");
 				str = ft_expand_heredoc(ft_strjoin(&data.heredoc[0], "heredoc", 0));
 				ft_heredoc(token[i + 1], str);
 				token[i][1] = '\0';

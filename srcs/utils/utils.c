@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:02:10 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 13:01:29 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 09:47:04 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,27 +73,6 @@ char	*ft_get_prompt(void)
 	return (prompt);
 }
 
-// bool	ft_check_builtin(int nb)
-// {
-// 	if (ft_strncmp(data.cmd[nb].token[0], "echo", 4) == 0)
-// 		return (true);
-// 	else if (ft_strncmp(data.cmd[nb].token[0], "env", 3) == 0)
-// 		return (true);
-// 	else if (ft_strncmp(data.cmd[nb].token[0], "export", 6) == 0)
-// 		return (true);
-// 	else if (ft_strncmp(data.cmd[nb].token[0], "unset", 5) == 0)
-// 		return (true);
-// 	else if (ft_strncmp(data.cmd[nb].token[0], "pwd", 3) == 0)
-// 		return (true);
-// 	else if (ft_strncmp(data.cmd[nb].buffer, "cd", 2) == 0)
-// 		return (true);
-// 	else if (ft_strncmp(data.cmd[nb].token[0], "exit", 4) == 0)
-// 		return (true);
-// 	else
-// 		return (false);
-// 	return (true);
-// }
-
 bool	ft_check_builtin(int nb, int i)
 {
 	if (ft_strncmp(data.cmd[nb].token[i], "echo", 4) == 0)
@@ -113,4 +92,17 @@ bool	ft_check_builtin(int nb, int i)
 	else
 		return (false);
 	return (true);
+}
+
+void	handle_sigint(int sig)
+{
+	if (sig == SIGINT)
+	{
+		data.prompt = ft_get_prompt();
+		printf("\n%s", data.prompt);
+	}
+	else if (sig == SIGSEGV)
+	{
+		exit (1);
+	}
 }

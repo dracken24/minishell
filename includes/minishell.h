@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/11 00:32:45 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 11:12:26 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct		s_data
 	char	**env;			//copy of env
 	char	*buffer;		//buffer for readline
 	char	*prompt;		//prompt message for readline
+	char	*start_path;
 	int 	cmd_count;		//count of commands
 	int		ct;
 	char	expand[2];		//flag for expansion
@@ -56,6 +57,7 @@ typedef struct		s_data
 
 void	ft_init_environement(char **env);
 void	ft_exit(char *str, int s);
+void	handle_sigint(int sig);
 void	ft_print_table(void);
 void	ft_free_table(void);
 void	ft_quit(char *str);

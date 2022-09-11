@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 20:44:21 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 10:30:37 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 10:06:18 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,75 +14,31 @@
 
 extern t_data data;
 
-char	*find_good_path(char **paths, char *env_path, int nb);
-char	*find_path(char *env_path);
-
 char	*ft_get_path(int nb)
 {
-	char	**paths;
+	char	*program;
 	char	*env_path;
+	char	**fcnt_path;
+	char 	*test_path;
 	int		i;
-
+	
 	i = -1;
-	while (data.env[++i])
+	if (access(data.cmd[nb].token[0], F_OK | X_OK) == 0)
+		return (data.cmd[nb].token[0]);
+	program = ft_strjoin("/", data.cmd[nb].token[0], 0);
+	env_path = ft_get_variable("PATH");
+	fcnt_path = ft_split(env_path, ':');
+	if (program == NULL || env_path == NULL || fcnt_path == NULL)
+		return (NULL);
+	while (fcnt_path[++i])
 	{
-		env_path = ft_strnstr(data.env[i], "PATH=", 5);
-		if (env_path)
-		{
-			env_path = find_path(env_path);
+		test_path = ft_strjoin(fcnt_path[i], program, 0);
+		if (access(test_path, F_OK | X_OK) == 0)
 			break ;
-		}
+		free (test_path);
+		test_path = NULL;
 	}
-	paths = ft_calloc(sizeof(paths), ft_strlen(env_path + 1));
-	env_path = find_good_path(paths, env_path, nb);
-	free(paths);
-	return (env_path);
-}
-
-char	*find_path(char *env_path)
-{
-	char	*tmp;
-	int		len;
-
-	len = ft_strlen(env_path);
-	tmp = ft_calloc(sizeof(tmp), len + 1);
-	if (!tmp)
-	{
-		perror("Error, tmp <find_path>");
-		free(tmp);
-		return (NULL);
-	}
-	tmp = ft_substr(env_path, 5, len);
-	len = ft_strlen(tmp);
-	env_path = ft_substr(tmp, 0, len);
-	free(tmp);
-	return (env_path);
-}
-
-char	*find_good_path(char **paths, char *env_path, int nb)
-{
-	int		i;
-	char	*cmd_path;
-
-	if (!paths)
-	{
-		perror("Error, path <find_good_path>");
-		return (NULL);
-	}
-	paths = ft_split(env_path, ':');
-	i = -1;
-	while (paths[++i])
-		paths[i] = ft_strjoin(paths[i], "/", 0);
-	i = -1;
-	while (paths[++i])
-	{
-		cmd_path = ft_strjoin(paths[i], data.cmd[nb].token[0], 0);
-		if (access(cmd_path, F_OK | X_OK) == 0)
-		{
-			free(paths);
-			return (cmd_path);
-		}
-		free(cmd_path);
-	}
-	return (NULL);
+	ft_free_ptr(fcnt_path);
+	free(program);
+	return (test_path);
 }
