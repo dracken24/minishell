@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/10 21:37:26 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 22:23:06 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int ac, char **argv, char **env)
 void	ft_fork_main(int nb)
 {
 	pid_t	pid;
+	// int		ret;
 
 	ft_parse(); 								// tokenize the buffer
 	pid = fork();
