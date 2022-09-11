@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 18:58:07 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 20:41:21 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,13 @@ bool	ft_execute_builtin(int nb)
 	else if (ft_strncmp(data.cmd[nb].token[0], "env", 3) == 0)
 		ft_env();
 	else if (ft_strncmp(data.cmd[nb].token[0], "export", 6) == 0)
-		ft_export(data.cmd[nb].token[1]);
+		ft_export(data.cmd[nb].token[1], nb);
 	else if (ft_strncmp(data.cmd[nb].token[0], "unset\0", 6) == 0)
-		ft_unset(data.cmd[nb].token[1]);
+		ft_unset(data.cmd[nb].token[1], nb);
 	else if (ft_strncmp(data.cmd[nb].token[0], "pwd", 3) == 0)
 		printf("%s\n", ft_get_variable("PWD"));
 	else if (ft_strncmp(data.cmd[nb].buffer, "cd", 2) == 0)
 		ft_cd(data.cmd[nb].token[1]);
-	else if (ft_strncmp(data.cmd[nb].token[0], "exit", 4) == 0)
-		ft_exit("Goodbye\n", 3);
 	else
 		return (false);
 	return (true);
@@ -111,7 +109,7 @@ void	ft_keep_cmd(int nb)
 	
 	data.ct = 1;
 	i = -1;
-	while (data.cmd[nb].token[i++])
+	while (data.cmd[nb].token[++i])
 	{
 		path = NULL;
 		data.cmd[nb].token[0] = data.cmd[nb].token[i];

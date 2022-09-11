@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 11:11:02 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 20:36:41 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_expand_heredoc(char *heredoc)
 	expand = ft_strjoin(data.heredoc, "heredoc=", 0);
 	temps = ft_strjoin(expand, heredoc, 0);
 	free(heredoc);
-	ft_export(temps);
+	ft_export(temps, 1);
 	free(temps);
 	expand[ft_strlen(expand) - 1] = '\0';
 	heredoc = ft_get_variable(expand);

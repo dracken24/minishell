@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:19:48 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 10:29:51 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:08:57 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 extern t_data data;
 
-void	ft_unset(char *buffer)
+void	ft_unset(char *buffer, int nb)
 {
 	int	i;
 
+	if (nb != 0)
+		return ;
 	i = -1;
 	while (data.env[++i])
 	{
@@ -33,4 +35,5 @@ void	ft_unset(char *buffer)
 			data.env[i] = NULL;
 		}
 	}
+	ft_fd_env();
 }

@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/10 17:58:27 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:12:12 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int ac, char **argv, char **env)
 	ft_init_environement(env);			// Copy environement variable in main struct
 	while (1)
 	{
+		ft_save_env();
 		i = -1;
 		data.prompt = ft_get_prompt();		// Get user and path for prompt
 		data.buffer = readline(data.prompt);	// Fill the buffer with user input
@@ -30,18 +31,12 @@ int	main(int ac, char **argv, char **env)
 		add_history(data.buffer);
 		if (ft_is_only(data.buffer, ' '))		// Newline on empty buffer
 			free(data.buffer);
+		else if (ft_strncmp(data.buffer, "exit\0", 5) == 0)
+			ft_quit("Good bye my friend !!!");
 		else
 		{
 			ft_parse(); // tokenize the buffer
-			if (ft_check_builtin(0, 0) == 1 && data.cmd_count == 1)
-			{
-				ft_find_redirect(0);
-				ft_execute_builtin(0);
-			}
-			else
-			{
-				ft_fork_main(i);
-			}
+			ft_fork_main(i);
 			ft_free_table();
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:43:29 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 15:09:15 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:03:58 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,11 @@ void	ft_exit(char *str, int s)
 	if (s <= 3)
 		ft_free_table();
 	exit(0);
+}
+void	ft_quit(char *str)
+{
+	free(data.buffer);
+	ft_free_ptr(data.env);
+	printf("%s\n", str);
+	exit (0);
 }

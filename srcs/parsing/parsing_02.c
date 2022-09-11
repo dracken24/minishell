@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/10 11:13:26 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 20:36:57 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_expand_variable(char *token)
 		expand = ft_strjoin(data.expand, "-expand=", 0);
 		temps = ft_strjoin(expand, token, 0);
 		free(token);
-		ft_export(temps);
+		ft_export(temps, 1);
 		free(temps);
 		expand[ft_strlen(expand) - 1] = '\0';
 		token = ft_get_variable(expand);

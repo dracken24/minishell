@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/10 17:13:54 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:12:09 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ void	ft_init_environement(char **env);
 void	ft_exit(char *str, int s);
 void	ft_print_table(void);
 void	ft_free_table(void);
+void	ft_quit(char *str);
+void	ft_save_env(void);
+void	ft_fd_env(void);
 
 char	*ft_get_variable(char *buffer);
 char	*ft_get_prompt(void);
@@ -91,8 +94,8 @@ bool	ft_check_builtin(int nb, int i);
 
 /** CMDS **/
 
-void	ft_unset(char *buffer);
-void	ft_export(char *arg);
+void	ft_unset(char *buffer, int nb);
+void	ft_export(char *arg, int nb);
 void	ft_cd(char *buffer);
 void	ft_heredoc(char *limiter, char *heredoc);
 void	ft_env(void);
