@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/10 21:12:12 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:37:26 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	main(int ac, char **argv, char **env)
 	(void)argv;
 	int		i;
 
-	ft_init_environement(env);			// Copy environement variable in main struct
+	ft_init_environement(env);					// Copy environement variable in main struct
 	while (1)
 	{
 		ft_save_env();
 		i = -1;
-		data.prompt = ft_get_prompt();		// Get user and path for prompt
+		data.prompt = ft_get_prompt();			// Get user and path for prompt
 		data.buffer = readline(data.prompt);	// Fill the buffer with user input
 		free(data.prompt);						// Free the prompt for next iteration
 		add_history(data.buffer);
@@ -35,7 +35,6 @@ int	main(int ac, char **argv, char **env)
 			ft_quit("Good bye my friend !!!");
 		else
 		{
-			ft_parse(); // tokenize the buffer
 			ft_fork_main(i);
 			ft_free_table();
 		}
@@ -46,16 +45,15 @@ void	ft_fork_main(int nb)
 {
 	pid_t	pid;
 
+	ft_parse(); 								// tokenize the buffer
 	pid = fork();
 	if (pid == -1)
 		ft_exit("Fork failed", 3);
 	if (pid == 0)
 	{
-		// ft_print_table();				//print the table with all the tokens
 		while (++nb < data.cmd_count - 1)
 			ft_make_child_process(nb);
 		ft_find_redirect(nb);
-		// ft_print_table();
 		if (ft_execute_builtin(nb) == true)
 			ft_exit("exit fork", 3);
 		else
