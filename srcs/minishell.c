@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/10 22:23:06 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 00:35:45 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,27 @@
 
 t_data	data;
 
+void handle_sigint(int sig)
+{
+	if (sig == SIGINT)
+	{
+		data.prompt = ft_get_prompt();
+		printf("\n%s", data.prompt);
+	}
+	else if (sig == SIGSEGV)
+	{
+		exit (1);
+	}
+}
+
 int	main(int ac, char **argv, char **env)
 {
 	(void)ac;
 	(void)argv;
 	int		i;
 
+	signal(SIGINT, handle_sigint);
+	signal(SIGSEGV, handle_sigint);
 	ft_init_environement(env);					// Copy environement variable in main struct
 	while (1)
 	{

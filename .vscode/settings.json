@@ -2,6 +2,7 @@
     "files.associations": {
         "locale_t.h": "c",
         "locale": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "signal.h": "c"
     }
 }
