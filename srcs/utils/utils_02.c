@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 18:29:51 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 19:17:59 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 22:43:02 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,19 @@ void	ft_sig(int ac, char **argv)
 	(void)argv;
 	signal(SIGINT, handle_sigint);
 	signal(SIGSEGV, handle_sigint);
+}
+
+void	handle_sigint(int sig)
+{
+	if (sig == SIGINT)
+	{
+		// if (data.cmd[0].token[0])
+			// ft_free_table();
+		data.prompt = ft_get_prompt();
+		printf("\n%s", data.prompt);
+	}
+	else if (sig == SIGSEGV)
+	{
+		exit (1);
+	}
 }
