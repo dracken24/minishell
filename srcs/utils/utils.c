@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:02:10 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 17:40:07 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 22:42:54 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,19 +92,4 @@ bool	ft_check_builtin(int nb, int i)
 	else
 		return (false);
 	return (true);
-}
-
-void	handle_sigint(int sig)
-{
-	if (sig == SIGINT)
-	{
-		// if (data.cmd[0].token[0])
-			// ft_free_table();
-		data.prompt = ft_get_prompt();
-		printf("\n%s", data.prompt);
-	}
-	else if (sig == SIGSEGV)
-	{
-		exit (1);
-	}
 }

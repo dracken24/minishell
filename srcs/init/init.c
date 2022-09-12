@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:40:49 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 18:58:32 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/11 22:29:16 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_save_env(void)
 
 	path = ft_get_variable("STARTDIR");
 	fd = ft_open_fd(path, 1);
-	tmp = ft_calloc(sizeof(char), 10000);
+	tmp = ft_calloc(sizeof(char), BUFFER_SIZE);
 	if (!tmp)
 		ft_exit("error calloc <ft_save_env>", 0);
 	tmp[0] = get_next_line(fd);
