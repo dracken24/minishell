@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 19:08:35 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/12 15:13:04 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,11 @@ int	ft_parse(void)
 	data.cmd = ft_calloc(sizeof(t_cmd), data.cmd_count + 1);
 	data.pid = ft_calloc(sizeof(pid_t), data.cmd_count - 1);
 	if (data.cmd == NULL || data.pid == NULL)
+	{
+		// free(data.pid);
+		// free(data.buffer);
 		ft_exit("Malloc error\n", 2);
+	}
 	data.cmd[0].buffer = ft_trim_token(ft_strtok(data.buffer, '|'), ' ');
 	while (++i < data.cmd_count)
 		data.cmd[i].buffer = ft_trim_token(ft_strtok(NULL, '|'), ' ');

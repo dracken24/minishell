@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:40:49 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 22:29:16 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/12 15:19:59 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_init_environement(char **env)
 
 	ft_init_suite();
 	i = -1;
-	data.env = ft_calloc(sizeof(char *), ft_array_size(env));
+	data.env = ft_calloc(sizeof(char *), ft_array_size(env) + 1);
 	if (data.env == NULL)
 		ft_exit("Malloc Error\n", 0);
 	while (env[++i])
