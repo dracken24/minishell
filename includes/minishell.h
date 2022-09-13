@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/11 19:18:17 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/13 14:35:06 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	handle_sigint(int sig);
 void	ft_print_table(void);
 void	ft_free_table(void);
 void	ft_quit(char *str);
-void	ft_save_env(void);
-void	ft_fd_env(void);
+void	ft_save_env(char *name);
+void	ft_fd_env(char *name);
 
 char	*ft_get_variable(char *buffer);
 char	*ft_get_prompt(void);

@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/13 13:18:44 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:44:15 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,9 @@ void	ft_clean_token(char **token)
 	t = 0;
 	while (token[t])
 	{
-		if (ft_strchr_bool(token[t], '\'') == true)
-		{
-			ft_remove_single(token[t]);
-		}
+
+		if (token[t][0] == '\'' && token[t][ft_strlen(token[t]) - 1] == '\'')
+			ft_remove_char(token[t], '\'');
 		else if (token[t][0] == '\"'
 			&& token[t][ft_strlen(token[t]) - 1] == '\"')
 		{
