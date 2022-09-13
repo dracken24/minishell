@@ -6,13 +6,41 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:48:32 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/12 15:13:04 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:18:44 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 extern t_data	data;
+
+// bool	ft_remove_single(char *token)
+// {
+// 	int 	i;
+// 	int		k;
+// 	int		ct;
+// 	char	*str;
+
+// 	str = ft_calloc(sizeof(char), BUFFER_SIZE);
+// 	if (!str)
+// 		ft_exit("error, wrong malloc", 2);
+// 	if (token[0] == '\'' && token[ft_strlen(token) - 1] == '\'')
+// 		ft_remove_char(token, '\'');
+// 	// str = NULL;
+// 	ct = 0;
+// 	i = 0;
+// 	k = -1;
+// 	while (token[i])
+// 	{
+// 		if (token[i] == '\'')
+// 			ct++;
+// 		else
+// 			str[++k] = token[i];
+// 		i++;
+// 	}
+// 	printf("TOKEN: %s\n", str);
+// 	return (false);
+// }
 
 void	ft_clean_token(char **token)
 {
@@ -21,8 +49,10 @@ void	ft_clean_token(char **token)
 	t = 0;
 	while (token[t])
 	{
-		if (token[t][0] == '\'' && token[t][ft_strlen(token[t]) - 1] == '\'')
-			ft_remove_char(token[t], '\'');
+		if (ft_strchr_bool(token[t], '\'') == true)
+		{
+			ft_remove_single(token[t]);
+		}
 		else if (token[t][0] == '\"'
 			&& token[t][ft_strlen(token[t]) - 1] == '\"')
 		{

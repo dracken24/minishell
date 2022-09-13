@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 18:29:51 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/12 14:57:05 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:31:02 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_keep_cmd_suite(char *path, int nb)
 {
 	int	k;
 
+	// if (data.cmd[nb].token)
 	if (data.cmd[nb].token[2] && (ft_strncmp(data.cmd[nb].token[2], "<", 1) == 0
 			|| ft_strncmp(data.cmd[nb].token[2], ">", 1)) == 0)
 		data.cmd[nb].token[2] = NULL;
@@ -63,7 +64,7 @@ void	ft_keep_cmd(int nb)
 void	ft_sig(int ac, char **argv)
 {
 	(void)ac;
-	(void)argv;
+	(void)argv; 
 	signal(SIGINT, handle_sigint);
 	signal(SIGSEGV, handle_sigint);
 	signal(SIGQUIT, handle_sigint);
@@ -82,8 +83,8 @@ void	handle_sigint(int sig)
 	}
 	else if (sig == SIGSEGV)
 	{
-		ft_free_table();
-		ft_free_ptr(data.env);
+		// ft_free_table();
+		// ft_free_ptr(data.env);
 		exit(1);
 	}
 	else if (sig == SIGQUIT)
