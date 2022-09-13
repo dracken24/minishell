@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:40:49 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/12 15:19:59 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/12 23:27:03 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_init_suite(void)
 void	ft_init_environement(char **env)
 {
 	int		i;
+	char	*tmp;
 
 	ft_init_suite();
 	i = -1;
@@ -40,8 +41,10 @@ void	ft_init_environement(char **env)
 		if (!data.env[i])
 			ft_exit("Malloc Error\n", 0);
 	}
-	data.env[i] = ft_strjoin("STARTDIR=",
-			ft_strjoin(getcwd(NULL, 0), "/env", 0), 0);
+	tmp = getcwd(NULL, 0);
+	data.env[i] = ft_strjoin("STARTDIR=", tmp, 0);
+	data.env[i] = ft_strjoin(data.env[i], "/env", 1);
+	free(tmp);
 	ft_fd_env();
 }
 
