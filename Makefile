@@ -6,7 +6,7 @@
 #    By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 23:33:38 by root              #+#    #+#              #
-#    Updated: 2022/09/11 18:34:36 by nadesjar         ###   ########.fr        #
+#    Updated: 2022/09/13 17:11:06 by nadesjar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ FILES			= $(P_SRCS)minishell.c \
 				$(P_KILL)exit.c \
 				$(P_INIT)init.c \
 				$(P_UTILS)utils.c $(P_UTILS)utils_02.c \
-				$(P_UTILS)pipes.c \
+				$(P_UTILS)pipes.c $(P_UTILS)keep_history.c \
 				$(P_COMM)ft_cd.c $(P_COMM)ft_unset.c \
 				$(P_COMM)echo_env.c $(P_COMM)ft_export.c \
 				$(P_PARS)parsing_01.c $(P_PARS)parsing_02.c \
@@ -35,7 +35,7 @@ OBJS 			= $(patsubst $(P_SRCS)%.c, $(P_OBJS)%.o, $(FILES)) \
 
 CC 				= gcc
 FLAGS 			= -Wall -Wextra -Werror
-RLFLAGS 		= -lreadline -lncurses -g
+RLFLAGS 		= -lreadline -lncurses 
 
 NAME 			= minishell
 
@@ -45,7 +45,7 @@ LIBFT_A			= $(P_SRCS)libft/libft.a
 all: signature make_lib $(NAME)
 
 $(NAME): msg_in $(OBJS) msg_out
-	@gcc $(OBJS) $(LIBFT_A) $(FLAGS) $(RLFLAGS) -o $(NAME)
+	@gcc $(OBJS) $(LIBFT_A) $(FLAGS) $(RLFLAGS) -g -o $(NAME)
 
 $(P_OBJS)%.o:	$(P_SRCS)%.c
 	@mkdir -p $(P_OBJS)

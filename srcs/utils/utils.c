@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:02:10 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 22:42:54 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/13 19:53:16 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_get_prompt(void)
 	prompt = ft_strjoin(prompt, "@", 1);
 	prompt = ft_strjoin(prompt, "Minishell", 1);
 	prompt = ft_strjoin(prompt, ": ", 1);
-	prompt = ft_strjoin(prompt, "\033[0;34m", 1);
+	prompt = ft_strjoin(prompt, "\033[0;35m", 1);
 	prompt = ft_strjoin(prompt, ft_get_variable("PWD"), 1);
 	prompt = ft_strjoin(prompt, "> ", 1);
 	prompt = ft_strjoin(prompt, "\033[0m", 1);
