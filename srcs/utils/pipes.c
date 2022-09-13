@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:05:04 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 18:37:34 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:04:17 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_fork_main(int nb)
 	}
 	pid = fork();
 	if (pid == -1)
-		ft_exit("Fork failed", 3);
+		ft_exit("Fork failed", 2);
 	if (pid == 0)
 		ft_fork_main_suite(nb);
 	else

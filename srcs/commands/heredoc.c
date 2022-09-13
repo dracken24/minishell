@@ -6,11 +6,13 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:46:46 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 22:40:38 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/12 15:10:36 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern t_data data;
 
 // void	ft_heredoc(char *limiter, char *heredoc)
 // {
@@ -40,13 +42,17 @@ void	ft_heredoc(char *limiter, char *heredoc)
 	char	*str;
 	int		fd;
 	pid_t	pid;
+	int d = 2;
 
 	pid = fork(); // make a child process
 	if (pid == 0) // if i'm the child
 	{
 		fd = ft_open_fd(heredoc, 2); // open file
 		if (fd == -1)
+		{
+			free(data.buffer);
 			ft_exit("Error: heredoc file not found", 1);
+		}
 		while (1)
 		{
 			write(1, "<heredoc> ", 10); // print prompt
@@ -61,5 +67,5 @@ void	ft_heredoc(char *limiter, char *heredoc)
 		free(str); // free the line
 		ft_exit(NULL, 3); // exit the child
 	}
-	waitpid(pid, NULL, 0); // wait the child to finish de heredoc
+	waitpid(pid, &d, 0); // wait the child to finish de heredoc
 }

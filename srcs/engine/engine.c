@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 19:08:24 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:49:15 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,13 @@ void	ft_find_redirect(int nb)
 	i = -1;
 	while (data.cmd[nb].token[++i])
 		ft_find_redirect_suite(nb, i);
-	ft_print_table();
+	// ft_print_table();
 	ft_keep_cmd(nb);
+	// ft_print_table();
 	ft_clean_token(data.cmd[nb].token);
+	// ft_print_table();
 	ft_clear_heredoc(nb);
-	ft_print_table();
+	// ft_print_table();
 }
 
 void	ft_clear_heredoc(int nb)

@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:19:48 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/11 12:07:11 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/13 14:34:06 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ void	ft_unset(char *buffer, int nb)
 			data.env[i] = NULL;
 		}
 	}
-	ft_fd_env();
+	ft_fd_env("STARTDIR");
 }
