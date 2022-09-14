@@ -1,1 +1,7 @@
 objs
+--cached
+--others
+--ignored
+--exclude-standard
+ls-files
+.DS_Store
