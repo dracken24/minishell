@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:56:21 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/13 19:53:56 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/13 20:05:13 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ void	ft_moove_history(void)
 
 	i = 0;
 	tmp = ft_calloc(sizeof(char *), 24);
+	fd = ft_open_fd(ft_get_variable("HISTORY"), 6);
 	tmp[i] = get_next_line(fd);
 	if (!tmp[i])
+	{
+		close(fd);
 		return ;
-	fd = ft_open_fd(ft_get_variable("HISTORY"), 6);
+	}
 	free(tmp[i]);
 	while (1)
 	{
