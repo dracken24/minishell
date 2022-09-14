@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:56:21 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/13 19:53:56 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/14 08:05:40 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,23 @@ void	ft_moove_history(void)
 
 	i = 0;
 	tmp = ft_calloc(sizeof(char *), 24);
+	fd = ft_open_fd(ft_get_variable("HISTORY"), 6);
 	tmp[i] = get_next_line(fd);
 	if (!tmp[i])
+	{
+		close(fd);
 		return ;
-	fd = ft_open_fd(ft_get_variable("HISTORY"), 6);
+	}
 	free(tmp[i]);
-	while (1)
+	while (i < 20)
 	{
 		tmp[i] = get_next_line(fd);
 		if (!tmp[i])
 			break ;
 		i++;
 	}
+	if (tmp[i])
+		free(tmp[i]);
 	tmp[i] = ft_strjoin(data.buffer, "\n", 0);
 	close (fd);
 	fd = ft_open_fd(ft_get_variable("HISTORY"), 2);
@@ -71,7 +76,7 @@ void	ft_save_history(void)
 {
 	int		fd;
 
-	if (ft_is_only(data.buffer, ' ') == true)
+	if (ft_is_only(data.buffer, ' ') == true || ft_strncmp(data.buffer, "\n", 1) == 0)
 		return ;
 	fd = ft_open_fd(ft_get_variable("HISTORY"), 6);
 	if(ft_refresh_history(fd) == true)

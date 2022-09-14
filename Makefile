@@ -6,7 +6,7 @@
 #    By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 23:33:38 by root              #+#    #+#              #
-#    Updated: 2022/09/13 17:11:06 by nadesjar         ###   ########.fr        #
+#    Updated: 2022/09/14 07:32:52 by nadesjar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ FILES			= $(P_SRCS)minishell.c \
 				$(P_PARS)parsing_01.c $(P_PARS)parsing_02.c \
 				$(P_ENGINE)engine.c $(P_ENGINE)check_path.c \
 				$(P_COMM)heredoc.c \
+				# $(P_UTILS)sig.c \
 
 OBJS 			= $(patsubst $(P_SRCS)%.c, $(P_OBJS)%.o, $(FILES)) \
 

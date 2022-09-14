@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/09/13 15:24:34 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/09/13 20:02:30 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	main(int ac, char **argv, char **env)
 		data.prompt = ft_get_prompt();			// Get user and path for prompt
 		data.buffer = readline(data.prompt);	// Fill the buffer with user input
 		free(data.prompt);
-		if (add_history(data.buffer) == 0) // Free the prompt for next iteration
-			ft_save_history();
+		// if (add_history(data.buffer) == 0) // Free the prompt for next iteration
+		ft_save_history();
 		if (ft_is_only(data.buffer, ' '))		// Newline on empty buffer
 			free(data.buffer);
 		else if (ft_strncmp(data.buffer, "exit\0", 5) == 0)
