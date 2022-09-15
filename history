@@ -1,8 +1,3 @@
-ujky
-ujk
-uk
-ukuk
-exit
 ger
 hrt
 rth
@@ -15,6 +10,11 @@ rfe
 ger
 gr
 ger
-rth
-gr
+make
+make re
+cd minishell/
+make re
+exit
+echo lol
+cd ..
 exit
