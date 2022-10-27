@@ -6,7 +6,7 @@
 /*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:55:26 by nadesjar          #+#    #+#             */
-/*   Updated: 2022/09/13 12:49:15 by nadesjar         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:10:15 by nadesjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	ft_find_redirect_suite(int nb, int i)
 	if (ft_strncmp(data.cmd[nb].token[i], "<", 1) == 0
 		&& data.cmd[nb].token[i][1] != '<')
 	{
+		if (data.cmd[nb].fd_in)
+			close(data.cmd[nb].fd_in);
 		data.cmd[nb].fd_in = ft_open_fd(data.cmd[nb].token[++i], 1);
 		dup2(data.cmd[nb].fd_in, STDIN_FILENO);
 	}

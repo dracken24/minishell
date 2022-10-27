@@ -6,7 +6,7 @@
 #    By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 23:33:38 by root              #+#    #+#              #
-#    Updated: 2022/09/14 07:32:52 by nadesjar         ###   ########.fr        #
+#    Updated: 2022/10/20 11:52:03 by nadesjar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,5 +95,3 @@ C	= $(shell tput -Txterm setaf 6)
 W	= $(shell tput -Txterm setaf 7)
 	
 .Phony: all make_lib msg_in msg_out clean fclean re signature
-
-# 禡
