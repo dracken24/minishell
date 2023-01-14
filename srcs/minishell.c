@@ -6,7 +6,7 @@
 /*   By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2023/01/13 21:04:00 by dracken24        ###   ########.fr       */
+/*   Updated: 2023/01/13 21:11:45 by dracken24        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char*	mountPath(void)
 
 	tmp = getcwd(NULL, 0);
 
-	ret = ft_strjoin("\x1b[33m", "\n-----------------------------------------------------------------------------\n", 0);
+	ret = ft_strjoin("\x1b[33m", "-----------------------------------------------------------------------------\n", 0);
 	// ret = ft_strjoin(ret, "| ", 1);
 	ret = ft_strjoin(ret, "\x1b[34m", 1);
 	ret = ft_strjoin(ret, "CWD: ", 1);
@@ -143,6 +143,7 @@ int	main(int ac, char **av, char **env)
 		}
 		ft_free(visiblePat);
 		ft_clear_command(&shell);
+		printf("\n");
 	}
 	return (0);
 }
