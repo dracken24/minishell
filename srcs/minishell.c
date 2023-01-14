@@ -3,40 +3,144 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+        */
+/*   By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2022/10/11 11:46:09 by nadesjar         ###   ########.fr       */
+/*   Updated: 2023/01/13 20:18:40 by dracken24        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <dirent.h> 
 
-t_data	data;
-void	ft_save_history(void);
-int	main(int ac, char **argv, char **env)
+char	**g_env;
+
+void	ft_parse_export(t_shell *shell, int nb)
 {
-	int		i;
+	int	i;
 
-	ft_sig(ac, argv);
-	ft_init_environement(env);					// Copy environement variable in main struct
+	if (shell->cmd[nb].nb_token == 1)
+		ft_env(0);
+	else
+	{
+		i = 0;
+		while (++i < shell->cmd[nb].nb_token)
+			ft_export(shell, shell->cmd[nb].token[i], 1);
+	}
+}
+
+void	ft_parse_unset(t_shell *shell, int nb)
+{
+	int	i;
+
+	i = 0;
+	while (++i < shell->cmd[nb].nb_token)
+		ft_unset(shell->cmd[nb].token[i]);
+}
+
+void	ft_exit(t_shell *shell, char *msg, int errno)
+{
+	ft_putstr_fd(msg, 2);
+	ft_clear_command(shell);
+	g_env = (char **)ft_free_array(g_env);
+	rl_clear_history();
+	exit(errno);
+}
+
+void	ft_init_shell(t_shell *shell, char **env, int ac, char **av)
+{
+	(void)ac;
+	(void)av;
+	ft_memset(shell, 0, sizeof(t_shell));
+	shell->expand[0] = 'a';
+	shell->heredoc[0] = 'a';
+	g_env = ft_remalloc(env, 0, 0);
+	if (!g_env)
+		ft_exit(shell, "Error: malloc failed\n", 1);
+	ft_export_error(shell);
+}
+
+char*	mountPath(void)
+{
+	char	*tmp;
+	char	*tmp2;
+	char	*head = NULL;
+	char	*ret;
+	int		fd;
+	DIR		*dir;
+
+	tmp = getcwd(NULL, 0);
+
+	ret = ft_strjoin("\x1b[34m", "\nCWD: ", 0);
+	ret = ft_strjoin(ret, tmp, 1);
+	ret = ft_strjoin(ret, "/ -->  branch:  ", 1);
+	
+	// check if dir .git exist. if yes, head = good line
+	dir = opendir(".git");
+	if (dir != NULL)
+	{
+		chdir(".git");
+		fd = open("HEAD", O_RDONLY); // branch is in HEAD file ex: "ref: refs/heads/main"
+		if (fd)
+		{
+			head = get_next_line(fd);
+			while (head && strncmp(head, "ref:", 4) != 0)
+			{
+				ft_free(head);
+				head = get_next_line(fd);
+			}
+		}
+		if (fd)
+			close(fd);
+		chdir("..");
+
+		// take name of branch if dir exist, else print none in red
+		fd = ft_strlen(head);
+		while (head[fd] != '/')
+			fd--;
+		tmp2 = strdup(&head[fd + 1]);
+		ret = ft_strjoin(ret , "\x1b[36m", 1);
+		ret = ft_strjoin(ret, tmp2, 1);
+		ret = ft_strjoin(ret , "\x1b[33m", 1);
+		ft_free(tmp2);
+		ft_free(head);
+		closedir(dir);
+	}
+	else
+	{
+		ret = ft_strjoin(ret , "\x1b[31m", 1);
+		ret = ft_strjoin(ret, "none\n", 1);
+		ret = ft_strjoin(ret , "\x1b[33m", 1);
+	}
+	
+	ret = ft_strjoin(ret, "-----------------------------------------------------------------------------\n", 1);
+	ret = ft_strjoin(ret , "\x1b[36m", 1);
+	ret = ft_strjoin(ret, "DrackenShell: ", 1);
+	ret = ft_strjoin(ret, "\e[0;35m", 1);
+
+	ft_free(tmp);
+	return (ret);
+}
+
+int	main(int ac, char **av, char **env)
+{
+	t_shell	shell;
+	char	*visiblePat;
+
+	ft_init_shell(&shell, env, ac, av);
 	while (1)
 	{
-		ft_save_env("STARTDIR");
-		i = -1;
-		data.prompt = ft_get_prompt();			// Get user and path for prompt
-		data.buffer = readline(data.prompt);	// Fill the buffer with user input
-		free(data.prompt);
-		// if (add_history(data.buffer) == 0) // Free the prompt for next iteration
-		add_history(data.buffer);
-		if (ft_is_only(data.buffer, ' '))		// Newline on empty buffer
-			free(data.buffer);
-		else if (ft_strncmp(data.buffer, "exit\0", 5) == 0)
-			ft_quit("Good bye my friend !!!");
-		else
+		ft_signal_on();
+		visiblePat = mountPath();
+		shell.buffer = readline(visiblePat);
+		// dprintf(2, "%s\n", shell.buffer);
+		ft_free(visiblePat);
+		if (ft_parse(&shell) == 1)
 		{
-			ft_fork_main(i);
-			ft_free_table();
+			ft_signal_off();
+			ft_execute_cmd(&shell, 0);
 		}
+		ft_clear_command(&shell);
 	}
+	return (0);
 }

@@ -1,39 +1,70 @@
 # minishell
 
-- Afficher un prompt en l’attente d’une nouvelle commande.
-- Posséder un historique fonctionnel.
-- Gérer ’ (single quote) qui empêche le shell d’interpréter les 				 	méta-caractères entre guillemets.
-- Gérer " (double quote) qui empêche le shell d’interpréter les 					méta-caractères entre guillemets sauf le $ (signe 	dollar).
-- Chercher et lancer le bon exécutable (en se basant sur la variable 				d’environnement PATH, ou sur un chemin relatif ou absolu).
-- "<" doit rediriger l’entrée.
-- ">" doit rediriger la sortie.
-- "<<" doit recevoir un délimiteur et lire l’input donné jusqu’à rencontrer une 		ligne contenant le délimiteur. l’historique n’a pas à être mis à jour
-- ">>" doit rediriger la sortie en mode append.
-- Implémenter les pipes (caractère |).
-- Gérer les variables d’environnement (un $ suivi d’une séquence de caractères) 	qui doivent être substituées par leur contenu.
-- Gérer $? qui doit être substitué par le statut de sortie de la dernière 			pipeline exécutée au premier plan.
-- Gérer ctrl-C, ctrl-D et ctrl-\ qui doivent fonctionner comme dans bash.
-	- ctrl-C affiche un nouveau prompt sur une nouvelle ligne.
-	- ctrl-D quitte le shell.
-	- ctrl-\ ne fait rien.
-- Votre shell doit implémenter les builtins suivantes :
-	- echo et l’option -n
-	- cd uniquement avec un chemin relatif ou absolu
-	- pwd sans aucune option
-	- export sans aucune option
-	- unset sans aucune option
-	- env sans aucune option ni argument
-	- exit sans aucune option
+- Show a prompt waiting for a new command.
+- History management.
+- Single quote avoid all the special characters.
+- Double quote avoid all the special characters except `$`.
+- Launch executable with their absolute or relative path.
+- "<" redirect input.
+- ">" redirect output.
+- "<<" open here document.
+- ">>" redirect output with append mode.
+- "|" implement pipe.
+- "$" implement environment variable.
+- "$?" implement the last return code.
+- ctrl-C show new prompt.
+- ctrl-D exit minishell.
+- ctrl-\ do nothing.
+- echo with -n
+- cd only with a relative or absolute path.
+- pwd with no options.
+- export with no options.
+- unset with no options.
+- env with no options.
+- exit  with no options.
 
+# Test to do
 
-	echo = bool ft_echo(char *buffer);
-	cd = bool ft_cd(char *buffer);
-	pwd = bool ft_pwd(char *buffer);
-	export = bool ft_export(char *buffer);
-	unset = bool ft_unset(char *buffer);
-	env = bool ft_env(void);
-	$ = char *ft_get_variable(char *buffer);
-	< = bool ft_redirect_input(char *buffer);
-	> = bool ft_redirect_output(char *buffer);
-	<< = bool ft_redirect_input_heredoc(char *buffer);
-	>> = bool ft_redirect_output_append(char *buffer);
+<<end cat
+<< end cat
+<infile cat
+< infile cat
+echo test >>outfile
+echo test >> outfile
+echo test > outfile
+echo test >outfile
+
+## Defense ##
+
+*** DONE ***
+
+- exportez des variables et véfifier si elle sont remplacé si déjà existante
+- entrer une commande, appuyez sur ctrl-C, appuyez sur entrée, le buffer devrait être vide et ne devrait rien executer
+- ctrl-c ctrl-\ ctrl-d
+- essayer des longues commandes avec des tonnes d'arguments. Amusez-vous
+- executez des commandes avec singles quotes qui ne devrait pas expand les variables et metacaractères
+- single quote ne va pas expand les variables et les double quote oui
+- executez echo avec des variables d'environnement ($variable)
+- naviger dans l'historique avec les flèches du haut et du bas
+- executez des commandes avec des chemin relatif avec beaucoup de ../
+- une commande vide
+- executez une commande avec un Path absolu comme /bin/ls et d'autre path relatif
+- une commande avec des espaces et tabulations
+- echo avec et sans arguments
+- echo avec l'option -n
+- pwd avec et sans arguments
+- cd avec des chemins existant et non existant.
+- cd avec . et ..
+- env affiche les variables d'environnement
+- exit avec et sans arguments
+- vérifier que les PATH sont bien analysé de gauche a droite dans ft_get_path
+- executez des commandes sans la variable PATH
+- executez des commandes avec des pipes, avec des commandes valide et invalide entre 2 pipes
+- vérifier des commandes qui ne fonctionne pas
+- valeur de retour des processus avec $?
+
+*** TODO ***
+
+- executez des commandes avec des redirections < << > >> (heredoc n'est pas obliger de mettre a jour l'historique)
+- cat | cat | ls doit fonctionner
+
