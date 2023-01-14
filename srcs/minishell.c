@@ -6,7 +6,7 @@
 /*   By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2023/01/13 20:18:40 by dracken24        ###   ########.fr       */
+/*   Updated: 2023/01/13 21:04:00 by dracken24        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ char*	mountPath(void)
 
 	tmp = getcwd(NULL, 0);
 
-	ret = ft_strjoin("\x1b[34m", "\nCWD: ", 0);
+	ret = ft_strjoin("\x1b[33m", "\n-----------------------------------------------------------------------------\n", 0);
+	// ret = ft_strjoin(ret, "| ", 1);
+	ret = ft_strjoin(ret, "\x1b[34m", 1);
+	ret = ft_strjoin(ret, "CWD: ", 1);
 	ret = ft_strjoin(ret, tmp, 1);
 	ret = ft_strjoin(ret, "/ -->  branch:  ", 1);
 	
@@ -133,13 +136,12 @@ int	main(int ac, char **av, char **env)
 		ft_signal_on();
 		visiblePat = mountPath();
 		shell.buffer = readline(visiblePat);
-		// dprintf(2, "%s\n", shell.buffer);
-		ft_free(visiblePat);
 		if (ft_parse(&shell) == 1)
 		{
 			ft_signal_off();
 			ft_execute_cmd(&shell, 0);
 		}
+		ft_free(visiblePat);
 		ft_clear_command(&shell);
 	}
 	return (0);
