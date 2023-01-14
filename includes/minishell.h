@@ -6,7 +6,7 @@
 /*   By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2023/01/13 19:35:27 by dracken24        ###   ########.fr       */
+/*   Updated: 2023/01/13 23:47:31 by dracken24        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct t_shell
 	char	expand[2];
 	char	heredoc[2];
 	int		error;
+	int		history;
 
 }					t_shell;
 
@@ -67,5 +68,13 @@ void	ft_signal_on(void);
 void	ft_exit(t_shell *shell, char *msg, int errno);
 void	ft_unlink_heredoc(t_shell *shell);
 void	ft_export_error(t_shell *shell);
+
+// History //
+
+void	ft_add_history(char *name);
+void	ft_moove_history(void);
+void	ft_save_history(void);
+
+bool	ft_refresh_history(int fd);
 
 #endif

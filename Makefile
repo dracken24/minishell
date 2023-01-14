@@ -6,7 +6,7 @@
 #    By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 23:33:38 by root              #+#    #+#              #
-#    Updated: 2023/01/13 20:00:39 by dracken24        ###   ########.fr        #
+#    Updated: 2023/01/13 23:37:31 by dracken24        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ FILES			= $(P_SRCS)minishell.c \
 				$(P_UTILS)builtins.c $(P_UTILS)engine.c\
 				$(P_UTILS)execute.c $(P_UTILS)parsing.c \
 				$(P_UTILS)signals.c $(P_UTILS)tokens.c \
-				$(P_UTILS)validation.c \
+				$(P_UTILS)validation.c $(P_UTILS)keep_history.c \
 
 OBJS 			= $(patsubst $(P_SRCS)%.c, $(P_OBJS)%.o, $(FILES)) \
 

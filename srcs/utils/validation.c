@@ -6,7 +6,7 @@
 /*   By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 00:46:12 by dantremb          #+#    #+#             */
-/*   Updated: 2023/01/13 17:27:53 by dracken24        ###   ########.fr       */
+/*   Updated: 2023/01/13 23:59:44 by dracken24        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	ft_empty_token(char *buf)
 int	ft_buffer_integrity(t_shell *shell)
 {
 	if (!shell->buffer)
-		ft_exit(shell, "Goodbye!\n", 0);
+		ft_exit(shell, "Good bye my friend !!!!\n", 0);
 	if (ft_is_only(shell->buffer, ' '))
 	{
 		shell->error = 127;

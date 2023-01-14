@@ -6,7 +6,7 @@
 /*   By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 20:21:33 by dantremb          #+#    #+#             */
-/*   Updated: 2023/01/13 21:05:50 by dracken24        ###   ########.fr       */
+/*   Updated: 2023/01/13 21:17:15 by dracken24        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,20 @@ void	ft_parse_token(t_shell *shell)
 	}
 }
 
-int	ft_parse(t_shell *shell)
+void	specialCmds(t_shell *shell)
 {
-	int		i;
-
 	if (shell->buffer && strncmp(shell->buffer, "lsa", 3) == 0)
 	{
 		ft_free(shell->buffer);
 		shell->buffer = ft_strdup("ls -la");
 	}
+}
+
+int	ft_parse(t_shell *shell)
+{
+	int		i;
+
+	specialCmds(shell);
 	i = 0;
 	if (ft_buffer_integrity(shell) == 0)
 	{

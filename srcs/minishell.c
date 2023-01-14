@@ -6,7 +6,7 @@
 /*   By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:04:50 by dantremb          #+#    #+#             */
-/*   Updated: 2023/01/13 21:11:45 by dracken24        ###   ########.fr       */
+/*   Updated: 2023/01/14 00:03:23 by dracken24        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <dirent.h> 
 
 char	**g_env;
+t_shell	shell;
 
 void	ft_parse_export(t_shell *shell, int nb)
 {
@@ -127,12 +128,14 @@ char*	mountPath(void)
 
 int	main(int ac, char **av, char **env)
 {
-	t_shell	shell;
 	char	*visiblePat;
 
+	shell.history = 1;
 	ft_init_shell(&shell, env, ac, av);
+	ft_add_history("history");
 	while (1)
 	{
+		// ft_save_env("STARTDIR");
 		ft_signal_on();
 		visiblePat = mountPath();
 		shell.buffer = readline(visiblePat);
@@ -140,6 +143,7 @@ int	main(int ac, char **av, char **env)
 		{
 			ft_signal_off();
 			ft_execute_cmd(&shell, 0);
+			add_history(shell.buffer);
 		}
 		ft_free(visiblePat);
 		ft_clear_command(&shell);
