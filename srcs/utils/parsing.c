@@ -6,7 +6,7 @@
 /*   By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 20:21:33 by dantremb          #+#    #+#             */
-/*   Updated: 2023/01/13 21:17:15 by dracken24        ###   ########.fr       */
+/*   Updated: 2023/01/15 15:26:50 by dracken24        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,11 @@ void	specialCmds(t_shell *shell)
 {
 	if (shell->buffer && strncmp(shell->buffer, "lsa", 3) == 0)
 	{
+		char *tmp = ft_calloc(sizeof(char), ft_strlen(shell->buffer) + 4);
+		for (int i = 3; i < (int)ft_strlen(shell->buffer); i++)
+			tmp[i - 3] = shell->buffer[i];
 		ft_free(shell->buffer);
-		shell->buffer = ft_strdup("ls -la");
+		shell->buffer = ft_strjoin("ls -la", tmp, 2);
 	}
 }
 
@@ -115,13 +118,13 @@ int	ft_parse(t_shell *shell)
 {
 	int		i;
 
-	specialCmds(shell);
 	i = 0;
 	if (ft_buffer_integrity(shell) == 0)
 	{
 		ft_export_error(shell);
 		return (0);
 	}
+	specialCmds(shell);
 	shell->nb_cmd = ft_token_count(shell->buffer, '|');
 	shell->cmd = ft_calloc(sizeof(t_cmd), shell->nb_cmd);
 	shell->pid = ft_calloc(sizeof(pid_t), shell->nb_cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantremb <dantremb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:57:35 by dantremb          #+#    #+#             */
-/*   Updated: 2022/08/08 12:54:49 by dantremb         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:16:37 by dracken24        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 #include "../includes/libft.h"
 
-char	*ft_strjoin(char *s1, char const *s2, int f)
+char	*ft_strjoin(char *s1, char *s2, int f)
 {
 	char	*tmp;
 	int		is;
@@ -43,5 +43,7 @@ char	*ft_strjoin(char *s1, char const *s2, int f)
 	tmp[is] = '\0';
 	if (f == 1)
 		free(s1);
+	if (f == 2)
+		free(s2);
 	return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:54:05 by dantremb          #+#    #+#             */
-/*   Updated: 2023/01/14 21:34:48 by dracken24        ###   ########.fr       */
+/*   Updated: 2023/01/15 15:57:37 by dracken24        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,9 @@ void	ft_moove_history(void);
 void	ft_save_history(void);
 
 bool	ft_refresh_history(int fd);
+
+// Prompt //
+
+char*	mountPath(void);
 
 #endif

@@ -1,49 +1,50 @@
-ls
-rhtw
-ls
-ls
-ls
-env
-unset str1
-env
-unset str2
-env
-export str1=lol str2=bob
-env
-ls
-ls
-ls
-cat
-cd
 lsa
-cd ,,
-cd ..
 lsa
-cd minishell
+ls -la
+lsa
+lsa
+lsa
+lsa
+lsa lol
+lsa lol
+lsa
+lsa lol
+lsa lol
+lsa lol
+lsa lol
+lsa lol
+lsa lol
+lsa lol
+lsa | infile 
+lsa
+lsa | cat infile 
+lsa | cat includes/
+lsa | grep infile
+lsa | grep infile
 exit
-env
-cd ..
-cat infile
-lsa
-cat infile
-cat infile
+lsa | grep infile
+lsa | grep infile
+exit
 lsa
 cd ..
 cd minishell
-cat infile | grep do
-cat infile | grep do | grep afro
-cd
-cd Desktop/
-lsa
-cd prog/microshell/
-cat microshell.c 
-./microshell /bin/cat infile "|" /usr/bin/grep do ";" /bin/cat infile "|" /usr/bin/grep si "|" /usr/bin/grep vas
+cd ../prog/container/
 make
-./microshell /bin/cat infile "|" /usr/bin/grep do ";" /bin/cat infile "|" /usr/bin/grep si "|" /usr/bin/grep vas
-./microshell /bin/cat infile "|" /usr/bin/grep do ";" /bin/cat infile "|" /usr/bin/grep si "|" /usr/bin/grep vas
-cd minishell
-./minishell cat infile | grep do
+cd
 cd ..
-cd prog/microshell/
-./microshell cat infile "|" grep do
 cd ..
+lsa
+lsa | cat infile 
+cd ..
+cd prog/container/
+cd ../microshell/
+cd ../container/
+zsh
+cd ..
+cd prog/container/
+make
+make
+cd ../prog/container/
+make
+make
+make

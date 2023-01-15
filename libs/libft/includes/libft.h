@@ -6,7 +6,7 @@
 /*   By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 22:40:58 by root              #+#    #+#             */
-/*   Updated: 2023/01/13 18:49:42 by dracken24        ###   ########.fr       */
+/*   Updated: 2023/01/15 15:17:02 by dracken24        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char			*ft_strdup(const char *src);
 char			*ft_strchr(const char *str, int nbr);
 char			**ft_split(char *src, char sep);
 char			*ft_strrchr(const char *str, int nbr);
-char			*ft_strjoin(char *s1, char const *s2, int f);
+char			*ft_strjoin(char *s1, char *s2, int f);
 char			*ft_strtrim(char const *s1, char const *set);
 char			*ft_substr(char const *src, unsigned int start, size_t len);
 char			*ft_strnstr(const char *src, const char *find, size_t len);
