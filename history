@@ -1,10 +1,8 @@
-unset str1
-env
-unset str 2
-env
-exit
-env
-inset str1
+ls
+rhtw
+ls
+ls
+ls
 env
 unset str1
 env
@@ -12,9 +10,40 @@ unset str2
 env
 export str1=lol str2=bob
 env
+ls
+ls
+ls
+cat
+cd
+lsa
+cd ,,
+cd ..
+lsa
+cd minishell
 exit
+env
 cd ..
+cat infile
+lsa
+cat infile
+cat infile
+lsa
 cd ..
-exit
+cd minishell
+cat infile | grep do
+cat infile | grep do | grep afro
+cd
+cd Desktop/
+lsa
+cd prog/microshell/
+cat microshell.c 
+./microshell /bin/cat infile "|" /usr/bin/grep do ";" /bin/cat infile "|" /usr/bin/grep si "|" /usr/bin/grep vas
+make
+./microshell /bin/cat infile "|" /usr/bin/grep do ";" /bin/cat infile "|" /usr/bin/grep si "|" /usr/bin/grep vas
+./microshell /bin/cat infile "|" /usr/bin/grep do ";" /bin/cat infile "|" /usr/bin/grep si "|" /usr/bin/grep vas
+cd minishell
+./minishell cat infile | grep do
 cd ..
-cd mini
+cd prog/microshell/
+./microshell cat infile "|" grep do
+cd ..

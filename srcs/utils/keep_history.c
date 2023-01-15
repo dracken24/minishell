@@ -6,7 +6,7 @@
 /*   By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:56:21 by nadesjar          #+#    #+#             */
-/*   Updated: 2023/01/13 23:55:39 by dracken24        ###   ########.fr       */
+/*   Updated: 2023/01/14 22:38:42 by dracken24        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_moove_history(void)
 	int		i;
 
 	i = 0;
-	tmp = ft_calloc(sizeof(char *), 24);
+	tmp = ft_calloc(sizeof(char *), 51);
 	fd = ft_open_fd(ft_get_variable("HISTORY", 0), 6);
 	tmp[i] = get_next_line(fd);
 	if (!tmp[i])
@@ -31,15 +31,13 @@ void	ft_moove_history(void)
 		return ;
 	}
 	free(tmp[i]);
-	while (i < 20)
+	while (i < 50)
 	{
 		tmp[i] = get_next_line(fd);
 		if (!tmp[i])
 			break ;
 		i++;
 	}
-	if (tmp[i])
-		free(tmp[i]);
 	tmp[i] = ft_strjoin(shell.buffer, "\n", 0);
 	close (fd);
 	fd = ft_open_fd(ft_get_variable("HISTORY", 0), 2);
@@ -60,7 +58,7 @@ bool	ft_refresh_history(int fd)
 	while (tmp)
 	{
 		i++;
-		if (i >= 20)
+		if (i >= 50)
 		{
 			close(fd);
 			ft_moove_history();
@@ -92,7 +90,7 @@ void	ft_add_history(char *name)
 	char	*tmp;
 	int		fd;
 	int		i;
-
+	
 	fd = ft_open_fd(ft_get_variable(name , 0), 4);
 	tmp = get_next_line(fd);
 	i = 0;
@@ -105,5 +103,31 @@ void	ft_add_history(char *name)
 		tmp = get_next_line(fd);
 	}
 	free(tmp);
+	close(fd);
+}
+
+void	ft_save_env(char *name)
+{
+	char	**tmp;
+	char	*path;
+	int		fd;
+	int		i;
+
+	path = ft_get_variable(name, 0);
+	fd = ft_open_fd(path, 1);
+	tmp = ft_calloc(sizeof(char), BUFFER_SIZE);
+	if (!tmp)
+		ft_exit(&shell, "error calloc <ft_save_env>\n", -1);
+	tmp[0] = get_next_line(fd);
+	i = 0;
+	while (tmp[i])
+	{
+		if (tmp[i])
+			tmp[i][ft_strlen(tmp[i]) - 1] = '\0';
+		i++;
+		tmp[i] = get_next_line(fd);
+	}
+	ft_free_array(g_env);
+	g_env = ft_remalloc(tmp, 2, 0);
 	close(fd);
 }
