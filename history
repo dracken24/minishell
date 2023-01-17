@@ -1,33 +1,3 @@
-lsa
-lsa
-lsa
-lsa
-lsa lol
-lsa lol
-lsa
-lsa lol
-lsa lol
-lsa lol
-lsa lol
-lsa lol
-lsa lol
-lsa lol
-lsa | infile 
-lsa
-lsa | cat infile 
-lsa | cat includes/
-lsa | grep infile
-lsa | grep infile
-exit
-lsa | grep infile
-lsa | grep infile
-exit
-lsa
-cd ..
-cd minishell
-cd ../prog/container/
-make
-cd
 cd ..
 cd ..
 lsa
@@ -47,3 +17,34 @@ make
 make
 lsa
 lsa
+bash
+cd ../prog/microshell/
+gcc microshell.c -Wall -Wextra -Werror
+zsh
+cd ../container/
+make
+lsa
+./Container 
+make
+make
+make
+make
+make
+make
+make
+make re
+make re
+make re
+make re
+make re
+make re
+make re
+make re
+make re
+make re
+make re
+make re
+make re
+make re
+make re
+exit
