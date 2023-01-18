@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dracken24 <dracken24@student.42.fr>        +#+  +:+       +#+         #
+#    By: nadesjar <dracken24@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 23:33:38 by root              #+#    #+#              #
-#    Updated: 2023/01/15 15:57:01 by dracken24        ###   ########.fr        #
+#    Updated: 2023/01/17 11:58:10 by nadesjar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,10 @@ CC 				= gcc
 FLAGS 			= -Wall -Wextra -Werror
 RLFLAGS 		= -lreadline -lncurses 
 
-NAME 			= minishell
+NAME 			= DrackenShell
 
 LIBFT			= make_lib
-LIBFT_A			= $(P_LIBFT)/libft.a
+LIBFT_A			= $(P_LIBFT)/libft.a libs/readline/libreadline.a
 
 all: signature make_lib $(NAME)
 

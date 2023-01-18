@@ -1,50 +1,49 @@
-cd ..
-cd ..
-lsa
-lsa | cat infile 
-cd ..
-cd prog/container/
-cd ../microshell/
-cd ../container/
+./cub3D maps/test_mandatory.cub 
+make
+make re
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
 zsh
-cd ..
-cd prog/container/
-make
-make
-cd ../prog/container/
-make
-make
-make
-lsa
-lsa
-bash
-cd ../prog/microshell/
-gcc microshell.c -Wall -Wextra -Werror
 zsh
-cd ../container/
-make
-lsa
-./Container 
-make
-make
-make
-make
-make
-make
-make
-make re
-make re
-make re
-make re
-make re
-make re
-make re
-make re
-make re
-make re
-make re
-make re
-make re
-make re
-make re
-exit
