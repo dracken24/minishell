@@ -1,49 +1,49 @@
 ./cub3D maps/test_mandatory.cub 
 make
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+make
+./cub3D maps/test_mandatory.cub 
+zsh
+zsh
+cd ../prog/container/
+make
 make re
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
+make re
+make re
+make re
+lsa
+./Container 
+./Container 
 make
-./cub3D maps/test_mandatory.cub 
+./Container 
 make
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
 make
-./cub3D maps/test_mandatory.cub 
+./Container 
 make
-./cub3D maps/test_mandatory.cub 
+./Container 
 make
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
+./Container 
+make re
+./Container 
 zsh
-zsh
+make
+lsa
+./DrackenShell 
+exit
+exit
+make
+./DrackenShell 
+exit
+cd ..
+cd minishell
+ls -la
+lsa
