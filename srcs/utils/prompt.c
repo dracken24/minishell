@@ -58,7 +58,7 @@ char*	mountPath(void)
 		while (head[fd] != '/')
 			fd--;
 		tmp2 = strdup(&head[fd + 1]);
-		ret = ft_strjoin(ret , "\x1b[36m", 1);
+		ret = ft_strjoin(ret , "\x1b[32m", 1);
 		ret = ft_strjoin(ret, tmp2, 1);
 		ret = ft_strjoin(ret , "\x1b[33m", 1);
 		ft_free(tmp2);

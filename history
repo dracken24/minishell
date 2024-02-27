@@ -1,49 +1,50 @@
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-make
-./cub3D maps/test_mandatory.cub 
-zsh
-zsh
-cd ../prog/container/
-make
-make re
-make re
-make re
-make re
-lsa
-./Container 
-./Container 
-make
-./Container 
-make
-make
-./Container 
-make
-./Container 
-make
-./Container 
-make re
-./Container 
-zsh
-make
-lsa
-./DrackenShell 
-exit
+cd ../Desktop
+quit
+Quit
+Close
 exit
 make
-./DrackenShell 
-exit
+cd ../Desktop
+cd ../Desktop
+make re
+cd ../Desktop
+cd ../Desktop
+cd ../Desktop
+make
+lol
+lol
+lol
+lol
+sudo nano .zshrc
 cd ..
-cd minishell
-ls -la
+cd ..
+cd ..
+cd ..
+cd ..
+cd home/
+sudo nano .zshrc
 lsa
+cd dracken24/
+sudo nano .zshrc
+sudo nano .bashrc
+make
+cd ../Desktop
+cd ../Desktop
+lsa
+cd ../Desktop
+cd ../Desktop
+cd ../Desktop
+cd ../Desktop
+cd ../Desktop
+sudo nano ~/.zshrc
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+cd home/
+cd dracken24/
+sudo nano ~/.zshrc
+sudo nano .zshrc
+make git
+git add .
