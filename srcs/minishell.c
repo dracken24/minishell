@@ -95,6 +95,7 @@ void	ft_init_shell(t_shell *shell, char **env, int ac, char **av)
 
 int	main(int ac, char **av, char **env)
 {
+	printf("0");
 	char	*visiblePat;
 	bool ct = true;
 
@@ -102,8 +103,10 @@ int	main(int ac, char **av, char **env)
 	ft_init_shell(&shell, env, ac, av);
 	while (1)
 	{
+		printf("A");
 		if (ct)
 		{
+			printf("B");
 			char * strTmp = ft_strdup("cd ../Desktop");
 			ft_signal_on();
 			visiblePat = mountPath();
@@ -112,18 +115,22 @@ int	main(int ac, char **av, char **env)
 		}
 		else
 		{
+			printf("C");
 			// ft_save_env("STARTDIR");
 			ft_signal_on();
 			visiblePat = mountPath();
 			shell.buffer = readline(visiblePat);
 		}
+		printf("D");
 
 		ft_save_history();
 		if (ft_parse(&shell) == 1)
 		{
+			printf("E");
 			ft_signal_off();
 			ft_execute_cmd(&shell, 0);
 		}
+		printf("F");
 		ft_free(visiblePat);
 		ft_clear_command(&shell);
 		printf("\n");
