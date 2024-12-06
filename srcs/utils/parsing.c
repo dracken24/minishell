@@ -24,7 +24,9 @@ static void	ft_make_heredoc(char *limiter, char *heredoc)
 	while (str)
 	{
 		if (ft_strncmp(str, limiter, ft_strlen(limiter)) == 0)
+		{
 			break ;
+		}
 		ft_putstr_fd(str, fd);
 		ft_putstr_fd("\n", fd);
 		ft_free(str);
@@ -42,12 +44,15 @@ static char	*ft_exp_heredoc(t_shell *shell, char *heredoc)
 	expand = ft_strjoin("<", shell->heredoc, 0);
 	expand = ft_strjoin(expand, "=", 1);
 	temps = ft_strjoin(expand, heredoc, 0);
+
 	free(heredoc);
 	ft_export(shell, temps, 0);
 	free(temps);
+
 	expand[ft_strlen(expand) - 1] = '\0';
 	temps = ft_get_variable(expand, 0);
 	free(expand);
+
 	return (temps);
 }
 
@@ -89,13 +94,20 @@ void	ft_parse_token(t_shell *shell)
 	{
 		shell->cmd[c].nb_token = ft_token_count(shell->cmd[c].buffer, ' ');
 		shell->cmd[c].token = ft_calloc(sizeof(char *),
-				shell->cmd[c].nb_token + 1);
+			shell->cmd[c].nb_token + 1);
+
 		if (!shell->cmd[c].token)
+		{
 			ft_exit(shell, "Error: malloc failed\n", 1);
+		}
+
 		t = 0;
 		shell->cmd[c].token[t] = ft_strtok(shell->cmd[c].buffer, ' ');
 		while (shell->cmd[c].token[t++])
+		{
 			shell->cmd[c].token[t] = ft_strtok(NULL, ' ');
+		}
+
 		shell->cmd[c].save = shell->cmd[c].token;
 		shell->cmd[c].open_error = 0;
 		ft_parse_heredoc(shell, shell->cmd[c].token);
@@ -108,7 +120,10 @@ void	specialCmds(t_shell *shell)
 	{
 		char *tmp = ft_calloc(sizeof(char), ft_strlen(shell->buffer) + 4);
 		for (int i = 3; i < (int)ft_strlen(shell->buffer); i++)
+		{
 			tmp[i - 3] = shell->buffer[i];
+		}
+		
 		ft_free(shell->buffer);
 		shell->buffer = ft_strjoin("ls -la", tmp, 2);
 	}
@@ -124,15 +139,24 @@ int	ft_parse(t_shell *shell)
 		ft_export_error(shell);
 		return (0);
 	}
+
 	specialCmds(shell);
 	shell->nb_cmd = ft_token_count(shell->buffer, '|');
 	shell->cmd = ft_calloc(sizeof(t_cmd), shell->nb_cmd);
 	shell->pid = ft_calloc(sizeof(pid_t), shell->nb_cmd);
+
 	if (shell->pid == NULL || shell->cmd == NULL)
+	{
 		ft_exit(shell, "Error: malloc failed\n", 1);
+	}
+
 	shell->cmd[0].buffer = ft_trim_token(ft_strtok(shell->buffer, '|'), ' ');
 	while (++i < shell->nb_cmd)
+	{
 		shell->cmd[i].buffer = ft_trim_token(ft_strtok(NULL, '|'), ' ');
+	}
+
 	ft_parse_token(shell);
+
 	return (1);
 }
