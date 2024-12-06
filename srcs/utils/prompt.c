@@ -27,7 +27,7 @@ char*	mountPath(void)
 
 	tmp = getcwd(NULL, 0);
 
-	ret = ft_strjoin("\x1b[33m", "-----------------------------------------------------------------------------\n", 0);
+	ret = ft_strjoin("\x1b[33m", "\n-----------------------------------------------------------------------------\n", 0);
 	ret = ft_strjoin(ret, "\x1b[34m", 1);
 	ret = ft_strjoin(ret, "CWD: ", 1);
 	ret = ft_strjoin(ret, tmp, 1);

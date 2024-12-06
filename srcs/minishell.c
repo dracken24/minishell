@@ -20,7 +20,9 @@ void	ft_parse_export(t_shell *shell, int nb)
 	int	i;
 
 	if (shell->cmd[nb].nb_token == 1)
+	{
 		ft_env(0);
+	}
 	else
 	{
 		i = 0;
@@ -42,7 +44,9 @@ void	ft_exit(t_shell *shell, char *msg, int errno)
 {
 	ft_putstr_fd(msg, 2);
 	ft_clear_command(shell);
+
 	g_env = (char **)ft_free_array(g_env);
+
 	rl_clear_history();
 	exit(errno);
 }
@@ -54,13 +58,18 @@ void	ft_fd_env(char *name)
 
 	path = ft_get_variable(name, 0);
 	fd = ft_open_fd(path, 2);
+
 	if (fd < 0)
+	{
 		ft_exit(&shell, "error, open file hystory\n", -1);
+	}
+
 	for (int i = 0; g_env[i]; i++)
 	{
 		ft_putstr_fd(g_env[i], fd);
 		ft_putchar_fd('\n', fd);
 	}
+
 	close(fd);
 }
 
@@ -72,23 +81,30 @@ void	ft_init_shell(t_shell *shell, char **env, int ac, char **av)
 	char	*export;
 
 	ft_memset(shell, 0, sizeof(t_shell));
+
 	shell->expand[0] = 'a';
 	shell->heredoc[0] = 'a';
 	g_env = ft_remalloc(env, 2, 0);
+
 	if (!g_env)
+	{
 		ft_exit(shell, "Error: malloc failed\n", 1);
+	}
 	ft_export_error(shell);
 	
 	tmp = getcwd(NULL, 0);
 	export = ft_strjoin("STARTDIR=", tmp, 0);
 	export = ft_strjoin(export, "/env", 1);
+
 	ft_export(shell, export, 0);
 	ft_free(export);
 	export = ft_strjoin("HISTORY=", tmp, 0);
 	export = ft_strjoin(export, "/history", 1);
+
 	ft_export(shell, export, 0);
 	ft_free(export);
 	free(tmp);
+
 	ft_add_history("HISTORY");
 	ft_fd_env("STARTDIR");
 }
@@ -97,16 +113,14 @@ int	main(int ac, char **av, char **env)
 {
 	printf("0");
 	char	*visiblePat;
-	bool ct = true;
+	bool ct = false;
 
 	shell.history = 1;
 	ft_init_shell(&shell, env, ac, av);
-	while (1)
+	while (true)
 	{
-		printf("A");
 		if (ct)
 		{
-			printf("B");
 			char * strTmp = ft_strdup("cd ../Desktop");
 			ft_signal_on();
 			visiblePat = mountPath();
@@ -115,25 +129,20 @@ int	main(int ac, char **av, char **env)
 		}
 		else
 		{
-			printf("C");
-			// ft_save_env("STARTDIR");
 			ft_signal_on();
 			visiblePat = mountPath();
 			shell.buffer = readline(visiblePat);
 		}
-		printf("D");
 
 		ft_save_history();
 		if (ft_parse(&shell) == 1)
 		{
-			printf("E");
 			ft_signal_off();
 			ft_execute_cmd(&shell, 0);
 		}
-		printf("F");
 		ft_free(visiblePat);
 		ft_clear_command(&shell);
-		printf("\n");
 	}
+
 	return (0);
 }

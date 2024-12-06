@@ -1,51 +1,50 @@
-cd dracken24/
-sudo nano .zshrc
-sudo nano .bashrc
+cd ..
+lsa
+cd cub3D/
+cd ..
+exit
+cd ..
+ls
+lsa
+exit
+exit
+ls
+lsa
+ls -al
+env
+cd ..
+exit
+cd ..
+env
+cd minishell/
+exit
+cd ..
+env
+exit
+exit
+cd ..
 make
-cd ../Desktop
-cd ../Desktop
+exit
+cd .
+cd ..
+exit
 lsa
-cd ../Desktop
-cd ../Desktop
-cd ../Desktop
-cd ../Desktop
-cd ../Desktop
-sudo nano ~/.zshrc
+env
 cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd home/
-cd dracken24/
-sudo nano ~/.zshrc
-sudo nano .zshrc
-make git
-git add .
-git commit -m ok
-git push
-cd ../Desktop
-cd ../Desktop
-cd Trading
 lsa
-git add .
-git commit -m MAJ
-git push
-cd ../Desktop
+env
+export banane=pomme
+env
+echo $banane
+echo $OLDPWD
+unset banane
+env
+ls
+unset PATH
+env
+ls
+cat
 cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd home
-cd dracken24/
-nano .zshrc
-lsa
-cd
-cd ~/Desktop
-cd ../Desktop
-cd ../Desktop
-cd ../Desktop
-cd ../Desktop
-cd ../Desktopcd ../Desktop
-cd ../Desktop
+exit
+env
+exit

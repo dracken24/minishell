@@ -25,6 +25,7 @@ void	ft_moove_history(void)
 	tmp = ft_calloc(sizeof(char *), 51);
 	fd = ft_open_fd(ft_get_variable("HISTORY", 0), 6);
 	tmp[i] = get_next_line(fd);
+
 	if (!tmp[i])
 	{
 		close(fd);
@@ -38,12 +39,17 @@ void	ft_moove_history(void)
 			break ;
 		i++;
 	}
+
 	tmp[i] = ft_strjoin(shell.buffer, "\n", 0);
 	close (fd);
 	fd = ft_open_fd(ft_get_variable("HISTORY", 0), 2);
 	i = -1;
+
 	while (tmp[++i])
+	{
 		ft_putstr_fd(tmp[i], fd);
+	}
+
 	close(fd);
 	ft_free_array(tmp);
 }
@@ -68,6 +74,7 @@ bool	ft_refresh_history(int fd)
 		free(tmp);
 		tmp = get_next_line(fd);
 	}
+
 	return (false);
 }
 
@@ -76,10 +83,16 @@ void	ft_save_history(void)
 	int		fd;
 
 	if (ft_is_only(shell.buffer, ' ') == true || ft_strncmp(shell.buffer, "\n", 1) == 0)
+	{
 		return ;
+	}
+
 	fd = ft_open_fd(ft_get_variable("HISTORY", 0), 6);
 	if(ft_refresh_history(fd) == true)
+	{
 		return ;
+	}
+
 	ft_putstr_fd(shell.buffer, fd);
 	ft_putstr_fd("\n", fd);
 	close(fd);
@@ -94,6 +107,7 @@ void	ft_add_history(char *name)
 	fd = ft_open_fd(ft_get_variable(name , 0), 4);
 	tmp = get_next_line(fd);
 	i = 0;
+
 	while (tmp)
 	{
 		tmp[ft_strlen(tmp) - 1] = '\0';
@@ -102,6 +116,7 @@ void	ft_add_history(char *name)
 		i++;
 		tmp = get_next_line(fd);
 	}
+
 	free(tmp);
 	close(fd);
 }
@@ -117,7 +132,10 @@ void	ft_save_env(char *name)
 	fd = ft_open_fd(path, 1);
 	tmp = ft_calloc(sizeof(char), BUFFER_SIZE);
 	if (!tmp)
+	{
 		ft_exit(&shell, "error calloc <ft_save_env>\n", -1);
+	}
+
 	tmp[0] = get_next_line(fd);
 	i = 0;
 	while (tmp[i])
@@ -127,6 +145,7 @@ void	ft_save_env(char *name)
 		i++;
 		tmp[i] = get_next_line(fd);
 	}
+
 	ft_free_array(g_env);
 	g_env = ft_remalloc(tmp, 2, 0);
 	close(fd);

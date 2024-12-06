@@ -29,7 +29,7 @@ typedef struct t_cmd
 	int		nb_token;
 	int		fd;
 	int		open_error;
-}					t_cmd;
+}	t_cmd;
 
 typedef struct t_shell
 {
@@ -41,8 +41,7 @@ typedef struct t_shell
 	char	heredoc[2];
 	int		error;
 	int		history;
-
-}					t_shell;
+}	t_shell;
 
 int		ft_parse(t_shell *shell);
 int		ft_buffer_integrity(t_shell *shell);

@@ -22,7 +22,9 @@ void	ft_env(int flag)
 	if (flag == 0)
 	{
 		while (g_env[++i])
+		{
 			printf("[%d]%s\n", i, g_env[i]);
+		}
 	}
 	else
 	{
@@ -30,7 +32,9 @@ void	ft_env(int flag)
 		{
 			if (g_env[i][0] != '<' && g_env[i][1] != '-'
 				&& ft_strchr(g_env[i], '='))
+			{
 				printf("%s\n", g_env[i]);
+			}
 		}
 	}
 }
@@ -73,7 +77,9 @@ void	ft_export(t_shell *shell, char *arg, int flag)
 		{
 			duplicate = ft_substr(arg, 0, ft_strchr(arg, '=') - arg);
 			if (ft_get_variable(duplicate, 0))
+			{
 				ft_unset(duplicate);
+			}
 			ft_free (duplicate);
 		}
 		g_env = ft_remalloc(g_env, 1, 1);
@@ -86,7 +92,9 @@ void	ft_cd(t_shell *shell, char *buffer)
 	char	*temp[2];
 
 	if (!buffer)
+	{
 		buffer = ft_get_variable("HOME", 0);
+	}
 	if (buffer && chdir(buffer) == 0)
 	{
 		ft_unset("OLDPWD");
