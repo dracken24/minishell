@@ -121,7 +121,7 @@ int	main(int ac, char **av, char **env)
 	{
 		if (ct)
 		{
-			char * strTmp = ft_strdup("cd ../Desktop");
+			char *strTmp = ft_strdup("cd ../Desktop");
 			ft_signal_on();
 			visiblePat = mountPath();
 			shell.buffer = strTmp;
