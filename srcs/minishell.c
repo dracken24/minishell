@@ -18,6 +18,7 @@ t_shell	shell;
 void	ft_parse_export(t_shell *shell, int nb)
 {
 	int	i;
+	
 
 	if (shell->cmd[nb].nb_token == 1)
 	{

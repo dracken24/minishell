@@ -28,7 +28,7 @@ char*	mountPath(void)
 	tmp = getcwd(NULL, 0);
 
 	ret = ft_strjoin("\x1b[33m", "\n-----------------------------------------------------------------------------\n", 0);
-	ret = ft_strjoin(ret, "\x1b[34m", 1);
+	ret = ft_strjoin(ret, "\e[38;5;27m", 1);
 	ret = ft_strjoin(ret, "CWD: ", 1);
 	ret = ft_strjoin(ret, tmp, 1);
 	ret = ft_strjoin(ret, "/ -->  branch:  ", 1);
@@ -73,9 +73,9 @@ char*	mountPath(void)
 	}
 	
 	ret = ft_strjoin(ret, "-----------------------------------------------------------------------------\n", 1);
-	ret = ft_strjoin(ret , "\x1b[36m", 1);
+	ret = ft_strjoin(ret , "\e[38;5;97m", 1);
 	ret = ft_strjoin(ret, "DrackenShell : ", 1);
-	ret = ft_strjoin(ret, "\e[0;35m", 1);
+	ret = ft_strjoin(ret, "\e[38;5;208m", 1);
 
 	ft_free(tmp);
 	return (ret);

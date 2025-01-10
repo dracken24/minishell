@@ -1,0 +1,7 @@
+{
+  "dependencies": [
+    "fmt",
+    "readline-unix",
+    "readline"
+  ]
+}
